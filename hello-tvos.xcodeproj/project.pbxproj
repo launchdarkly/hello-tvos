@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		69ACB99A1E9A87FE00A2F8CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ACB9991E9A87FE00A2F8CF /* AppDelegate.swift */; };
+		69ACB99C1E9A87FE00A2F8CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ACB99B1E9A87FE00A2F8CF /* ViewController.swift */; };
+		69ACB99F1E9A87FE00A2F8CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB99D1E9A87FE00A2F8CF /* Main.storyboard */; };
+		69ACB9A11E9A87FF00A2F8CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */; };
+		69ACB9AC1E9A87FF00A2F8CF /* hello_tvosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ACB9AB1E9A87FF00A2F8CF /* hello_tvosTests.swift */; };
+		B9E79C211EA1AC09001DDA41 /* Darkly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69ACB9B61E9A9B9600A2F8CF /* Darkly.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		69ACB9A81E9A87FF00A2F8CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69ACB98E1E9A87FE00A2F8CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 69ACB9951E9A87FE00A2F8CF;
+			remoteInfo = "hello-tvos";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		69ACB9961E9A87FE00A2F8CF /* hello-tvos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-tvos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69ACB9991E9A87FE00A2F8CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		69ACB99B1E9A87FE00A2F8CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		69ACB99E1E9A87FE00A2F8CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		69ACB9A21E9A87FF00A2F8CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69ACB9A71E9A87FF00A2F8CF /* hello-tvosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hello-tvosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69ACB9AB1E9A87FF00A2F8CF /* hello_tvosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hello_tvosTests.swift; sourceTree = "<group>"; };
+		69ACB9AD1E9A87FF00A2F8CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69ACB9B61E9A9B9600A2F8CF /* Darkly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Darkly.framework; path = Carthage/Build/tvOS/Darkly.framework; sourceTree = "<group>"; };
+		69ACB9B81E9A9BCD00A2F8CF /* hello-tvos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hello-tvos-Bridging-Header.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		69ACB9931E9A87FE00A2F8CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9E79C211EA1AC09001DDA41 /* Darkly.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69ACB9A41E9A87FF00A2F8CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		69ACB98D1E9A87FE00A2F8CF = {
+			isa = PBXGroup;
+			children = (
+				69ACB9B61E9A9B9600A2F8CF /* Darkly.framework */,
+				69ACB9981E9A87FE00A2F8CF /* hello-tvos */,
+				69ACB9AA1E9A87FF00A2F8CF /* hello-tvosTests */,
+				69ACB9971E9A87FE00A2F8CF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		69ACB9971E9A87FE00A2F8CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69ACB9961E9A87FE00A2F8CF /* hello-tvos.app */,
+				69ACB9A71E9A87FF00A2F8CF /* hello-tvosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		69ACB9981E9A87FE00A2F8CF /* hello-tvos */ = {
+			isa = PBXGroup;
+			children = (
+				69ACB9991E9A87FE00A2F8CF /* AppDelegate.swift */,
+				69ACB99B1E9A87FE00A2F8CF /* ViewController.swift */,
+				69ACB99D1E9A87FE00A2F8CF /* Main.storyboard */,
+				69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */,
+				69ACB9A21E9A87FF00A2F8CF /* Info.plist */,
+				69ACB9B81E9A9BCD00A2F8CF /* hello-tvos-Bridging-Header.h */,
+			);
+			path = "hello-tvos";
+			sourceTree = "<group>";
+		};
+		69ACB9AA1E9A87FF00A2F8CF /* hello-tvosTests */ = {
+			isa = PBXGroup;
+			children = (
+				69ACB9AB1E9A87FF00A2F8CF /* hello_tvosTests.swift */,
+				69ACB9AD1E9A87FF00A2F8CF /* Info.plist */,
+			);
+			path = "hello-tvosTests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		69ACB9951E9A87FE00A2F8CF /* hello-tvos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69ACB9B01E9A87FF00A2F8CF /* Build configuration list for PBXNativeTarget "hello-tvos" */;
+			buildPhases = (
+				69ACB9921E9A87FE00A2F8CF /* Sources */,
+				69ACB9931E9A87FE00A2F8CF /* Frameworks */,
+				69ACB9941E9A87FE00A2F8CF /* Resources */,
+				69ACB9B91E9AA08B00A2F8CF /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "hello-tvos";
+			productName = "hello-tvos";
+			productReference = 69ACB9961E9A87FE00A2F8CF /* hello-tvos.app */;
+			productType = "com.apple.product-type.application";
+		};
+		69ACB9A61E9A87FF00A2F8CF /* hello-tvosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69ACB9B31E9A87FF00A2F8CF /* Build configuration list for PBXNativeTarget "hello-tvosTests" */;
+			buildPhases = (
+				69ACB9A31E9A87FF00A2F8CF /* Sources */,
+				69ACB9A41E9A87FF00A2F8CF /* Frameworks */,
+				69ACB9A51E9A87FF00A2F8CF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				69ACB9A91E9A87FF00A2F8CF /* PBXTargetDependency */,
+			);
+			name = "hello-tvosTests";
+			productName = "hello-tvosTests";
+			productReference = 69ACB9A71E9A87FF00A2F8CF /* hello-tvosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		69ACB98E1E9A87FE00A2F8CF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = LaunchDarkly;
+				TargetAttributes = {
+					69ACB9951E9A87FE00A2F8CF = {
+						CreatedOnToolsVersion = 8.3;
+						ProvisioningStyle = Automatic;
+					};
+					69ACB9A61E9A87FF00A2F8CF = {
+						CreatedOnToolsVersion = 8.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 69ACB9951E9A87FE00A2F8CF;
+					};
+				};
+			};
+			buildConfigurationList = 69ACB9911E9A87FE00A2F8CF /* Build configuration list for PBXProject "hello-tvos" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 69ACB98D1E9A87FE00A2F8CF;
+			productRefGroup = 69ACB9971E9A87FE00A2F8CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				69ACB9951E9A87FE00A2F8CF /* hello-tvos */,
+				69ACB9A61E9A87FF00A2F8CF /* hello-tvosTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		69ACB9941E9A87FE00A2F8CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69ACB9A11E9A87FF00A2F8CF /* Assets.xcassets in Resources */,
+				69ACB99F1E9A87FE00A2F8CF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69ACB9A51E9A87FF00A2F8CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		69ACB9B91E9AA08B00A2F8CF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/tvOS/Darkly.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69ACB9921E9A87FE00A2F8CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69ACB99C1E9A87FE00A2F8CF /* ViewController.swift in Sources */,
+				69ACB99A1E9A87FE00A2F8CF /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69ACB9A31E9A87FF00A2F8CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69ACB9AC1E9A87FF00A2F8CF /* hello_tvosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		69ACB9A91E9A87FF00A2F8CF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 69ACB9951E9A87FE00A2F8CF /* hello-tvos */;
+			targetProxy = 69ACB9A81E9A87FF00A2F8CF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		69ACB99D1E9A87FE00A2F8CF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69ACB99E1E9A87FE00A2F8CF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		69ACB9AE1E9A87FF00A2F8CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.2;
+			};
+			name = Debug;
+		};
+		69ACB9AF1E9A87FF00A2F8CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		69ACB9B11E9A87FF00A2F8CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = "hello-tvos/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.hello-tvos";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "hello-tvos/hello-tvos-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		69ACB9B21E9A87FF00A2F8CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
+				INFOPLIST_FILE = "hello-tvos/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.hello-tvos";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "hello-tvos/hello-tvos-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		69ACB9B41E9A87FF00A2F8CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "hello-tvosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.hello-tvosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hello-tvos.app/hello-tvos";
+			};
+			name = Debug;
+		};
+		69ACB9B51E9A87FF00A2F8CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "hello-tvosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.hello-tvosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/hello-tvos.app/hello-tvos";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		69ACB9911E9A87FE00A2F8CF /* Build configuration list for PBXProject "hello-tvos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69ACB9AE1E9A87FF00A2F8CF /* Debug */,
+				69ACB9AF1E9A87FF00A2F8CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69ACB9B01E9A87FF00A2F8CF /* Build configuration list for PBXNativeTarget "hello-tvos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69ACB9B11E9A87FF00A2F8CF /* Debug */,
+				69ACB9B21E9A87FF00A2F8CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		69ACB9B31E9A87FF00A2F8CF /* Build configuration list for PBXNativeTarget "hello-tvosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69ACB9B41E9A87FF00A2F8CF /* Debug */,
+				69ACB9B51E9A87FF00A2F8CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 69ACB98E1E9A87FE00A2F8CF /* Project object */;
+}
