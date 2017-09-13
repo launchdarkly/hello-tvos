@@ -11,7 +11,6 @@
 		69ACB99C1E9A87FE00A2F8CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ACB99B1E9A87FE00A2F8CF /* ViewController.swift */; };
 		69ACB99F1E9A87FE00A2F8CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB99D1E9A87FE00A2F8CF /* Main.storyboard */; };
 		69ACB9A11E9A87FF00A2F8CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */; };
-		69ACB9AC1E9A87FF00A2F8CF /* hello_tvosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ACB9AB1E9A87FF00A2F8CF /* hello_tvosTests.swift */; };
 		B9E79C211EA1AC09001DDA41 /* Darkly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69ACB9B61E9A9B9600A2F8CF /* Darkly.framework */; };
 /* End PBXBuildFile section */
 
@@ -150,6 +149,7 @@
 				TargetAttributes = {
 					69ACB9951E9A87FE00A2F8CF = {
 						CreatedOnToolsVersion = 8.3;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					69ACB9A61E9A87FF00A2F8CF = {
@@ -228,7 +228,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69ACB9AC1E9A87FF00A2F8CF /* hello_tvosTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +351,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
@@ -361,7 +361,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.hello-tvos";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "hello-tvos/hello-tvos-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -370,6 +371,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
@@ -379,7 +381,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.hello-tvos";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "hello-tvos/hello-tvos-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -430,6 +433,7 @@
 				69ACB9B21E9A87FF00A2F8CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		69ACB9B31E9A87FF00A2F8CF /* Build configuration list for PBXNativeTarget "hello-tvosTests" */ = {
 			isa = XCConfigurationList;
@@ -438,6 +442,7 @@
 				69ACB9B51E9A87FF00A2F8CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
