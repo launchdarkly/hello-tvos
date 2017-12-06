@@ -11,7 +11,10 @@
 		69ACB99C1E9A87FE00A2F8CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ACB99B1E9A87FE00A2F8CF /* ViewController.swift */; };
 		69ACB99F1E9A87FE00A2F8CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB99D1E9A87FE00A2F8CF /* Main.storyboard */; };
 		69ACB9A11E9A87FF00A2F8CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */; };
-		B9E79C211EA1AC09001DDA41 /* Darkly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69ACB9B61E9A9B9600A2F8CF /* Darkly.framework */; };
+		839C30FB1FD8409D00619340 /* DarklyEventSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839C30F91FD8407100619340 /* DarklyEventSource.framework */; };
+		839C30FC1FD8409D00619340 /* DarklyEventSource.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 839C30F91FD8407100619340 /* DarklyEventSource.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		839C30FD1FD8409D00619340 /* Darkly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839C30F71FD8406700619340 /* Darkly.framework */; };
+		839C30FE1FD8409D00619340 /* Darkly.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 839C30F71FD8406700619340 /* Darkly.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +27,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		839C30FF1FD8409D00619340 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				839C30FC1FD8409D00619340 /* DarklyEventSource.framework in Embed Frameworks */,
+				839C30FE1FD8409D00619340 /* Darkly.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		69ACB9961E9A87FE00A2F8CF /* hello-tvos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-tvos.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69ACB9991E9A87FE00A2F8CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,8 +52,9 @@
 		69ACB9A71E9A87FF00A2F8CF /* hello-tvosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hello-tvosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69ACB9AB1E9A87FF00A2F8CF /* hello_tvosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hello_tvosTests.swift; sourceTree = "<group>"; };
 		69ACB9AD1E9A87FF00A2F8CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		69ACB9B61E9A9B9600A2F8CF /* Darkly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Darkly.framework; path = Carthage/Build/tvOS/Darkly.framework; sourceTree = "<group>"; };
 		69ACB9B81E9A9BCD00A2F8CF /* hello-tvos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hello-tvos-Bridging-Header.h"; sourceTree = "<group>"; };
+		839C30F71FD8406700619340 /* Darkly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Darkly.framework; path = Carthage/Build/tvOS/Darkly.framework; sourceTree = "<group>"; };
+		839C30F91FD8407100619340 /* DarklyEventSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DarklyEventSource.framework; path = Carthage/Build/tvOS/DarklyEventSource.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,7 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9E79C211EA1AC09001DDA41 /* Darkly.framework in Frameworks */,
+				839C30FB1FD8409D00619340 /* DarklyEventSource.framework in Frameworks */,
+				839C30FD1FD8409D00619340 /* Darkly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,10 +80,10 @@
 		69ACB98D1E9A87FE00A2F8CF = {
 			isa = PBXGroup;
 			children = (
-				69ACB9B61E9A9B9600A2F8CF /* Darkly.framework */,
 				69ACB9981E9A87FE00A2F8CF /* hello-tvos */,
 				69ACB9AA1E9A87FF00A2F8CF /* hello-tvosTests */,
 				69ACB9971E9A87FE00A2F8CF /* Products */,
+				83C2CA621FD8401F0097B386 /* CarthageFrameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +118,15 @@
 			path = "hello-tvosTests";
 			sourceTree = "<group>";
 		};
+		83C2CA621FD8401F0097B386 /* CarthageFrameworks */ = {
+			isa = PBXGroup;
+			children = (
+				839C30F91FD8407100619340 /* DarklyEventSource.framework */,
+				839C30F71FD8406700619340 /* Darkly.framework */,
+			);
+			name = CarthageFrameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,6 +138,7 @@
 				69ACB9931E9A87FE00A2F8CF /* Frameworks */,
 				69ACB9941E9A87FE00A2F8CF /* Resources */,
 				69ACB9B91E9AA08B00A2F8CF /* ShellScript */,
+				839C30FF1FD8409D00619340 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
