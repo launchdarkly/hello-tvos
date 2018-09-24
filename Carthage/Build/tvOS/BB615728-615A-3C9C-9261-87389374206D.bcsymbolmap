@@ -1,7 +1,7 @@
 BCSymbolMap Version: 2.0
 -[NSURLResponse(LaunchDarkly) isUnauthorizedHTTPResponse]
 -[NSURLResponse(LaunchDarkly) headerDate]
-Apple LLVM version 9.1.0 (clang-902.0.39.2)
+Apple LLVM version 10.0.0 (clang-1000.11.45.2)
 /Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSURLResponse+LaunchDarkly.m
 /Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client
 +[LDEventTrackingContext contextWithObject:]
@@ -165,7 +165,7 @@ __25-[LDClient userUnchanged]_block_invoke
 __23-[LDClient userUpdated]_block_invoke
 __33-[LDClient setOnline:completion:]_block_invoke
 __26+[LDClient sharedInstance]_block_invoke
-/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS11.4.sdk/usr/include/dispatch/once.h
+/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/usr/include/dispatch/once.h
 -[NSMutableDictionary(NullRemovable) removeNullValues]
 /Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSMutableDictionary+NullRemovable.m
 /Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/DarklyConstants.m
@@ -574,7 +574,7 @@ _OBJC_IVAR_$_LDDataManager._eventsArray
 __38-[LDDataManager allEventDictionaries:]_block_invoke
 __39-[LDDataManager deleteProcessedEvents:]_block_invoke
 NSMakeRange
-/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS11.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
+/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
 __36-[LDDataManager addEventDictionary:]_block_invoke
 __30-[LDDataManager purgeOldUser:]_block_invoke
 __30+[LDDataManager sharedManager]_block_invoke
@@ -754,4 +754,4 @@ __46-[LDRequestManager performFeatureFlagRequest:]_block_invoke.87
 __46-[LDRequestManager performFeatureFlagRequest:]_block_invoke_2
 __46-[LDRequestManager performFeatureFlagRequest:]_block_invoke
 __34+[LDRequestManager sharedInstance]_block_invoke
-/Users/markpokorny/Library/Caches/org.carthage.CarthageKit/DerivedData/9.4.1_9F2000/ios-client/2.13.4/Build/Intermediates.noindex/ArchiveIntermediates/Darkly_tvOS/IntermediateBuildFilesPath/Darkly.build/Release-appletvos/Darkly_tvOS.build/DerivedSources/Darkly_vers.c
+/Users/markpokorny/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/ios-client/dfd6fb68d7f856c2f578561f3fe5a04c07bfc04e/Build/Intermediates.noindex/ArchiveIntermediates/Darkly_tvOS/IntermediateBuildFilesPath/Darkly.build/Release-appletvos/Darkly_tvOS.build/DerivedSources/Darkly_vers.c

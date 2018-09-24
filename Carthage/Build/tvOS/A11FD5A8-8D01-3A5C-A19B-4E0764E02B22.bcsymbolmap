@@ -105,7 +105,7 @@ _OBJC_IVAR_$_LDEvent._readyState
 _OBJC_IVAR_$_LDEvent._error
 l_OBJC_PROTOCOL_$_NSCopying
 l_OBJC_LABEL_PROTOCOL_$_NSCopying
-Apple LLVM version 9.1.0 (clang-902.0.39.2)
+Apple LLVM version 10.0.0 (clang-1000.11.45.2)
 /Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-eventsource/LDEventSource/LDEventSource.m
 /Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-eventsource
 /Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-eventsource/LDEventSource/LDEventSource.h
@@ -152,5 +152,5 @@ _OBJC_IVAR_$_LDEventStringAccumulator._eventString
 -[NSArray(LDEventSource) subArrayFromIndex:]
 /Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-eventsource/LDEventSource/NSArray+LDEventSource.m
 NSMakeRange
-/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS11.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
-/Users/markpokorny/Library/Caches/org.carthage.CarthageKit/DerivedData/9.4.1_9F2000/ios-eventsource/3.2.7/Build/Intermediates.noindex/ArchiveIntermediates/DarklyEventSource/IntermediateBuildFilesPath/LDEventSource.build/Release-appletvos/DarklyEventSource.build/DerivedSources/DarklyEventSource_vers.c
+/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
+/Users/markpokorny/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/ios-eventsource/3.2.7/Build/Intermediates.noindex/ArchiveIntermediates/DarklyEventSource/IntermediateBuildFilesPath/LDEventSource.build/Release-appletvos/DarklyEventSource.build/DerivedSources/DarklyEventSource_vers.c

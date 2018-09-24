@@ -1,9 +1,27 @@
 {
-  "commitish" : "2.13.4",
+  "Mac" : [
+    {
+      "name" : "Darkly",
+      "hash" : "cbfe8c2fe94ea7266994221c5346204ce65b387bc067be043edb423239827929"
+    }
+  ],
+  "watchOS" : [
+    {
+      "name" : "Darkly",
+      "hash" : "14dab83d3f8a8c02cdf636ec5b8d09e5fe1b888df41920b3766167ce6eb192de"
+    }
+  ],
   "tvOS" : [
     {
       "name" : "Darkly",
-      "hash" : "7fa931fbe808c004d268c593c32d42efdf546a35a4723fdf8617321bf8db2ba1"
+      "hash" : "c3487e72c0b46fdbf5c6637e221d88002d0d5cfd6f754c70d2ce8fa35f9ee577"
+    }
+  ],
+  "commitish" : "2.13.5",
+  "iOS" : [
+    {
+      "name" : "Darkly",
+      "hash" : "e51ee8f522f7f327f242da0b264604bb7bcfac9414995d6a7a9da4db3825d6e0"
     }
   ]
 }
