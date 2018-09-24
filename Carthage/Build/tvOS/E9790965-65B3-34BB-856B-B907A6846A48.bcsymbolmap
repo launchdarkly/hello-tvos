@@ -1,0 +1,757 @@
+BCSymbolMap Version: 2.0
+-[NSURLResponse(LaunchDarkly) isUnauthorizedHTTPResponse]
+-[NSURLResponse(LaunchDarkly) headerDate]
+Apple LLVM version 10.0.0 (clang-1000.11.45.2)
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSURLResponse+LaunchDarkly.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client
++[LDEventTrackingContext contextWithObject:]
+-[LDEventTrackingContext initWithObject:]
+-[LDEventTrackingContext dictionaryValue]
+-[LDEventTrackingContext encodeWithCoder:]
+-[LDEventTrackingContext initWithCoder:]
+-[LDEventTrackingContext description]
+-[LDEventTrackingContext trackEvents]
+-[LDEventTrackingContext setTrackEvents:]
+-[LDEventTrackingContext debugEventsUntilDate]
+-[LDEventTrackingContext setDebugEventsUntilDate:]
+-[LDEventTrackingContext .cxx_destruct]
+_OBJC_IVAR_$_LDEventTrackingContext._trackEvents
+_OBJC_IVAR_$_LDEventTrackingContext._debugEventsUntilDate
+l_OBJC_PROTOCOL_$_NSCoding
+l_OBJC_LABEL_PROTOCOL_$_NSCoding
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDEventTrackingContext.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDEventTrackingContext.h
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDEvent+EventTypes.m
+-[LDEventModel encodeWithCoder:]
+-[LDEventModel initWithCoder:]
++[LDEventModel featureEventWithFlagKey:reportedFlagValue:flagConfigValue:defaultFlagValue:user:inlineUser:]
+-[LDEventModel initFeatureEventWithFlagKey:reportedFlagValue:flagConfigValue:defaultFlagValue:user:inlineUser:]
++[LDEventModel customEventWithKey:customData:userValue:inlineUser:]
+-[LDEventModel initCustomEventWithKey:customData:userValue:inlineUser:]
++[LDEventModel identifyEventWithUser:]
+-[LDEventModel initIdentifyEventWithUser:]
++[LDEventModel summaryEventWithTracker:]
+-[LDEventModel initSummaryEventWithTracker:]
++[LDEventModel debugEventWithFlagKey:reportedFlagValue:flagConfigValue:defaultFlagValue:user:]
+-[LDEventModel initDebugEventWithFlagKey:reportedFlagValue:flagConfigValue:defaultFlagValue:user:]
+-[LDEventModel init]
+-[LDEventModel dictionaryValueUsingConfig:]
+-[LDEventModel featuresSummaryDictionaryValue]
+-[LDEventModel description]
+-[LDEventModel kind]
+-[LDEventModel setKind:]
+-[LDEventModel key]
+-[LDEventModel setKey:]
+-[LDEventModel creationDate]
+-[LDEventModel setCreationDate:]
+-[LDEventModel user]
+-[LDEventModel setUser:]
+-[LDEventModel inlineUser]
+-[LDEventModel setInlineUser:]
+-[LDEventModel flagConfigValue]
+-[LDEventModel setFlagConfigValue:]
+-[LDEventModel reportedValue]
+-[LDEventModel setReportedValue:]
+-[LDEventModel defaultValue]
+-[LDEventModel setDefaultValue:]
+-[LDEventModel data]
+-[LDEventModel setData:]
+-[LDEventModel startDateMillis]
+-[LDEventModel setStartDateMillis:]
+-[LDEventModel endDateMillis]
+-[LDEventModel setEndDateMillis:]
+-[LDEventModel flagRequestSummary]
+-[LDEventModel setFlagRequestSummary:]
+-[LDEventModel .cxx_destruct]
+_OBJC_IVAR_$_LDEventModel._kind
+_OBJC_IVAR_$_LDEventModel._key
+_OBJC_IVAR_$_LDEventModel._creationDate
+_OBJC_IVAR_$_LDEventModel._user
+_OBJC_IVAR_$_LDEventModel._inlineUser
+_OBJC_IVAR_$_LDEventModel._flagConfigValue
+_OBJC_IVAR_$_LDEventModel._reportedValue
+_OBJC_IVAR_$_LDEventModel._defaultValue
+_OBJC_IVAR_$_LDEventModel._data
+_OBJC_IVAR_$_LDEventModel._startDateMillis
+_OBJC_IVAR_$_LDEventModel._endDateMillis
+_OBJC_IVAR_$_LDEventModel._flagRequestSummary
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDEventModel.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDEventModel.h
++[NSDateFormatter(JsonHeader) jsonHeaderDateFormatter]
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSDateFormatter+JsonHeader.m
++[LDClient sharedInstance]
+___26+[LDClient sharedInstance]_block_invoke
+___copy_helper_block_
+___destroy_helper_block_
+-[LDClient setLdUser:]
+-[LDClient start:userBuilder:]
+-[LDClient start:withUserBuilder:]
+-[LDClient updateUser:]
+-[LDClient currentUserBuilder]
+-[LDClient boolVariation:fallback:]
+-[LDClient numberVariation:fallback:]
+-[LDClient doubleVariation:fallback:]
+-[LDClient stringVariation:fallback:]
+-[LDClient arrayVariation:fallback:]
+-[LDClient dictionaryVariation:fallback:]
+-[LDClient track:data:]
+-[LDClient setOnline:]
+-[LDClient setOnline:completion:]
+___33-[LDClient setOnline:completion:]_block_invoke
+___copy_helper_block_.149
+___destroy_helper_block_.150
+-[LDClient _setOnline:completion:]
+-[LDClient flush]
+-[LDClient stopClient]
+-[LDClient userUpdated]
+___23-[LDClient userUpdated]_block_invoke
+___copy_helper_block_.169
+___destroy_helper_block_.170
+-[LDClient userUnchanged]
+___25-[LDClient userUnchanged]_block_invoke
+___copy_helper_block_.174
+___destroy_helper_block_.175
+-[LDClient serverUnavailable]
+___29-[LDClient serverUnavailable]_block_invoke
+___copy_helper_block_.179
+___destroy_helper_block_.180
+-[LDClient configFlagUpdated:]
+___30-[LDClient configFlagUpdated:]_block_invoke
+___copy_helper_block_.190
+___destroy_helper_block_.191
+-[LDClient handleClientUnauthorizedNotification]
+___48-[LDClient handleClientUnauthorizedNotification]_block_invoke
+___copy_helper_block_.195
+___destroy_helper_block_.196
+-[LDClient dealloc]
+-[LDClient isOnline]
+-[LDClient setIsOnline:]
+-[LDClient ldUser]
+-[LDClient ldConfig]
+-[LDClient setLdConfig:]
+-[LDClient delegate]
+-[LDClient setDelegate:]
+-[LDClient clientStarted]
+-[LDClient setClientStarted:]
+-[LDClient throttler]
+-[LDClient setThrottler:]
+-[LDClient willGoOnlineAfterDelay]
+-[LDClient setWillGoOnlineAfterDelay:]
+-[LDClient .cxx_destruct]
+_sharedInstance.sharedLDClient
+_sharedInstance.onceToken
+___block_descriptor_tmp
+_OBJC_IVAR_$_LDClient._ldUser
+___block_descriptor_tmp.151
+___block_descriptor_tmp.171
+___block_descriptor_tmp.176
+___block_descriptor_tmp.181
+___block_descriptor_tmp.192
+___block_descriptor_tmp.197
+_OBJC_IVAR_$_LDClient._isOnline
+_OBJC_IVAR_$_LDClient._ldConfig
+_OBJC_IVAR_$_LDClient._delegate
+_OBJC_IVAR_$_LDClient._clientStarted
+_OBJC_IVAR_$_LDClient._throttler
+_OBJC_IVAR_$_LDClient._willGoOnlineAfterDelay
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDClient.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDClient.h
+__destroy_helper_block_
+__copy_helper_block_
+__48-[LDClient handleClientUnauthorizedNotification]_block_invoke
+__30-[LDClient configFlagUpdated:]_block_invoke
+__29-[LDClient serverUnavailable]_block_invoke
+__25-[LDClient userUnchanged]_block_invoke
+__23-[LDClient userUpdated]_block_invoke
+__33-[LDClient setOnline:completion:]_block_invoke
+__26+[LDClient sharedInstance]_block_invoke
+/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/usr/include/dispatch/once.h
+-[NSMutableDictionary(NullRemovable) removeNullValues]
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSMutableDictionary+NullRemovable.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/DarklyConstants.m
++[LDFlagConfigTracker tracker]
+-[LDFlagConfigTracker init]
+-[LDFlagConfigTracker hasTrackedEvents]
+-[LDFlagConfigTracker logRequestForFlagKey:reportedFlagValue:flagConfigValue:defaultValue:]
+-[LDFlagConfigTracker flagRequestSummary]
+-[LDFlagConfigTracker description]
+-[LDFlagConfigTracker startDateMillis]
+-[LDFlagConfigTracker setStartDateMillis:]
+-[LDFlagConfigTracker mutableFlagCounters]
+-[LDFlagConfigTracker setMutableFlagCounters:]
+-[LDFlagConfigTracker .cxx_destruct]
+_OBJC_IVAR_$_LDFlagConfigTracker._startDateMillis
+_OBJC_IVAR_$_LDFlagConfigTracker._mutableFlagCounters
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDFlagConfigTracker.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDFlagConfigTracker.h
++[NSThread(MainExecutable) performOnMainThread:]
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSThread+MainExecutable.m
+-[LDConfig initWithMobileKey:]
+-[LDConfig setMobileKey:]
+-[LDConfig setBaseUrl:]
+-[LDConfig setEventsUrl:]
+-[LDConfig setCapacity:]
+-[LDConfig setConnectionTimeout:]
+-[LDConfig setFlushInterval:]
+-[LDConfig setPollingInterval:]
+-[LDConfig setBackgroundFetchInterval:]
+-[LDConfig setStreaming:]
+-[LDConfig setPrivateUserAttributes:]
+-[LDConfig setDebugEnabled:]
+-[LDConfig setInlineUserInEvents:]
+-[LDConfig isFlagRetryStatusCode:]
+-[LDConfig mobileKey]
+-[LDConfig baseUrl]
+-[LDConfig eventsUrl]
+-[LDConfig streamUrl]
+-[LDConfig setStreamUrl:]
+-[LDConfig capacity]
+-[LDConfig connectionTimeout]
+-[LDConfig flushInterval]
+-[LDConfig pollingInterval]
+-[LDConfig backgroundFetchInterval]
+-[LDConfig streaming]
+-[LDConfig privateUserAttributes]
+-[LDConfig allUserAttributesPrivate]
+-[LDConfig setAllUserAttributesPrivate:]
+-[LDConfig useReport]
+-[LDConfig setUseReport:]
+-[LDConfig inlineUserInEvents]
+-[LDConfig debugEnabled]
+-[LDConfig flagRetryStatusCodes]
+-[LDConfig setFlagRetryStatusCodes:]
+-[LDConfig .cxx_destruct]
+-[LDConfigBuilder init]
+-[LDConfigBuilder withMobileKey:]
+-[LDConfigBuilder withBaseUrl:]
+-[LDConfigBuilder withEventsUrl:]
+-[LDConfigBuilder withCapacity:]
+-[LDConfigBuilder withConnectionTimeout:]
+-[LDConfigBuilder withFlushInterval:]
+-[LDConfigBuilder withPollingInterval:]
+-[LDConfigBuilder withBackgroundFetchInterval:]
+-[LDConfigBuilder withDebugEnabled:]
+-[LDConfigBuilder withStreaming:]
+-[LDConfigBuilder build]
+-[LDConfigBuilder config]
+-[LDConfigBuilder setConfig:]
+-[LDConfigBuilder .cxx_destruct]
+_OBJC_IVAR_$_LDConfig._mobileKey
+_OBJC_IVAR_$_LDConfig._baseUrl
+_OBJC_IVAR_$_LDConfig._eventsUrl
+_OBJC_IVAR_$_LDConfig._capacity
+_OBJC_IVAR_$_LDConfig._connectionTimeout
+_OBJC_IVAR_$_LDConfig._flushInterval
+_OBJC_IVAR_$_LDConfig._pollingInterval
+_OBJC_IVAR_$_LDConfig._backgroundFetchInterval
+_OBJC_IVAR_$_LDConfig._streaming
+_OBJC_IVAR_$_LDConfig._privateUserAttributes
+_OBJC_IVAR_$_LDConfig._debugEnabled
+_OBJC_IVAR_$_LDConfig._inlineUserInEvents
+_OBJC_IVAR_$_LDConfig._streamUrl
+_OBJC_IVAR_$_LDConfig._allUserAttributesPrivate
+_OBJC_IVAR_$_LDConfig._useReport
+_OBJC_IVAR_$_LDConfig._flagRetryStatusCodes
+_OBJC_IVAR_$_LDConfigBuilder._config
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDConfig.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDConfig.h
+-[NSHTTPURLResponse(LaunchDarkly) isUnauthorizedHTTPResponse]
+-[NSHTTPURLResponse(LaunchDarkly) headerDate]
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSHTTPURLResponse+LaunchDarkly.m
+-[LDFlagConfigModel encodeWithCoder:]
+-[LDFlagConfigModel initWithCoder:]
+-[LDFlagConfigModel initWithDictionary:]
+-[LDFlagConfigModel init]
+-[LDFlagConfigModel dictionaryValue]
+-[LDFlagConfigModel dictionaryValueIncludeNulls:]
+-[LDFlagConfigModel doesFlagConfigValueExistForFlagKey:]
+-[LDFlagConfigModel flagConfigValueForFlagKey:]
+-[LDFlagConfigModel flagValueForFlagKey:]
+-[LDFlagConfigModel flagModelVersionForFlagKey:]
+-[LDFlagConfigModel addOrReplaceFromDictionary:]
+-[LDFlagConfigModel shouldApplyPatch:forFlagKey:]
+-[LDFlagConfigModel deleteFromDictionary:]
+-[LDFlagConfigModel isEqualToConfig:]
+-[LDFlagConfigModel hasFeaturesEqualToDictionary:]
+-[LDFlagConfigModel updateEventTrackingContextFromConfig:]
+-[LDFlagConfigModel description]
+-[LDFlagConfigModel featuresJsonDictionary]
+-[LDFlagConfigModel setFeaturesJsonDictionary:]
+-[LDFlagConfigModel .cxx_destruct]
+_OBJC_IVAR_$_LDFlagConfigModel._featuresJsonDictionary
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDFlagConfigModel.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDFlagConfigModel.h
+-[NSDictionary(BVJSONString) jsonString]
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSDictionary+JSON.m
++[NSDateFormatter(LDUserModel) userDateFormatter]
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSDateFormatter+LDUserModel.m
++[LDFlagConfigValue flagConfigValueWithObject:]
+-[LDFlagConfigValue initWithObject:]
+-[LDFlagConfigValue encodeWithCoder:]
+-[LDFlagConfigValue initWithCoder:]
+-[LDFlagConfigValue dictionaryValue]
+-[LDFlagConfigValue dictionaryValueUseFlagVersionForVersion:includeEventTrackingContext:]
+-[LDFlagConfigValue isEqualToFlagConfigValue:]
+-[LDFlagConfigValue isEqual:]
+-[LDFlagConfigValue hash]
+-[LDFlagConfigValue hasPropertiesMatchingDictionary:]
+-[LDFlagConfigValue description]
+-[LDFlagConfigValue value]
+-[LDFlagConfigValue setValue:]
+-[LDFlagConfigValue modelVersion]
+-[LDFlagConfigValue setModelVersion:]
+-[LDFlagConfigValue variation]
+-[LDFlagConfigValue setVariation:]
+-[LDFlagConfigValue flagVersion]
+-[LDFlagConfigValue setFlagVersion:]
+-[LDFlagConfigValue eventTrackingContext]
+-[LDFlagConfigValue setEventTrackingContext:]
+-[LDFlagConfigValue .cxx_destruct]
+_OBJC_IVAR_$_LDFlagConfigValue._value
+_OBJC_IVAR_$_LDFlagConfigValue._modelVersion
+_OBJC_IVAR_$_LDFlagConfigValue._variation
+_OBJC_IVAR_$_LDFlagConfigValue._flagVersion
+_OBJC_IVAR_$_LDFlagConfigValue._eventTrackingContext
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDFlagConfigValue.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDFlagConfigValue.h
+-[LDEvent(Unauthorized) isUnauthorizedEvent]
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDEvent+Unauthorized.m
++[LDUtil assertThreadIsNotMain]
++[LDUtil getDeviceAsString]
++[LDUtil getSystemVersionAsString]
++[LDUtil getSystemVersionAsAnInteger]
++[LDUtil setLogLevel:]
++[LDUtil logLevel]
++[LDUtil base64EncodeString:]
++[LDUtil base64DecodeString:]
++[LDUtil base64UrlEncodeString:]
++[LDUtil base64UrlDecodeString:]
++[LDUtil throwException:reason:]
+_getSystemVersionAsAnInteger.version
+_gLogLevel
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDUtil.m
+-[LDThrottler initWithMaxDelayInterval:]
+-[LDThrottler runThrottled:]
+-[LDThrottler delayIntervalForRunAttempts:]
+-[LDThrottler delayTimerWithDelayInterval:]
+-[LDThrottler timerFired]
+-[LDThrottler maxDelayInterval]
+-[LDThrottler setMaxDelayInterval:]
+-[LDThrottler runAttempts]
+-[LDThrottler setRunAttempts:]
+-[LDThrottler delayInterval]
+-[LDThrottler setDelayInterval:]
+-[LDThrottler timerStartDate]
+-[LDThrottler setTimerStartDate:]
+-[LDThrottler delayTimer]
+-[LDThrottler setDelayTimer:]
+-[LDThrottler runBlock]
+-[LDThrottler setRunBlock:]
+-[LDThrottler timerFiredCallback]
+-[LDThrottler setTimerFiredCallback:]
+-[LDThrottler .cxx_destruct]
+_OBJC_IVAR_$_LDThrottler._maxDelayInterval
+_OBJC_IVAR_$_LDThrottler._runAttempts
+_OBJC_IVAR_$_LDThrottler._delayInterval
+_OBJC_IVAR_$_LDThrottler._timerStartDate
+_OBJC_IVAR_$_LDThrottler._delayTimer
+_OBJC_IVAR_$_LDThrottler._runBlock
+_OBJC_IVAR_$_LDThrottler._timerFiredCallback
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDThrottler.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDThrottler.h
++[LDPollingManager sharedInstance]
+___34+[LDPollingManager sharedInstance]_block_invoke
+-[LDPollingManager init]
+-[LDPollingManager dealloc]
+-[LDPollingManager startConfigPollTimer]
+___40-[LDPollingManager startConfigPollTimer]_block_invoke
+___copy_helper_block_.28
+___destroy_helper_block_.29
+-[LDPollingManager configPoll]
+-[LDPollingManager updateConfigPollingTimer]
+-[LDPollingManager startConfigPolling]
+-[LDPollingManager pauseConfigPolling]
+-[LDPollingManager suspendConfigPolling]
+-[LDPollingManager resumeConfigPolling]
+-[LDPollingManager stopConfigPolling]
+-[LDPollingManager setEventPollingIntervalMillis:]
+-[LDPollingManager calculateEventPollingIntervalMillis:]
+-[LDPollingManager startEventPollTimer]
+___39-[LDPollingManager startEventPollTimer]_block_invoke
+___copy_helper_block_.97
+___destroy_helper_block_.98
+-[LDPollingManager eventPoll]
+-[LDPollingManager updateEventPollingTimer]
+-[LDPollingManager startEventPolling]
+-[LDPollingManager pauseEventPolling]
+-[LDPollingManager suspendEventPolling]
+-[LDPollingManager resumeEventPolling]
+-[LDPollingManager stopEventPolling]
+-[LDPollingManager eventTimer]
+-[LDPollingManager setEventTimer:]
+-[LDPollingManager eventPollingIntervalMillis]
+-[LDPollingManager eventPollingState]
+-[LDPollingManager setEventPollingState:]
+-[LDPollingManager configTimer]
+-[LDPollingManager setConfigTimer:]
+-[LDPollingManager configPollingIntervalMillis]
+-[LDPollingManager setConfigPollingIntervalMillis:]
+-[LDPollingManager configPollingState]
+-[LDPollingManager setConfigPollingState:]
+-[LDPollingManager .cxx_destruct]
+_sharedInstance.once
+_sharedInstance.sharedInstance
+___block_descriptor_tmp.30
+_OBJC_IVAR_$_LDPollingManager.eventPollingIntervalMillis
+___block_descriptor_tmp.99
+_OBJC_IVAR_$_LDPollingManager.eventTimer
+_OBJC_IVAR_$_LDPollingManager.configTimer
+_OBJC_IVAR_$_LDPollingManager.configPollingIntervalMillis
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDPollingManager.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDPollingManager.h
+__39-[LDPollingManager startEventPollTimer]_block_invoke
+__40-[LDPollingManager startConfigPollTimer]_block_invoke
+__34+[LDPollingManager sharedInstance]_block_invoke
++[LDClientManager sharedInstance]
+___33+[LDClientManager sharedInstance]_block_invoke
+-[LDClientManager setOnline:]
+-[LDClientManager isOnline]
+-[LDClientManager startPolling]
+-[LDClientManager stopPolling]
+-[LDClientManager updateUser]
+-[LDClientManager willEnterBackground]
+-[LDClientManager willEnterForeground]
+-[LDClientManager configureEventSource]
+___39-[LDClientManager configureEventSource]_block_invoke
+___copy_helper_block_.90
+___destroy_helper_block_.91
+___39-[LDClientManager configureEventSource]_block_invoke.96
+-[LDClientManager eventSourceForUser:config:httpHeaders:]
+-[LDClientManager eventSourceUrlForUser:config:]
+-[LDClientManager handlePingEvent:]
+-[LDClientManager handlePutEvent:]
+-[LDClientManager handlePatchEvent:]
+-[LDClientManager handleDeleteEvent:]
+-[LDClientManager postClientUnauthorizedNotification]
+-[LDClientManager stopEventSource]
+-[LDClientManager backgroundFetchInitiated]
+-[LDClientManager syncWithServerForEvents]
+___42-[LDClientManager syncWithServerForEvents]_block_invoke
+-[LDClientManager syncWithServerForConfig]
+-[LDClientManager flushEvents]
+-[LDClientManager processedEvents:jsonEventArray:responseDate:]
+-[LDClientManager processedConfig:jsonConfigDictionary:]
+-[LDClientManager httpHeadersForEventSource]
+-[LDClientManager eventSource]
+-[LDClientManager backgroundTime]
+-[LDClientManager setBackgroundTime:]
+-[LDClientManager .cxx_destruct]
+_sharedInstance.sharedApiManager
+_OBJC_IVAR_$_LDClientManager._online
+_OBJC_IVAR_$_LDClientManager.eventSource
+___block_descriptor_tmp.93
+___block_descriptor_tmp.97
+___block_literal_global
+___block_descriptor_tmp.202
+___block_literal_global.203
+_OBJC_IVAR_$_LDClientManager._backgroundTime
+l_OBJC_PROTOCOL_$_NSObject
+l_OBJC_LABEL_PROTOCOL_$_NSObject
+l_OBJC_PROTOCOL_$_RequestManagerDelegate
+l_OBJC_LABEL_PROTOCOL_$_RequestManagerDelegate
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDClientManager.m
+__42-[LDClientManager syncWithServerForEvents]_block_invoke
+__39-[LDClientManager configureEventSource]_block_invoke.96
+__39-[LDClientManager configureEventSource]_block_invoke
+__33+[LDClientManager sharedInstance]_block_invoke
+-[LDUserModel dictionaryValueWithPrivateAttributesAndFlagConfig:]
+-[LDUserModel dictionaryValueWithFlagConfig:includePrivateAttributes:config:]
+-[LDUserModel storeValue:in:forAttribute:includePrivate:privateAttributes:redactedAttributes:]
+-[LDUserModel customDictionaryIncludingPrivate:privateAttributes:redactedAttributes:]
+-[LDUserModel encodeWithCoder:]
+-[LDUserModel initWithCoder:]
+-[LDUserModel initWithDictionary:]
+-[LDUserModel init]
+-[LDUserModel resetTracker]
+-[LDUserModel description]
++[LDUserModel allUserAttributes]
+-[LDUserModel key]
+-[LDUserModel key:]
+-[LDUserModel ip]
+-[LDUserModel setIp:]
+-[LDUserModel country]
+-[LDUserModel setCountry:]
+-[LDUserModel name]
+-[LDUserModel setName:]
+-[LDUserModel firstName]
+-[LDUserModel setFirstName:]
+-[LDUserModel lastName]
+-[LDUserModel setLastName:]
+-[LDUserModel email]
+-[LDUserModel setEmail:]
+-[LDUserModel avatar]
+-[LDUserModel setAvatar:]
+-[LDUserModel custom]
+-[LDUserModel setCustom:]
+-[LDUserModel updatedAt]
+-[LDUserModel setUpdatedAt:]
+-[LDUserModel flagConfig]
+-[LDUserModel setFlagConfig:]
+-[LDUserModel flagConfigTracker]
+-[LDUserModel setFlagConfigTracker:]
+-[LDUserModel privateAttributes]
+-[LDUserModel setPrivateAttributes:]
+-[LDUserModel anonymous]
+-[LDUserModel setAnonymous:]
+-[LDUserModel device]
+-[LDUserModel setDevice:]
+-[LDUserModel os]
+-[LDUserModel setOs:]
+-[LDUserModel .cxx_destruct]
+_OBJC_IVAR_$_LDUserModel._key
+_OBJC_IVAR_$_LDUserModel._ip
+_OBJC_IVAR_$_LDUserModel._country
+_OBJC_IVAR_$_LDUserModel._name
+_OBJC_IVAR_$_LDUserModel._firstName
+_OBJC_IVAR_$_LDUserModel._lastName
+_OBJC_IVAR_$_LDUserModel._email
+_OBJC_IVAR_$_LDUserModel._avatar
+_OBJC_IVAR_$_LDUserModel._custom
+_OBJC_IVAR_$_LDUserModel._updatedAt
+_OBJC_IVAR_$_LDUserModel._flagConfig
+_OBJC_IVAR_$_LDUserModel._flagConfigTracker
+_OBJC_IVAR_$_LDUserModel._privateAttributes
+_OBJC_IVAR_$_LDUserModel._anonymous
+_OBJC_IVAR_$_LDUserModel._device
+_OBJC_IVAR_$_LDUserModel._os
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDUserModel.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDUserModel.h
+-[NSNumber(LaunchDarkly) ldMillisecondValue]
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSNumber+LaunchDarkly.m
++[LDDataManager sharedManager]
+___30+[LDDataManager sharedManager]_block_invoke
+-[LDDataManager purgeOldUser:]
+___30-[LDDataManager purgeOldUser:]_block_invoke
+-[LDDataManager saveUser:]
+-[LDDataManager saveUserDeprecated:]
+-[LDDataManager saveUser:asDict:]
+-[LDDataManager findUserWithkey:]
+-[LDDataManager compareConfigForUser:withNewUser:]
+-[LDDataManager storeUserDictionary:]
+-[LDDataManager deprecatedStoreUserDictionary:]
+-[LDDataManager retrieveUserDictionary]
+-[LDDataManager createFlagEvaluationEventsWithFlagKey:reportedFlagValue:flagConfigValue:defaultFlagValue:user:config:]
+-[LDDataManager createFeatureEventWithFlagKey:reportedFlagValue:flagConfigValue:defaultFlagValue:user:config:]
+-[LDDataManager createCustomEventWithKey:customData:user:config:]
+-[LDDataManager createIdentifyEventWithUser:config:]
+-[LDDataManager createSummaryEventWithTracker:config:]
+-[LDDataManager createDebugEventWithFlagKey:reportedFlagValue:flagConfigValue:defaultFlagValue:user:config:]
+-[LDDataManager shouldCreateDebugEventForContext:lastEventResponseDate:]
+-[LDDataManager addEventDictionary:]
+___36-[LDDataManager addEventDictionary:]_block_invoke
+___copy_helper_block_.160
+___destroy_helper_block_.161
+-[LDDataManager isAtEventCapacity:]
+-[LDDataManager deleteProcessedEvents:]
+___39-[LDDataManager deleteProcessedEvents:]_block_invoke
+-[LDDataManager allEventDictionaries:]
+___38-[LDDataManager allEventDictionaries:]_block_invoke
+-[LDDataManager flushEventsDictionary]
+-[LDDataManager retrieveEventsArray]
+-[LDDataManager lastEventResponseDate]
+-[LDDataManager setLastEventResponseDate:]
+-[LDDataManager eventsArray]
+-[LDDataManager setEventsArray:]
+-[LDDataManager .cxx_destruct]
+_sharedManager.sharedDataManager
+_sharedManager.onceToken
+___block_descriptor_tmp.10
+___block_descriptor_tmp.162
+_OBJC_IVAR_$_LDDataManager._lastEventResponseDate
+_OBJC_IVAR_$_LDDataManager._eventsArray
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDDataManager.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDDataManager.h
+__38-[LDDataManager allEventDictionaries:]_block_invoke
+__39-[LDDataManager deleteProcessedEvents:]_block_invoke
+NSMakeRange
+/Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
+__36-[LDDataManager addEventDictionary:]_block_invoke
+__30-[LDDataManager purgeOldUser:]_block_invoke
+__30+[LDDataManager sharedManager]_block_invoke
++[LDUserBuilder compareNewBuilder:withUser:]
++[LDUserBuilder retrieveCurrentBuilder:]
++[LDUserBuilder currentBuilder:]
+-[LDUserBuilder init]
+-[LDUserBuilder customString:value:]
+-[LDUserBuilder customBool:value:]
+-[LDUserBuilder customNumber:value:]
+-[LDUserBuilder customArray:value:]
+-[LDUserBuilder build]
+-[LDUserBuilder withKey:]
+-[LDUserBuilder withIp:]
+-[LDUserBuilder withCountry:]
+-[LDUserBuilder withName:]
+-[LDUserBuilder withFirstName:]
+-[LDUserBuilder withLastName:]
+-[LDUserBuilder withEmail:]
+-[LDUserBuilder withAvatar:]
+-[LDUserBuilder withCustomString:value:]
+-[LDUserBuilder withCustomBool:value:]
+-[LDUserBuilder withCustomNumber:value:]
+-[LDUserBuilder withCustomArray:value:]
+-[LDUserBuilder withCustomDictionary:]
+-[LDUserBuilder withAnonymous:]
+-[LDUserBuilder key]
+-[LDUserBuilder setKey:]
+-[LDUserBuilder ip]
+-[LDUserBuilder setIp:]
+-[LDUserBuilder country]
+-[LDUserBuilder setCountry:]
+-[LDUserBuilder name]
+-[LDUserBuilder setName:]
+-[LDUserBuilder firstName]
+-[LDUserBuilder setFirstName:]
+-[LDUserBuilder lastName]
+-[LDUserBuilder setLastName:]
+-[LDUserBuilder email]
+-[LDUserBuilder setEmail:]
+-[LDUserBuilder avatar]
+-[LDUserBuilder setAvatar:]
+-[LDUserBuilder customDictionary]
+-[LDUserBuilder setCustomDictionary:]
+-[LDUserBuilder isAnonymous]
+-[LDUserBuilder setIsAnonymous:]
+-[LDUserBuilder privateAttributes]
+-[LDUserBuilder setPrivateAttributes:]
+-[LDUserBuilder .cxx_destruct]
+_OBJC_IVAR_$_LDUserBuilder._customDictionary
+_OBJC_IVAR_$_LDUserBuilder._key
+_OBJC_IVAR_$_LDUserBuilder._ip
+_OBJC_IVAR_$_LDUserBuilder._country
+_OBJC_IVAR_$_LDUserBuilder._name
+_OBJC_IVAR_$_LDUserBuilder._firstName
+_OBJC_IVAR_$_LDUserBuilder._lastName
+_OBJC_IVAR_$_LDUserBuilder._email
+_OBJC_IVAR_$_LDUserBuilder._avatar
+_OBJC_IVAR_$_LDUserBuilder._isAnonymous
+_OBJC_IVAR_$_LDUserBuilder._privateAttributes
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDUserBuilder.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDUserBuilder.h
++[NSDate(ReferencedDate) dateFromMillisSince1970:]
+-[NSDate(ReferencedDate) millisSince1970]
+-[NSDate(ReferencedDate) isWithinTimeInterval:ofDate:]
+-[NSDate(ReferencedDate) isEarlierThan:]
+-[NSDate(ReferencedDate) isLaterThan:]
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/NSDate+ReferencedDate.m
++[LDFlagValueCounter counterWithFlagConfigValue:reportedFlagValue:]
+-[LDFlagValueCounter initWithFlagConfigValue:reportedFlagValue:]
+-[LDFlagValueCounter dictionaryValue]
+-[LDFlagValueCounter description]
+-[LDFlagValueCounter reportedFlagValue]
+-[LDFlagValueCounter setReportedFlagValue:]
+-[LDFlagValueCounter flagConfigValue]
+-[LDFlagValueCounter setFlagConfigValue:]
+-[LDFlagValueCounter isKnown]
+-[LDFlagValueCounter setKnown:]
+-[LDFlagValueCounter count]
+-[LDFlagValueCounter setCount:]
+-[LDFlagValueCounter .cxx_destruct]
+_OBJC_IVAR_$_LDFlagValueCounter._reportedFlagValue
+_OBJC_IVAR_$_LDFlagValueCounter._flagConfigValue
+_OBJC_IVAR_$_LDFlagValueCounter._known
+_OBJC_IVAR_$_LDFlagValueCounter._count
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDFlagValueCounter.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDFlagValueCounter.h
++[LDFlagCounter counterWithFlagKey:defaultValue:]
+-[LDFlagCounter initWithFlagKey:defaultValue:]
+-[LDFlagCounter hasLoggedRequests]
+-[LDFlagCounter logRequestWithFlagConfigValue:reportedFlagValue:]
+-[LDFlagCounter valueCounterForFlagConfigValue:]
+___48-[LDFlagCounter valueCounterForFlagConfigValue:]_block_invoke
+-[LDFlagCounter dictionaryValue]
+-[LDFlagCounter description]
+-[LDFlagCounter flagKey]
+-[LDFlagCounter setFlagKey:]
+-[LDFlagCounter defaultValue]
+-[LDFlagCounter setDefaultValue:]
+-[LDFlagCounter flagValueCounters]
+-[LDFlagCounter setFlagValueCounters:]
+-[LDFlagCounter .cxx_destruct]
+_OBJC_IVAR_$_LDFlagCounter._flagKey
+_OBJC_IVAR_$_LDFlagCounter._defaultValue
+_OBJC_IVAR_$_LDFlagCounter._flagValueCounters
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDFlagCounter.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDFlagConfig/LDFlagCounter.h
+__48-[LDFlagCounter valueCounterForFlagConfigValue:]_block_invoke
++[LDRequestManager sharedInstance]
+___34+[LDRequestManager sharedInstance]_block_invoke
+-[LDRequestManager dealloc]
+-[LDRequestManager configure:]
+-[LDRequestManager performFeatureFlagRequest:]
+___46-[LDRequestManager performFeatureFlagRequest:]_block_invoke
+___46-[LDRequestManager performFeatureFlagRequest:]_block_invoke_2
+___copy_helper_block_.78
+___destroy_helper_block_.79
+___copy_helper_block_.84
+___destroy_helper_block_.85
+___46-[LDRequestManager performFeatureFlagRequest:]_block_invoke.87
+___copy_helper_block_.88
+___destroy_helper_block_.89
+-[LDRequestManager shouldTryFlagGetRequestForFlagResponse:]
+-[LDRequestManager processFlagResponseWithData:error:]
+___54-[LDRequestManager processFlagResponseWithData:error:]_block_invoke
+___copy_helper_block_.107
+___destroy_helper_block_.108
+-[LDRequestManager performFlagRequest:completionHandler:]
+___57-[LDRequestManager performFlagRequest:completionHandler:]_block_invoke
+___57-[LDRequestManager performFlagRequest:completionHandler:]_block_invoke_2
+___copy_helper_block_.121
+___destroy_helper_block_.122
+-[LDRequestManager performEventRequest:]
+___40-[LDRequestManager performEventRequest:]_block_invoke
+___40-[LDRequestManager performEventRequest:]_block_invoke_2
+___40-[LDRequestManager performEventRequest:]_block_invoke_3
+___copy_helper_block_.166
+___destroy_helper_block_.167
+-[LDRequestManager flagRequestUsingReportMethodForUser:]
+-[LDRequestManager flagRequestUsingGetMethodForUser:]
+-[LDRequestManager addFeatureRequestHeaders:]
+-[LDRequestManager addEventRequestHeaders:]
+-[LDRequestManager mobileKey]
+-[LDRequestManager setMobileKey:]
+-[LDRequestManager baseUrl]
+-[LDRequestManager setBaseUrl:]
+-[LDRequestManager eventsUrl]
+-[LDRequestManager setEventsUrl:]
+-[LDRequestManager connectionTimeout]
+-[LDRequestManager setConnectionTimeout:]
+-[LDRequestManager delegate]
+-[LDRequestManager setDelegate:]
+-[LDRequestManager .cxx_destruct]
+_OBJC_IVAR_$_LDRequestManager.mobileKey
+___block_descriptor_tmp.81
+___block_descriptor_tmp.86
+___block_descriptor_tmp.90
+___block_descriptor_tmp.109
+___block_descriptor_tmp.118
+___block_descriptor_tmp.123
+_OBJC_IVAR_$_LDRequestManager.eventsUrl
+___block_descriptor_tmp.160
+___block_literal_global.161
+___block_descriptor_tmp.168
+_OBJC_IVAR_$_LDRequestManager.baseUrl
+_OBJC_IVAR_$_LDRequestManager.connectionTimeout
+_OBJC_IVAR_$_LDRequestManager.delegate
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDRequestManager.m
+/Users/markpokorny/Documents/Development/launchDarkly/hello-tvos/Carthage/Checkouts/ios-client/Darkly/LDRequestManager.h
+__40-[LDRequestManager performEventRequest:]_block_invoke_3
+__40-[LDRequestManager performEventRequest:]_block_invoke_2
+__40-[LDRequestManager performEventRequest:]_block_invoke
+__57-[LDRequestManager performFlagRequest:completionHandler:]_block_invoke_2
+__57-[LDRequestManager performFlagRequest:completionHandler:]_block_invoke
+__54-[LDRequestManager processFlagResponseWithData:error:]_block_invoke
+__46-[LDRequestManager performFeatureFlagRequest:]_block_invoke.87
+__46-[LDRequestManager performFeatureFlagRequest:]_block_invoke_2
+__46-[LDRequestManager performFeatureFlagRequest:]_block_invoke
+__34+[LDRequestManager sharedInstance]_block_invoke
+/Users/markpokorny/Library/Caches/org.carthage.CarthageKit/DerivedData/10.0_10A255/ios-client/2.13.5/Build/Intermediates.noindex/ArchiveIntermediates/Darkly_tvOS/IntermediateBuildFilesPath/Darkly.build/Release-appletvos/Darkly_tvOS.build/DerivedSources/Darkly_vers.c
