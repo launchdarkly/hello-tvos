@@ -2,26 +2,26 @@
   "Mac" : [
     {
       "name" : "DarklyEventSource",
-      "hash" : "5848cb93447e0e658079db555ae05888da33f90db8efdacb0c4b7df82a0de5fe"
+      "hash" : "c4f1282bc63dd321126dd6547f0fd7ceee84898c6c03f4e7364629f1e37f6a06"
     }
   ],
   "watchOS" : [
     {
       "name" : "DarklyEventSource",
-      "hash" : "7b4e15a8bcef3fd04d030b85ac1532aca2bf33a6a9cec616e624d07dff3a5a04"
+      "hash" : "abab836312c3ce15fe3a15a7d4859fd05fdb47ed399bf9830b7b7caf288d47c9"
     }
   ],
   "tvOS" : [
     {
       "name" : "DarklyEventSource",
-      "hash" : "1bfd0b732041a63ff9ea3112b237080f3f24845ac18204eb7f7d678e057f13d2"
+      "hash" : "4e0c824d65f9ab1517df31a3bf87df366c82cb799369728e9ac090d6fb7cbee9"
     }
   ],
   "commitish" : "3.2.7",
   "iOS" : [
     {
       "name" : "DarklyEventSource",
-      "hash" : "e6eee5effaf2d3ade9ce8a5342cca831deb79b9e9e7acd1a9a2da21eee38ce8d"
+      "hash" : "1d7c96b3e5adae33d0decc96e172efb9595d21b3d5f752da02fafb6c303841c7"
     }
   ]
 }
