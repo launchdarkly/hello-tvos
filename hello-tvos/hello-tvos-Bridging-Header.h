@@ -6,4 +6,4 @@
 //  Copyright © 2017 LaunchDarkly. All rights reserved.
 //
 
-#import <Darkly/Darkly.h>
+@import LaunchDarkly;

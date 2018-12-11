@@ -1,2 +1,2 @@
-github "launchdarkly/ios-client" "2.14.0"
+github "launchdarkly/ios-client" "7fd2afb0598efbfa6e43ae9de60ffe8aa984e495"
 github "launchdarkly/ios-eventsource" "3.2.7"
