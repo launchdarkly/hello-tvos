@@ -498,8 +498,8 @@ ___destroy_helper_block_.140
 -[LDEnvironmentController reportFlagConfigProcessingCompleteWithNotificationName:message:]
 -[LDEnvironmentController syncWithServerForEvents]
 ___50-[LDEnvironmentController syncWithServerForEvents]_block_invoke
-___copy_helper_block_.293
-___destroy_helper_block_.294
+___copy_helper_block_.295
+___destroy_helper_block_.296
 -[LDEnvironmentController processedEvents:jsonEventArray:responseDate:]
 -[LDEnvironmentController flushEvents]
 -[LDEnvironmentController isOnline]
@@ -522,7 +522,7 @@ ___destroy_helper_block_.294
 -[LDEnvironmentController .cxx_destruct]
 _OBJC_IVAR_$_LDEnvironmentController._online
 ___block_descriptor_tmp.141
-___block_descriptor_tmp.296
+___block_descriptor_tmp.298
 _OBJC_IVAR_$_LDEnvironmentController._mobileKey
 _OBJC_IVAR_$_LDEnvironmentController._config
 _OBJC_IVAR_$_LDEnvironmentController._user
@@ -975,4 +975,4 @@ __51-[LDRequestManager processFlagResponse:data:error:]_block_invoke
 __55-[LDRequestManager performFeatureFlagRequest:isOnline:]_block_invoke.62
 __55-[LDRequestManager performFeatureFlagRequest:isOnline:]_block_invoke_2
 __55-[LDRequestManager performFeatureFlagRequest:isOnline:]_block_invoke
-/Users/markpokorny/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/ios-client/2.14.1/Build/Intermediates.noindex/ArchiveIntermediates/Darkly_tvOS/IntermediateBuildFilesPath/Darkly.build/Release-appletvos/Darkly_tvOS.build/DerivedSources/Darkly_vers.c
+/Users/markpokorny/Library/Caches/org.carthage.CarthageKit/DerivedData/10.1_10B61/ios-client/2.14.2/Build/Intermediates.noindex/ArchiveIntermediates/Darkly_tvOS/IntermediateBuildFilesPath/Darkly.build/Release-appletvos/Darkly_tvOS.build/DerivedSources/Darkly_vers.c
