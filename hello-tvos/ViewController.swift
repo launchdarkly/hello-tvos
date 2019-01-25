@@ -8,10 +8,10 @@
 
 import UIKit
 
-let MOBILE_KEY = ""
-let FLAG_KEY = "my-flag-key"
-
 class ViewController: UIViewController, ClientDelegate {
+
+    let mobileKey = ""
+    let flagKey = "test-flag"
 
     @IBOutlet weak var valueLabel: UILabel!
     override func viewDidLoad() {
@@ -37,12 +37,13 @@ class ViewController: UIViewController, ClientDelegate {
         let groups = ["beta_testers"]
         builder.customArray("groups", value: groups)
         
-        let config = LDConfig.init(mobileKey: MOBILE_KEY)
+        let config = LDConfig.init(mobileKey: mobileKey)
+
         LDClient.sharedInstance().start(config, with: builder)
     }
     
     func checkFeatureValue() {
-        let showFeature = LDClient.sharedInstance().boolVariation(FLAG_KEY, fallback: false)
+        let showFeature = LDClient.sharedInstance().boolVariation(flagKey, fallback: false)
         updateLabel(value: "\(showFeature)")
     }
     
@@ -52,8 +53,8 @@ class ViewController: UIViewController, ClientDelegate {
 
     //MARK: - ClientDelegate Methods
     
-    func featureFlagDidUpdate(_ key: String!) {
-        if key == FLAG_KEY {
+    func featureFlagDidUpdate(_ key: String) {
+        if key == flagKey {
             checkFeatureValue()
         }
     }
