@@ -1,9 +1,9 @@
 {
-  "commitish" : "3.2.7",
+  "commitish" : "4.0.0",
   "tvOS" : [
     {
       "name" : "DarklyEventSource",
-      "hash" : "312be5e7ec70c7827f153c27c12139e121dd72a27575734a9eb264107bbfe4aa"
+      "hash" : "a7778d8f83f4264c416a6292a753a5e0995449d33532ad50b0f73d591be355f7"
     }
   ]
 }

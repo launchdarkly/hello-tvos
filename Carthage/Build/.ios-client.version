@@ -1,9 +1,9 @@
 {
-  "commitish" : "7fd2afb0598efbfa6e43ae9de60ffe8aa984e495",
+  "commitish" : "5443b396768d01338402724f1acaede3656353b0",
   "tvOS" : [
     {
       "name" : "LaunchDarkly",
-      "hash" : "8e8cd7e28651c7784ce09ed3004b4167c851b99fa1171aca3288ee42998976b3"
+      "hash" : "518af6672397ac875d9c13388ec441574f599bb002ad01fd2bcf7a3b3943c3e2"
     }
   ]
 }
