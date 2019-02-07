@@ -32,12 +32,12 @@ class ViewController: UIViewController {
         user.lastName = "Loblaw"
         user.custom = ["groups":["beta_testers"]]
 
-        let config = LDConfig()
+        let config = LDConfig(mobileKey: mobileKey)
 
         LDClient.shared.observe(key: flagKey, owner: self) { [weak self] (changedFlag) in
             self?.featureFlagDidUpdate(changedFlag.key)
         }
-        LDClient.shared.start(mobileKey: mobileKey, config: config, user: user)
+        LDClient.shared.start(config: config, user: user)
     }
     
     func checkFeatureValue() {

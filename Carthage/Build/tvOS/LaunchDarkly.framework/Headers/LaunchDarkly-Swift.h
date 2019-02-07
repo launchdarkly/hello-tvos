@@ -190,6 +190,19 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
+@interface NSJSONSerialization (SWIFT_EXTENSION(LaunchDarkly))
+/// String domain set into NSError objects for Objective-C clients when the SDK sends a JSONError
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull LaunchDarklyJSONErrorDomain;)
++ (NSString * _Nonnull)LaunchDarklyJSONErrorDomain SWIFT_WARN_UNUSED_RESULT;
+@end
+
+typedef SWIFT_ENUM_NAMED(NSInteger, LaunchDarklyJSONError, "JSONError", closed) {
+/// Error used when the expected JSON object is a dictionary, but the actual object is not
+  LaunchDarklyJSONErrorNotADictionary = 0,
+/// Error used when the expected object is a valid JSON object, but the actual object is not
+  LaunchDarklyJSONErrorInvalidJsonObject = 1,
+};
+static NSString * _Nonnull const LaunchDarklyJSONErrorDomain = @"LaunchDarkly.JSONError";
 
 
 
@@ -212,13 +225,6 @@ SWIFT_CLASS("_TtC12LaunchDarkly13LDUserWrapper")
 
 
 
-enum LDFlagValueSource : NSInteger;
-
-@interface NSString (SWIFT_EXTENSION(LaunchDarkly))
-/// String representation of an ObjcLDFlagValueSource
-+ (NSString * _Nonnull)stringWithFlagValueSource:(enum LDFlagValueSource)source SWIFT_WARN_UNUSED_RESULT;
-@end
-
 
 /// Collects the elements of a feature flag that changed as a result of a <code>clientstream</code> update or feature flag request. The SDK will pass a typed ObjcLDChangedFlag or a collection of ObjcLDChangedFlags into feature flag observer blocks. This is the base type for the typed ObjcLDChangedFlags passed into observer blocks. The client app will have to convert the ObjcLDChangedFlag into the expected typed ObjcLDChangedFlag type.
 /// See the typed <code>ObjcLDClient</code> observeWithKey:owner:handler:, observeWithKeys:owner:handler:, and observeAllWithOwner:handler: for more details.
@@ -236,6 +242,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
+@class LDFlagValueSource;
 
 /// Wraps the changed feature flag’s NSArray values and sources.
 /// If the flag is not actually a NSArray the SDK sets the old and new value to nil, and old and new valueSource to ‘type mismatch’.
@@ -246,9 +253,9 @@ SWIFT_CLASS_NAMED("ObjcLDArrayChangedFlag")
 /// The changed flag’s value after it changed
 @property (nonatomic, readonly, copy) NSArray * _Nullable newValue;
 /// The changed flag value’s source before it changed
-@property (nonatomic, readonly) enum LDFlagValueSource oldValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull oldValueSource;
 /// The changed flag value’s source after it changed
-@property (nonatomic, readonly) enum LDFlagValueSource newValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull newValueSource;
 @end
 
 
@@ -256,9 +263,9 @@ SWIFT_CLASS_NAMED("ObjcLDArrayChangedFlag")
 SWIFT_CLASS_NAMED("ObjcLDArrayVariationValue")
 @interface LDArrayVariationValue : NSObject
 /// The feature flag’s NSArray value
-@property (nonatomic, readonly, copy) NSArray * _Nonnull value;
+@property (nonatomic, readonly, copy) NSArray * _Nullable value;
 /// The feature flag value’s source
-@property (nonatomic, readonly) enum LDFlagValueSource source;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull source;
 /// A string representation of the feature flag value’s source
 @property (nonatomic, readonly, copy) NSString * _Nonnull sourceString;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -275,9 +282,9 @@ SWIFT_CLASS_NAMED("ObjcLDBoolChangedFlag")
 /// The changed flag’s value after it changed
 @property (nonatomic, readonly) BOOL newValue;
 /// The changed flag value’s source before it changed
-@property (nonatomic, readonly) enum LDFlagValueSource oldValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull oldValueSource;
 /// The changed flag value’s source after it changed
-@property (nonatomic, readonly) enum LDFlagValueSource newValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull newValueSource;
 @end
 
 
@@ -287,7 +294,7 @@ SWIFT_CLASS_NAMED("ObjcLDBoolVariationValue")
 /// The feature flag’s BOOL value
 @property (nonatomic, readonly) BOOL value;
 /// The feature flag value’s source
-@property (nonatomic, readonly) enum LDFlagValueSource source;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull source;
 /// A string representation of the feature flag value’s source
 @property (nonatomic, readonly, copy) NSString * _Nonnull sourceString;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -313,18 +320,22 @@ SWIFT_CLASS_NAMED("ObjcLDBoolVariationValue")
 /// <h3>Startup</h3>
 /// <ol>
 ///   <li>
-///     To customize, configure a LDConfig (<code>ObjcLDConfig</code>) and LDUser (<code>ObjcLDUser</code>). While neither are required, both give you additional control over the feature flags delivered to the LDClient. See <code>ObjcLDConfig</code> & <code>ObjcLDUser</code> for more details.
-///   </li>
-///   <li>
-///     Call <code>[LDClient.sharedInstance startWithMobileKey: config: user: completion:]</code> (<code>ObjcLDClient.startWithMobileKey(_:config:user:completion:)</code>)
+///     To customize, configure a LDConfig (<code>ObjcLDConfig</code>) and LDUser (<code>ObjcLDUser</code>). The <code>config</code> is required, the <code>user</code> is optional. Both give you additional control over the feature flags delivered to the LDClient. See <code>ObjcLDConfig</code> & <code>ObjcLDUser</code> for more details.
 ///   </li>
 /// </ol>
 /// <ul>
 ///   <li>
-///     The mobileKey comes from your LaunchDarkly Account settings (on the left, at the bottom). If you have multiple projects be sure to choose the correct Mobile key.
+///     The mobileKey set into the <code>LDConfig</code> comes from your LaunchDarkly Account settings (on the left, at the bottom). If you have multiple projects be sure to choose the correct Mobile key.
 ///   </li>
+/// </ul>
+/// <ol>
 ///   <li>
-///     If you do not pass in a LDConfig or LDUser, LDCLient will create a default for you.
+///     Call <code>[LDClient.sharedInstance startWithConfig: user: completion:]</code> (<code>ObjcLDClient.startWithConfig(_:config:user:completion:)</code>)
+///   </li>
+/// </ol>
+/// <ul>
+///   <li>
+///     If you do not pass in a LDUser, LDCLient will create a default for you.
 ///   </li>
 ///   <li>
 ///     The optional completion closure allows the LDClient to notify your app when it has gone online.
@@ -396,31 +407,27 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// The client app can change the LDUser by getting the <code>user</code>, adjusting the values, and setting it into the LDClient. This allows client apps to collect information over time from the user and update as information is collected. Client apps should follow <a href="apple.com/legal/privacy">Apple’s Privacy Policy</a> when collecting user information. If the client app does not create a LDUser, LDClient creates an anonymous default user, which can affect the feature flags delivered to the LDClient.
 /// When a new user is set, the LDClient goes offline and sets the new user. If the client was online when the new user was set, it goes online again, subject to a throttling delay if in force (see <code>ObjcLDClient.setOnline(_:completion:)</code> for details). To change both the <code>config</code> and <code>user</code>, set the LDClient offline, set both properties, then set the LDClient online.
 @property (nonatomic, strong) LDUser * _Nonnull user;
-/// Starts the LDClient using the passed in <code>mobileKey</code>, <code>config</code>, & <code>user</code>. Call this before requesting feature flag values. The LDClient will not go online until you call this method.
+/// Starts the LDClient using the passed in <code>config</code> & <code>user</code>. Call this before requesting feature flag values. The LDClient will not go online until you call this method.
 /// Starting the LDClient means setting the <code>config</code> & <code>user</code>, setting the client online if <code>config.startOnline</code> is YES (the default setting), and starting event recording. The client app must start the LDClient before it will report feature flag values. If a client does not call start, the LDClient will only report fallback values, and no events will be recorded.
-/// If the start call omits the <code>config</code> or <code>user</code>, the LDClient uses the previously set <code>config</code> and <code>user</code>, or defaults if they were never set.
+/// If the start call omits the <code>user</code>, the LDClient uses the previously set <code>user</code>, or the default <code>user</code> if it was never set.
 /// Subsequent calls to this method cause the LDClient to go offline, reconfigure using the new <code>config</code> & <code>user</code> (if supplied), and then go online if it was online when start was called. Normally there should only be one call to start. To change <code>config</code> or <code>user</code>, set them directly on LDClient.
-/// \param mobileKey The Mobile key from your <a href="app.launchdarkly.com">LaunchDarkly Account</a> settings (on the left at the bottom). If you have multiple projects be sure to choose the correct Mobile key.
+/// \param configWrapper The LDConfig that contains the desired configuration. (Required)
 ///
-/// \param config The LDConfig set with the desired configuration. If omitted, LDClient retains the previously set config, or default if one was never set. (Optional)
+/// \param userWrapper The LDUser set with the desired user. If omitted, LDClient retains the previously set user, or default if one was never set. (Optional)
 ///
-/// \param user The LDUser set with the desired user. If omitted, LDClient retains the previously set user, or default if one was never set. (Optional)
-///
-- (void)startWithMobileKey:(NSString * _Nonnull)mobileKey config:(LDConfig * _Nullable)config user:(LDUser * _Nullable)user;
-/// Starts the LDClient using the passed in <code>mobileKey</code>, <code>config</code>, & <code>user</code>. Call this before requesting feature flag values. The LDClient will not go online until you call this method.
+- (void)startWithConfig:(LDConfig * _Nonnull)configWrapper user:(LDUser * _Nullable)userWrapper;
+/// Starts the LDClient using the passed in <code>config</code> & <code>user</code>. Call this before requesting feature flag values. The LDClient will not go online until you call this method.
 /// Starting the LDClient means setting the <code>config</code> & <code>user</code>, setting the client online if <code>config.startOnline</code> is YES (the default setting), and starting event recording. The client app must start the LDClient before it will report feature flag values. If a client does not call start, the LDClient will only report fallback values, and no events will be recorded.
-/// If the start call omits the <code>config</code> or <code>user</code>, the LDClient uses the previously set <code>config</code> and <code>user</code>, or defaults if they were never set.
+/// If the start call omits the <code>user</code>, the LDClient uses the previously set <code>user</code>, or the default <code>user</code> if it was never set.
 /// If the start call includes the optional <code>completion</code> block, LDClient calls the <code>completion</code> block when <code>[LDClient.sharedInstance setOnline: completion:]</code> embedded in the start method completes. The start call is subject to throttling delays, therefore the <code>completion</code> block call may be delayed.
 /// Subsequent calls to this method cause the LDClient to go offline, reconfigure using the new <code>config</code> & <code>user</code> (if supplied), and then go online if it was online when start was called. Normally there should only be one call to start. To change <code>config</code> or <code>user</code>, set them directly on LDClient.
-/// \param mobileKey The Mobile key from your <a href="app.launchdarkly.com">LaunchDarkly Account</a> settings (on the left at the bottom). If you have multiple projects be sure to choose the correct Mobile key.
+/// \param configWrapper The LDConfig that contains the desired configuration. (Required)
 ///
-/// \param config The LDConfig set with the desired configuration. If omitted, LDClient retains the previously set config, or default if one was never set. (Optional)
-///
-/// \param user The LDUser set with the desired user. If omitted, LDClient retains the previously set user, or default if one was never set. (Optional)
+/// \param userWrapper The LDUser set with the desired user. If omitted, LDClient retains the previously set user, or default if one was never set. (Optional)
 ///
 /// \param completion Closure called when the embedded <code>setOnline</code> call completes, subject to throttling delays. (Optional)
 ///
-- (void)startWithMobileKey:(NSString * _Nonnull)mobileKey config:(LDConfig * _Nullable)config user:(LDUser * _Nullable)user completion:(void (^ _Nullable)(void))completion;
+- (void)startWithConfig:(LDConfig * _Nonnull)configWrapper user:(LDUser * _Nullable)userWrapper completion:(void (^ _Nullable)(void))completion;
 /// Stops the LDClient. Stopping the client means the LDClient goes offline and stops recording events. LDClient will no longer provide feature flag values, only returning fallback values.
 /// There is almost no reason to stop the LDClient. Normally, set the LDClient offline to stop communication with the LaunchDarkly servers. Stop the LDClient to stop recording events. There is no need to stop the LDClient prior to suspending, moving to the background, or terminating the app. The SDK will respond to these events as the system requires and as configured in LDConfig.
 - (void)stop;
@@ -538,7 +545,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// A <code>LDDoubleVariationValue</code> (<code>ObjcLDDoubleVariationValue</code>) containing the requested feature flag value and source, or the fallback if the flag is missing or cannot be cast to a double, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
 - (LDDoubleVariationValue * _Nonnull)doubleVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(double)fallback SWIFT_WARN_UNUSED_RESULT;
-/// Returns the NSString variation for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the fallback value.
+/// Returns the NSString variation for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the fallback value, which may be nil.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
 /// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
@@ -550,13 +557,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// \endcode\param key The LDFlagKey for the requested feature flag.
 ///
-/// \param fallback The fallback value to return if the feature flag key does not exist.
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
 ///
 ///
 /// returns:
-/// The requested NSString feature flag value, or the fallback if the flag is missing or cannot be cast to a NSString, or the client is not started
-- (NSString * _Nonnull)stringVariationForKey:(NSString * _Nonnull)key fallback:(NSString * _Nonnull)fallback SWIFT_WARN_UNUSED_RESULT;
-/// Returns the <code>LDStringVariationValue</code> (<code>ObjcLDStringVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the fallback value and <code>LDFlagValueSourceFallback</code> for the source.
+/// The requested NSString feature flag value, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSString, or the client is not started.
+- (NSString * _Nullable)stringVariationForKey:(NSString * _Nonnull)key fallback:(NSString * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// Returns the <code>LDStringVariationValue</code> (<code>ObjcLDStringVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the fallback value (which may be nil) and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
 /// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
@@ -570,13 +577,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// \endcode\param key The LDFlagKey for the requested feature flag.
 ///
-/// \param fallback The fallback value to return if the feature flag key does not exist.
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
 ///
 ///
 /// returns:
-/// A <code>LDStringVariationValue</code> (<code>ObjcLDStringVariationValue</code>) containing the requested feature flag value and source, or the fallback if the flag is missing or cannot be cast to a NSString, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDStringVariationValue * _Nonnull)stringVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSString * _Nonnull)fallback SWIFT_WARN_UNUSED_RESULT;
-/// Returns the NSArray variation for the given feature flag. If the flag does not exist, cannot be cast to a NSArray, or the LDClient is not started, returns the fallback value.
+/// A <code>LDStringVariationValue</code> (<code>ObjcLDStringVariationValue</code>) containing the requested feature flag value and source, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSString, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
+- (LDStringVariationValue * _Nonnull)stringVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSString * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// Returns the NSArray variation for the given feature flag. If the flag does not exist, cannot be cast to a NSArray, or the LDClient is not started, returns the fallback value, which may be nil..
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
 /// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
@@ -588,13 +595,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// \endcode\param key The LDFlagKey for the requested feature flag.
 ///
-/// \param fallback The fallback value to return if the feature flag key does not exist.
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
 ///
 ///
 /// returns:
-/// The requested NSArray feature flag value, or the fallback if the flag is missing or cannot be cast to a NSArray, or the client is not started
-- (NSArray * _Nonnull)arrayVariationForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nonnull)fallback SWIFT_WARN_UNUSED_RESULT;
-/// Returns the <code>LDArrayVariationValue</code> (<code>ObjcLDArrayVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSArray, or the LDClient is not started, returns the fallback value and <code>LDFlagValueSourceFallback</code> for the source.
+/// The requested NSArray feature flag value, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSArray, or the client is not started
+- (NSArray * _Nullable)arrayVariationForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// Returns the <code>LDArrayVariationValue</code> (<code>ObjcLDArrayVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSArray, or the LDClient is not started, returns the fallback value (which may be nil) and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
 /// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
@@ -608,13 +615,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// \endcode\param key The LDFlagKey for the requested feature flag.
 ///
-/// \param fallback The fallback value to return if the feature flag key does not exist.
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
 ///
 ///
 /// returns:
-/// A <code>LDArrayVariationValue</code> (<code>ObjcLDArrayVariationValue</code>) containing the requested feature flag value and source, or the fallback if the flag is missing or cannot be cast to a NSArray, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDArrayVariationValue * _Nonnull)arrayVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nonnull)fallback SWIFT_WARN_UNUSED_RESULT;
-/// Returns the NSDictionary variation for the given feature flag. If the flag does not exist, cannot be cast to a NSDictionary, or the LDClient is not started, returns the fallback value.
+/// A <code>LDArrayVariationValue</code> (<code>ObjcLDArrayVariationValue</code>) containing the requested feature flag value and source, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSArray, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
+- (LDArrayVariationValue * _Nonnull)arrayVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// Returns the NSDictionary variation for the given feature flag. If the flag does not exist, cannot be cast to a NSDictionary, or the LDClient is not started, returns the fallback value, which may be nil..
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
 /// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
@@ -626,13 +633,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// \endcode\param key The LDFlagKey for the requested feature flag.
 ///
-/// \param fallback The fallback value to return if the feature flag key does not exist.
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
 ///
 ///
 /// returns:
-/// The requested NSDictionary feature flag value, or the fallback if the flag is missing or cannot be cast to a NSDictionary, or the client is not started
-- (NSDictionary<NSString *, id> * _Nonnull)dictionaryVariationForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nonnull)fallback SWIFT_WARN_UNUSED_RESULT;
-/// Returns the <code>LDDictionaryVariationValue</code> (<code>ObjcLDDictionaryVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSDictionary, or the LDClient is not started, returns the fallback value and <code>LDFlagValueSourceFallback</code> for the source.
+/// The requested NSDictionary feature flag value, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSDictionary, or the client is not started
+- (NSDictionary<NSString *, id> * _Nullable)dictionaryVariationForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// Returns the <code>LDDictionaryVariationValue</code> (<code>ObjcLDDictionaryVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSDictionary, or the LDClient is not started, returns the fallback value (which may be nil) and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
 /// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
@@ -646,12 +653,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// \endcode\param key The LDFlagKey for the requested feature flag.
 ///
-/// \param fallback The fallback value to return if the feature flag key does not exist.
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
 ///
 ///
 /// returns:
-/// A <code>LDDictionaryVariationValue</code> (<code>ObjcLDDictionaryVariationValue</code>) containing the requested feature flag value and source, or the fallback if the flag is missing or cannot be cast to a NSDictionary, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDDictionaryVariationValue * _Nonnull)dictionaryVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nonnull)fallback SWIFT_WARN_UNUSED_RESULT;
+/// A <code>LDDictionaryVariationValue</code> (<code>ObjcLDDictionaryVariationValue</code>) containing the requested feature flag value and source, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSDictionary, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
+- (LDDictionaryVariationValue * _Nonnull)dictionaryVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns a dictionary with the flag keys and their values. If the LDClient is not started, returns nil.
 /// The dictionary will not contain feature flags from the server with null values.
 /// LDClient will not provide any source or change information, only flag keys and flag values. The client app should convert the feature flag value into the desired type.
@@ -837,7 +844,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 - (void)setOnServerUnavailable:(void (^ _Nullable)(void))handler;
 /// Adds a custom event to the LDClient event store. A client app can set a tracking event to allow client customized data analysis. Once an app has called <code>trackEvent</code>, the app cannot remove the event from the event store.
-/// LDClient periodically transmits events to LaunchDarkly based on the frequency set in LDConfig.eventFlushIntervalMillis. The LDClient must be started and online. Ths SDK stores events tracked while the LDClient is offline, but started.
+/// LDClient periodically transmits events to LaunchDarkly based on the frequency set in LDConfig.eventFlushInterval. The LDClient must be started and online. Ths SDK stores events tracked while the LDClient is offline, but started.
 /// Once the SDK’s event store is full, the SDK discards events until they can be reported to LaunchDarkly. Configure the size of the event store using <code>eventCapacity</code> on the <code>config</code>. See <code>LDConfig</code> (<code>ObjcLDConfig</code>) for details.
 /// <h3>Usage</h3>
 /// \code
@@ -845,9 +852,11 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// \endcode\param key The key for the event. The SDK does nothing with the key, which can be any string the client app sends
 ///
-/// \param data The data for the event. The SDK does nothing with the data, which can be any NSDictionary the client app sends. (Optional)
+/// \param data The data for the event. The SDK does nothing with the data, which can be any valid JSON item the client app sends. (Optional)
 ///
-- (void)trackEventWithKey:(NSString * _Nonnull)key data:(NSDictionary<NSString *, id> * _Nullable)data;
+/// \param error NSError object to hold the invalidJsonObject error if the data is not a valid JSON item. (Optional)
+///
+- (BOOL)trackEventWithKey:(NSString * _Nonnull)key data:(id _Nullable)data error:(NSError * _Nullable * _Nullable)error;
 /// Report events to LaunchDarkly servers. While online, the LDClient automatically reports events on the <code>LDConfig.eventFlushInterval</code>, and whenever the client app moves to the background. There should normally not be a need to call reportEvents.
 - (void)reportEvents;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -859,6 +868,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// The client app can change the LDConfig by getting the <code>config</code> from LDClient (<code>ObjcLDClient</code>), adjusting the values, and setting it back into the LDClient (<code>ObjcLDClient</code>).
 SWIFT_CLASS_NAMED("ObjcLDConfig")
 @interface LDConfig : NSObject
+/// The Mobile key from your <a href="app.launchdarkly.com">LaunchDarkly Account</a> settings (on the left at the bottom). If you have multiple projects be sure to choose the correct Mobile key.
+@property (nonatomic, copy) NSString * _Nonnull mobileKey;
 /// The url for making feature flag requests. Do not change unless instructed by LaunchDarkly.
 @property (nonatomic, copy) NSURL * _Nonnull baseUrl;
 /// The url for making event reports. Do not change unless instructed by LaunchDarkly.
@@ -867,18 +878,18 @@ SWIFT_CLASS_NAMED("ObjcLDConfig")
 @property (nonatomic, copy) NSURL * _Nonnull streamUrl;
 /// The maximum number of analytics events the LDClient can store. When the LDClient event store reaches the eventCapacity, the SDK discards events until it successfully reports them to LaunchDarkly. (Default: 100)
 @property (nonatomic) NSInteger eventCapacity;
-/// The timeout interval in milliseconds for flag requests and event reports. (Default: 10 seconds)
-@property (nonatomic) NSInteger connectionTimeoutMillis;
-/// The interval between event reports in milliseconds (Default: 30 seconds)
-@property (nonatomic) NSInteger eventFlushIntervalMillis;
-/// The interval between feature flag requests in milliseconds. Used only for polling mode. (Default: 5 minutes)
-@property (nonatomic) NSInteger pollIntervalMillis;
-/// The interval between feature flag requests while running in the background, in milliseconds. Used only for polling mode. (Default: 60 minutes)
-@property (nonatomic) NSInteger backgroundPollIntervalMillis;
-/// The minimum interval between feature flag requests in milliseconds. Used only for polling mode. (5 minutes)
-@property (nonatomic, readonly) NSInteger minPollingIntervalMillis;
-/// The minimum interval between feature flag requests while running in the background, in milliseconds. Used only for polling mode. (15 minutes)
-@property (nonatomic, readonly) NSInteger minBackgroundPollIntervalMillis;
+/// The timeout interval for flag requests and event reports. (Default: 10 seconds)
+@property (nonatomic) NSTimeInterval connectionTimeout;
+/// The time interval between event reports (Default: 30 seconds)
+@property (nonatomic) NSTimeInterval eventFlushInterval;
+/// The interval between feature flag requests. Used only for polling mode. (Default: 5 minutes)
+@property (nonatomic) NSTimeInterval flagPollingInterval;
+/// The interval between feature flag requests while running in the background. Used only for polling mode. (Default: 60 minutes)
+@property (nonatomic) NSTimeInterval backgroundFlagPollingInterval;
+/// The minimum interval between feature flag requests. Used only for polling mode. (5 minutes)
+@property (nonatomic, readonly) NSTimeInterval minFlagPollingInterval;
+/// The minimum interval between feature flag requests while running in the background. Used only for polling mode. (15 minutes)
+@property (nonatomic, readonly) NSTimeInterval minBackgroundFlagPollInterval;
 /// Controls the method the SDK uses to keep feature flags updated. When set to .streaming, connects to <code>clientstream</code> which notifies the SDK of feature flag changes. When set to .polling, an efficient polling mechanism is used to periodically request feature flag values. Ignored for watchOS, which always uses .polling. See <code>LDStreamingMode</code> for more details. (Default: .streaming)
 @property (nonatomic) BOOL streamingMode;
 /// Enables feature flag updates when your app is in the background. Allowed on macOS only. (Default: NO)
@@ -902,9 +913,11 @@ SWIFT_CLASS_NAMED("ObjcLDConfig")
 /// Enables logging for debugging. (Default: NO)
 @property (nonatomic) BOOL debugMode;
 /// LDConfig constructor. Configurable values are all set to their default values. The client app can modify these values as desired. Note that client app developers may prefer to get the LDConfig from <code>LDClient.config</code> (<code>ObjcLDClient.config</code>) in order to retain previously set values.
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithMobileKey:(NSString * _Nonnull)mobileKey OBJC_DESIGNATED_INITIALIZER;
 /// Compares the settable properties in 2 LDConfig structs
 - (BOOL)isEqualWithObject:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
 
@@ -917,9 +930,9 @@ SWIFT_CLASS_NAMED("ObjcLDDictionaryChangedFlag")
 /// The changed flag’s value after it changed
 @property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable newValue;
 /// The changed flag value’s source before it changed
-@property (nonatomic, readonly) enum LDFlagValueSource oldValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull oldValueSource;
 /// The changed flag value’s source after it changed
-@property (nonatomic, readonly) enum LDFlagValueSource newValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull newValueSource;
 @end
 
 
@@ -927,9 +940,9 @@ SWIFT_CLASS_NAMED("ObjcLDDictionaryChangedFlag")
 SWIFT_CLASS_NAMED("ObjcLDDictionaryVariationValue")
 @interface LDDictionaryVariationValue : NSObject
 /// The feature flag’s NSDictionary value
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull value;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable value;
 /// The feature flag value’s source
-@property (nonatomic, readonly) enum LDFlagValueSource source;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull source;
 /// A string representation of the feature flag value’s source
 @property (nonatomic, readonly, copy) NSString * _Nonnull sourceString;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -946,9 +959,9 @@ SWIFT_CLASS_NAMED("ObjcLDDoubleChangedFlag")
 /// The changed flag’s value after it changed
 @property (nonatomic, readonly) double newValue;
 /// The changed flag value’s source before it changed
-@property (nonatomic, readonly) enum LDFlagValueSource oldValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull oldValueSource;
 /// The changed flag value’s source after it changed
-@property (nonatomic, readonly) enum LDFlagValueSource newValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull newValueSource;
 @end
 
 
@@ -958,7 +971,7 @@ SWIFT_CLASS_NAMED("ObjcLDDoubleVariationValue")
 /// The feature flag’s double value
 @property (nonatomic, readonly) double value;
 /// The feature flag value’s source
-@property (nonatomic, readonly) enum LDFlagValueSource source;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull source;
 /// A string representation of the feature flag value’s source
 @property (nonatomic, readonly, copy) NSString * _Nonnull sourceString;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -975,20 +988,39 @@ SWIFT_CLASS_NAMED("ObjcLDFlagValue")
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
+
 /// Defines the possible sources for feature flag values.
 /// See also: <code>LDClient.variationAndSource(forKey:fallback:)</code> and <code>LDChangedFlag</code>
-typedef SWIFT_ENUM_NAMED(NSInteger, LDFlagValueSource, "ObjcLDFlagValueSource", closed) {
-/// ObjcLDFlagValueSourceNilSource indicates the feature flag value’s source is not available (Objective-C only)
-  LDFlagValueSourceNilSource = -1,
-/// ObjcLDFlagValueSourceServer indicates the feature flag value’s source is the LaunchDarkly server
-  LDFlagValueSourceServer = 0,
-/// ObjcLDFlagValueSourceCache indicates the feature flag value’s source is the SDK’s local cache
-  LDFlagValueSourceCache = 1,
-/// ObjcLDFlagValueSourceFallback indicates the feature flag value’s source is the fallback value provided by the client app
-  LDFlagValueSourceFallback = 2,
-/// ObjcLDFlagValueSourceTypeMismatch indicates the type of feature flag requested differs from the actual feature flag type (Objective-C only)
-  LDFlagValueSourceTypeMismatch = 3,
-};
+SWIFT_CLASS_NAMED("ObjcLDFlagValueSource")
+@interface LDFlagValueSource : NSObject
+/// LDFlagValueSource constant indicating the source is nil.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger nilSource;)
++ (NSInteger)nilSource SWIFT_WARN_UNUSED_RESULT;
+/// LDFlagValueSource constant indicating the source is the server.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger server;)
++ (NSInteger)server SWIFT_WARN_UNUSED_RESULT;
+/// LDFlagValueSource constant indicating the source is the cache.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger cache;)
++ (NSInteger)cache SWIFT_WARN_UNUSED_RESULT;
+/// LDFlagValueSource constant indicating the source is the fallback value.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger fallback;)
++ (NSInteger)fallback SWIFT_WARN_UNUSED_RESULT;
+/// LDFlagValueSource constant indicating the actual flag type differs from the type requested by the client.
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) NSInteger typeMismatch;)
++ (NSInteger)typeMismatch SWIFT_WARN_UNUSED_RESULT;
+/// Initializer that takes an integer and returns the LDFlagValueSource provided the integer matches one of the LDFlagValueSource constants. Otherwise, returns nil.
+- (nullable instancetype)initWithRawValue:(NSInteger)rawValue OBJC_DESIGNATED_INITIALIZER;
+/// Property that converts the LDFlagValueSource into an integer matching one of the LDFlagValueSource constants.
+@property (nonatomic, readonly) NSInteger rawValue;
+/// Property that converts the LDFlagValueSource into a string describing one of the LDFlagValueSource constants.
+@property (nonatomic, readonly, copy) NSString * _Nonnull stringValue;
+/// Compares a LDFlagValueSource to another object, returning true when the object is the same as the receiver.
+- (BOOL)isEqualToObject:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+/// Compares a LDFlagValueSource to an Int, returning true when the receiver has the same raw value as the constantValue.
+- (BOOL)isEqualToConstant:(NSInteger)constantValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
+@end
 
 
 /// Wraps the changed feature flag’s NSInteger values and sources.
@@ -1000,9 +1032,9 @@ SWIFT_CLASS_NAMED("ObjcLDIntegerChangedFlag")
 /// The changed flag’s value after it changed
 @property (nonatomic, readonly) NSInteger newValue;
 /// The changed flag value’s source before it changed
-@property (nonatomic, readonly) enum LDFlagValueSource oldValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull oldValueSource;
 /// The changed flag value’s source after it changed
-@property (nonatomic, readonly) enum LDFlagValueSource newValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull newValueSource;
 @end
 
 
@@ -1012,7 +1044,7 @@ SWIFT_CLASS_NAMED("ObjcLDIntegerVariationValue")
 /// The feature flag’s NSInteger value
 @property (nonatomic, readonly) NSInteger value;
 /// The feature flag value’s source
-@property (nonatomic, readonly) enum LDFlagValueSource source;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull source;
 /// A string representation of the feature flag value’s source
 @property (nonatomic, readonly, copy) NSString * _Nonnull sourceString;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1029,9 +1061,9 @@ SWIFT_CLASS_NAMED("ObjcLDStringChangedFlag")
 /// The changed flag’s value after it changed
 @property (nonatomic, readonly, copy) NSString * _Nullable newValue;
 /// The changed flag value’s source before it changed
-@property (nonatomic, readonly) enum LDFlagValueSource oldValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull oldValueSource;
 /// The changed flag value’s source after it changed
-@property (nonatomic, readonly) enum LDFlagValueSource newValueSource;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull newValueSource;
 @end
 
 
@@ -1039,9 +1071,9 @@ SWIFT_CLASS_NAMED("ObjcLDStringChangedFlag")
 SWIFT_CLASS_NAMED("ObjcLDStringVariationValue")
 @interface LDStringVariationValue : NSObject
 /// The feature flag’s NSString value
-@property (nonatomic, readonly, copy) NSString * _Nonnull value;
+@property (nonatomic, readonly, copy) NSString * _Nullable value;
 /// The feature flag value’s source
-@property (nonatomic, readonly) enum LDFlagValueSource source;
+@property (nonatomic, readonly, strong) LDFlagValueSource * _Nonnull source;
 /// A string representation of the feature flag value’s source
 @property (nonatomic, readonly, copy) NSString * _Nonnull sourceString;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
