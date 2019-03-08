@@ -33,7 +33,10 @@ class ViewController: UIViewController {
         user.lastName = "Loblaw"
         user.custom = ["groups":["beta_testers"]]
 
-        let config = LDConfig(mobileKey: mobileKey)
+        var config = LDConfig(mobileKey: mobileKey)
+        config.eventFlushInterval = 30.0
+//        config.flagPollingInterval = 30.0
+//        config.streamingMode = .polling
 
         LDClient.shared.observe(key: flagKey, owner: self) { [weak self] (changedFlag) in
             self?.featureFlagDidUpdate(changedFlag.key)
