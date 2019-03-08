@@ -1,4 +1,0 @@
-framework module LaunchDarkly {
-  header "LaunchDarkly-Swift.h"
-  requires objc
-}

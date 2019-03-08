@@ -11,8 +11,8 @@
 		69ACB99C1E9A87FE00A2F8CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ACB99B1E9A87FE00A2F8CF /* ViewController.swift */; };
 		69ACB99F1E9A87FE00A2F8CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB99D1E9A87FE00A2F8CF /* Main.storyboard */; };
 		69ACB9A11E9A87FF00A2F8CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */; };
-		833FD9F521C0042F001F80EB /* LaunchDarkly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833FD9F421C0042F001F80EB /* LaunchDarkly.framework */; };
-		833FD9F721C00947001F80EB /* LaunchDarkly.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 833FD9F421C0042F001F80EB /* LaunchDarkly.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		830DB3A72232FA1300D65D25 /* LaunchDarkly_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 830DB3A52232FA0B00D65D25 /* LaunchDarkly_tvOS.framework */; };
+		830DB3A82232FA1300D65D25 /* LaunchDarkly_tvOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 830DB3A52232FA0B00D65D25 /* LaunchDarkly_tvOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		839C30FB1FD8409D00619340 /* DarklyEventSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839C30F91FD8407100619340 /* DarklyEventSource.framework */; };
 		839C30FC1FD8409D00619340 /* DarklyEventSource.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 839C30F91FD8407100619340 /* DarklyEventSource.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -34,7 +34,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				833FD9F721C00947001F80EB /* LaunchDarkly.framework in Embed Frameworks */,
+				830DB3A82232FA1300D65D25 /* LaunchDarkly_tvOS.framework in Embed Frameworks */,
 				839C30FC1FD8409D00619340 /* DarklyEventSource.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -52,8 +52,7 @@
 		69ACB9A71E9A87FF00A2F8CF /* hello-tvosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "hello-tvosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69ACB9AB1E9A87FF00A2F8CF /* hello_tvosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hello_tvosTests.swift; sourceTree = "<group>"; };
 		69ACB9AD1E9A87FF00A2F8CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		69ACB9B81E9A9BCD00A2F8CF /* hello-tvos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hello-tvos-Bridging-Header.h"; sourceTree = "<group>"; };
-		833FD9F421C0042F001F80EB /* LaunchDarkly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchDarkly.framework; path = Carthage/Build/tvOS/LaunchDarkly.framework; sourceTree = "<group>"; };
+		830DB3A52232FA0B00D65D25 /* LaunchDarkly_tvOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchDarkly_tvOS.framework; path = Carthage/Build/tvOS/LaunchDarkly_tvOS.framework; sourceTree = "<group>"; };
 		839C30F91FD8407100619340 /* DarklyEventSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DarklyEventSource.framework; path = Carthage/Build/tvOS/DarklyEventSource.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,8 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				830DB3A72232FA1300D65D25 /* LaunchDarkly_tvOS.framework in Frameworks */,
 				839C30FB1FD8409D00619340 /* DarklyEventSource.framework in Frameworks */,
-				833FD9F521C0042F001F80EB /* LaunchDarkly.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,7 +103,6 @@
 				69ACB99D1E9A87FE00A2F8CF /* Main.storyboard */,
 				69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */,
 				69ACB9A21E9A87FF00A2F8CF /* Info.plist */,
-				69ACB9B81E9A9BCD00A2F8CF /* hello-tvos-Bridging-Header.h */,
 			);
 			path = "hello-tvos";
 			sourceTree = "<group>";
@@ -122,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				839C30F91FD8407100619340 /* DarklyEventSource.framework */,
-				833FD9F421C0042F001F80EB /* LaunchDarkly.framework */,
+				830DB3A52232FA0B00D65D25 /* LaunchDarkly_tvOS.framework */,
 			);
 			name = CarthageFrameworks;
 			sourceTree = "<group>";
@@ -388,7 +386,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.hello-tvos";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "hello-tvos/hello-tvos-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -408,7 +406,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.hello-tvos";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "hello-tvos/hello-tvos-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
