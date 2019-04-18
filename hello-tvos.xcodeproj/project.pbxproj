@@ -11,10 +11,10 @@
 		69ACB99C1E9A87FE00A2F8CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ACB99B1E9A87FE00A2F8CF /* ViewController.swift */; };
 		69ACB99F1E9A87FE00A2F8CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB99D1E9A87FE00A2F8CF /* Main.storyboard */; };
 		69ACB9A11E9A87FF00A2F8CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */; };
-		839C30FB1FD8409D00619340 /* DarklyEventSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839C30F91FD8407100619340 /* DarklyEventSource.framework */; };
-		839C30FC1FD8409D00619340 /* DarklyEventSource.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 839C30F91FD8407100619340 /* DarklyEventSource.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		839C30FD1FD8409D00619340 /* Darkly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 839C30F71FD8406700619340 /* Darkly.framework */; };
-		839C30FE1FD8409D00619340 /* Darkly.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 839C30F71FD8406700619340 /* Darkly.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8304AB872264FA2600B21340 /* DarklyEventSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8304AB852264FA1E00B21340 /* DarklyEventSource.framework */; };
+		8304AB882264FA2600B21340 /* DarklyEventSource.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8304AB852264FA1E00B21340 /* DarklyEventSource.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		83702D4222653F1B00D0FFCC /* Darkly_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83702D4022653F1300D0FFCC /* Darkly_tvOS.framework */; };
+		83702D4322653F1B00D0FFCC /* Darkly_tvOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83702D4022653F1300D0FFCC /* Darkly_tvOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,8 +34,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				839C30FC1FD8409D00619340 /* DarklyEventSource.framework in Embed Frameworks */,
-				839C30FE1FD8409D00619340 /* Darkly.framework in Embed Frameworks */,
+				8304AB882264FA2600B21340 /* DarklyEventSource.framework in Embed Frameworks */,
+				83702D4322653F1B00D0FFCC /* Darkly_tvOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -53,8 +53,8 @@
 		69ACB9AB1E9A87FF00A2F8CF /* hello_tvosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hello_tvosTests.swift; sourceTree = "<group>"; };
 		69ACB9AD1E9A87FF00A2F8CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69ACB9B81E9A9BCD00A2F8CF /* hello-tvos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "hello-tvos-Bridging-Header.h"; sourceTree = "<group>"; };
-		839C30F71FD8406700619340 /* Darkly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Darkly.framework; path = Carthage/Build/tvOS/Darkly.framework; sourceTree = "<group>"; };
-		839C30F91FD8407100619340 /* DarklyEventSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DarklyEventSource.framework; path = Carthage/Build/tvOS/DarklyEventSource.framework; sourceTree = "<group>"; };
+		8304AB852264FA1E00B21340 /* DarklyEventSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DarklyEventSource.framework; path = Carthage/Build/tvOS/DarklyEventSource.framework; sourceTree = "<group>"; };
+		83702D4022653F1300D0FFCC /* Darkly_tvOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Darkly_tvOS.framework; path = Carthage/Build/tvOS/Darkly_tvOS.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				839C30FB1FD8409D00619340 /* DarklyEventSource.framework in Frameworks */,
-				839C30FD1FD8409D00619340 /* Darkly.framework in Frameworks */,
+				8304AB872264FA2600B21340 /* DarklyEventSource.framework in Frameworks */,
+				83702D4222653F1B00D0FFCC /* Darkly_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,8 +121,8 @@
 		83C2CA621FD8401F0097B386 /* CarthageFrameworks */ = {
 			isa = PBXGroup;
 			children = (
-				839C30F91FD8407100619340 /* DarklyEventSource.framework */,
-				839C30F71FD8406700619340 /* Darkly.framework */,
+				83702D4022653F1300D0FFCC /* Darkly_tvOS.framework */,
+				8304AB852264FA1E00B21340 /* DarklyEventSource.framework */,
 			);
 			name = CarthageFrameworks;
 			sourceTree = "<group>";
@@ -137,8 +137,8 @@
 				69ACB9921E9A87FE00A2F8CF /* Sources */,
 				69ACB9931E9A87FE00A2F8CF /* Frameworks */,
 				69ACB9941E9A87FE00A2F8CF /* Resources */,
-				69ACB9B91E9AA08B00A2F8CF /* ShellScript */,
 				839C30FF1FD8409D00619340 /* Embed Frameworks */,
+				69ACB9B91E9AA08B00A2F8CF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -174,7 +174,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = LaunchDarkly;
 				TargetAttributes = {
 					69ACB9951E9A87FE00A2F8CF = {
@@ -191,7 +191,7 @@
 			};
 			buildConfigurationList = 69ACB9911E9A87FE00A2F8CF /* Build configuration list for PBXProject "hello-tvos" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -234,13 +234,13 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/tvOS/Darkly.framework",
+				"$(SRCROOT)/Carthage/Build/tvOS/Darkly_tvOS.framework",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -287,6 +287,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -345,6 +346,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -402,6 +404,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "hello-tvos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.hello-tvos";
@@ -422,6 +425,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/tvOS",
 				);
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "hello-tvos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.launchdarkly.hello-tvos";
