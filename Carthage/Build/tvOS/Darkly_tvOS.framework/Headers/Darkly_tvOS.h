@@ -16,8 +16,8 @@ FOUNDATION_EXPORT const unsigned char DarklyVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Darkly/PublicHeader.h>
 
-#import <Darkly/DarklyConstants.h>
-#import <Darkly/LDConfig.h>
-#import <Darkly/LDUserBuilder.h>
-#import <Darkly/LDClientInterface.h>
-#import <Darkly/LDClient.h>
+#import <Darkly_tvOS/DarklyConstants.h>
+#import <Darkly_tvOS/LDConfig.h>
+#import <Darkly_tvOS/LDUserBuilder.h>
+#import <Darkly_tvOS/LDClientInterface.h>
+#import <Darkly_tvOS/LDClient.h>
