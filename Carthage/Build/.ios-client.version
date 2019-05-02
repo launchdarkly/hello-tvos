@@ -1,9 +1,9 @@
 {
-  "commitish" : "3.0.0",
+  "commitish" : "3.0.1",
   "tvOS" : [
     {
       "name" : "Darkly_tvOS",
-      "hash" : "95c108732e55940fe7bb52f311136daa38c77f16591a8fc929e9c5b9774454b9"
+      "hash" : "bb537f174061e1d9874ee4114288514196999bb3828237ceef3da549299f24e7"
     }
   ]
 }
