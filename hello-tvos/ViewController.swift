@@ -12,7 +12,7 @@ import LaunchDarkly_tvOS
 class ViewController: UIViewController {
 
     let mobileKey = ""
-    let flagKey = "test-flag"
+    let flagKey = "hello-ios-boolean"
 
     @IBOutlet weak var valueLabel: UILabel!
     override func viewDidLoad() {
