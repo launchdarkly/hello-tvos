@@ -1,0 +1,4 @@
+framework module LaunchDarkly_tvOS {
+  header "LaunchDarkly_tvOS-Swift.h"
+  requires objc
+}

@@ -7,20 +7,19 @@
 //
 
 import UIKit
+import LaunchDarkly_tvOS
 
-class ViewController: UIViewController, ClientDelegate {
+class ViewController: UIViewController {
 
     let mobileKey = ""
-    let flagKey = "test-flag"
+    let flagKey = "hello-ios-boolean"
 
     @IBOutlet weak var valueLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        LDClient.sharedInstance().delegate = self
         setupLDClient()
         checkFeatureValue()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,21 +28,24 @@ class ViewController: UIViewController, ClientDelegate {
     }
     
     func setupLDClient() {
-        let builder = LDUserBuilder()
-        builder.key = "bob@example.com"
-        builder.firstName = "Bob"
-        builder.lastName = "Loblaw"
-        
-        let groups = ["beta_testers"]
-        builder.customArray("groups", value: groups)
-        
-        let config = LDConfig.init(mobileKey: mobileKey)
+        var user = LDUser(key: "bob@example.com")
+        user.firstName = "Bob"
+        user.lastName = "Loblaw"
+        user.custom = ["groups":["beta_testers"]]
 
-        LDClient.sharedInstance().start(config, with: builder)
+        var config = LDConfig(mobileKey: mobileKey)
+        config.eventFlushInterval = 30.0
+//        config.flagPollingInterval = 30.0
+//        config.streamingMode = .polling
+
+        LDClient.shared.observe(key: flagKey, owner: self) { [weak self] (changedFlag) in
+            self?.featureFlagDidUpdate(changedFlag.key)
+        }
+        LDClient.shared.start(config: config, user: user)
     }
     
     func checkFeatureValue() {
-        let showFeature = LDClient.sharedInstance().boolVariation(flagKey, fallback: false)
+        let showFeature = LDClient.shared.variation(forKey: flagKey, fallback: false)
         updateLabel(value: "\(showFeature)")
     }
     
@@ -53,7 +55,7 @@ class ViewController: UIViewController, ClientDelegate {
 
     //MARK: - ClientDelegate Methods
     
-    func featureFlagDidUpdate(_ key: String) {
+    func featureFlagDidUpdate(_ key: String!) {
         if key == flagKey {
             checkFeatureValue()
         }
