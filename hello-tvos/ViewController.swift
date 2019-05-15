@@ -10,7 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, ClientDelegate {
 
-    let mobileKey = ""
     let flagKey = "test-flag"
 
     @IBOutlet weak var valueLabel: UILabel!
@@ -18,28 +17,12 @@ class ViewController: UIViewController, ClientDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         LDClient.sharedInstance().delegate = self
-        setupLDClient()
         checkFeatureValue()
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func setupLDClient() {
-        let builder = LDUserBuilder()
-        builder.key = "bob@example.com"
-        builder.firstName = "Bob"
-        builder.lastName = "Loblaw"
-        
-        let groups = ["beta_testers"]
-        builder.customArray("groups", value: groups)
-        
-        let config = LDConfig.init(mobileKey: mobileKey)
-
-        LDClient.sharedInstance().start(config, with: builder)
     }
     
     func checkFeatureValue() {
