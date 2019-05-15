@@ -7,16 +7,32 @@
 //
 
 import UIKit
+import LaunchDarkly_tvOS
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let launchDarklyMobileKey = ""
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        setupLDClient()
+
         return true
+    }
+
+    func setupLDClient() {
+        var user = LDUser(key: "bob@example.com")
+        user.firstName = "Bob"
+        user.lastName = "Loblaw"
+        user.custom = ["groups":["beta_testers"]]
+
+        var config = LDConfig(mobileKey: launchDarklyMobileKey)
+        config.eventFlushInterval = 30.0
+
+        LDClient.shared.start(config: config, user: user)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
