@@ -12,11 +12,28 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let launchDarklyMobileKey = ""
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        setupLDClient()
+
         return true
+    }
+
+    func setupLDClient() {
+        let builder = LDUserBuilder()
+        builder.key = "bob@example.com"
+        builder.firstName = "Bob"
+        builder.lastName = "Loblaw"
+
+        let groups = ["beta_testers"]
+        builder.customArray("groups", value: groups)
+
+        let config = LDConfig(mobileKey: launchDarklyMobileKey)
+
+        LDClient.sharedInstance().start(config, with: builder)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
