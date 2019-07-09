@@ -1,9 +1,9 @@
 {
-  "commitish" : "4.1.0",
+  "commitish" : "4.1.1",
   "tvOS" : [
     {
       "name" : "LaunchDarkly_tvOS",
-      "hash" : "3118619eb0bdb34670ccba0137f7aacc01d8e28d4c69cb974fc985c6dfa73c7d",
+      "hash" : "401172d5ff43bfc569043975399e026e5dd7a241ba27bf815549dcefd19cfc1b",
       "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]
