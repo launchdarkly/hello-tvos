@@ -414,6 +414,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// The client app can change the LDUser by getting the <code>user</code>, adjusting the values, and setting it into the LDClient. This allows client apps to collect information over time from the user and update as information is collected. Client apps should follow <a href="apple.com/legal/privacy">Apple’s Privacy Policy</a> when collecting user information. If the client app does not create a LDUser, LDClient creates an anonymous default user, which can affect the feature flags delivered to the LDClient.
 /// When a new user is set, the LDClient goes offline and sets the new user. If the client was online when the new user was set, it goes online again, subject to a throttling delay if in force (see <code>ObjcLDClient.setOnline(_:completion:)</code> for details). To change both the <code>config</code> and <code>user</code>, set the LDClient offline, set both properties, then set the LDClient online.
 @property (nonatomic, strong) LDUser * _Nonnull user;
+- (void)identifyWithUser:(LDUser * _Nonnull)user;
 /// Starts the LDClient using the passed in <code>config</code> & <code>user</code>. Call this before requesting feature flag values. The LDClient will not go online until you call this method.
 /// Starting the LDClient means setting the <code>config</code> & <code>user</code>, setting the client online if <code>config.startOnline</code> is YES (the default setting), and starting event recording. The client app must start the LDClient before it will report feature flag values. If a client does not call start, the LDClient will only report fallback values, and no events will be recorded.
 /// If the start call omits the <code>user</code>, the LDClient uses the previously set <code>user</code>, or the default <code>user</code> if it was never set.
@@ -1181,6 +1182,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 /// Compares users by comparing their user keys only, to allow the client app to collect user information over time
 - (BOOL)isEqualWithObject:(id _Nonnull)object SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 
 
@@ -1608,6 +1611,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// The client app can change the LDUser by getting the <code>user</code>, adjusting the values, and setting it into the LDClient. This allows client apps to collect information over time from the user and update as information is collected. Client apps should follow <a href="apple.com/legal/privacy">Apple’s Privacy Policy</a> when collecting user information. If the client app does not create a LDUser, LDClient creates an anonymous default user, which can affect the feature flags delivered to the LDClient.
 /// When a new user is set, the LDClient goes offline and sets the new user. If the client was online when the new user was set, it goes online again, subject to a throttling delay if in force (see <code>ObjcLDClient.setOnline(_:completion:)</code> for details). To change both the <code>config</code> and <code>user</code>, set the LDClient offline, set both properties, then set the LDClient online.
 @property (nonatomic, strong) LDUser * _Nonnull user;
+- (void)identifyWithUser:(LDUser * _Nonnull)user;
 /// Starts the LDClient using the passed in <code>config</code> & <code>user</code>. Call this before requesting feature flag values. The LDClient will not go online until you call this method.
 /// Starting the LDClient means setting the <code>config</code> & <code>user</code>, setting the client online if <code>config.startOnline</code> is YES (the default setting), and starting event recording. The client app must start the LDClient before it will report feature flag values. If a client does not call start, the LDClient will only report fallback values, and no events will be recorded.
 /// If the start call omits the <code>user</code>, the LDClient uses the previously set <code>user</code>, or the default <code>user</code> if it was never set.
@@ -2375,6 +2379,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 /// Compares users by comparing their user keys only, to allow the client app to collect user information over time
 - (BOOL)isEqualWithObject:(id _Nonnull)object SWIFT_WARN_UNUSED_RESULT;
 @end
+
+
 
 
 
