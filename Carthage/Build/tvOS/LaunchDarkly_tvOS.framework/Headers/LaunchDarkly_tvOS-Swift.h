@@ -233,6 +233,48 @@ SWIFT_CLASS("_TtC17LaunchDarkly_tvOS13LDUserWrapper")
 
 
 
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS25ObjCArrayEvaluationDetail")
+@interface ObjCArrayEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS24ObjCBoolEvaluationDetail")
+@interface ObjCBoolEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS30ObjCDictionaryEvaluationDetail")
+@interface ObjCDictionaryEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS26ObjCDoubleEvaluationDetail")
+@interface ObjCDoubleEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS27ObjCIntegerEvaluationDetail")
+@interface ObjCIntegerEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS26ObjCStringEvaluationDetail")
+@interface ObjCStringEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 /// Collects the elements of a feature flag that changed as a result of a <code>clientstream</code> update or feature flag request. The SDK will pass a typed ObjcLDChangedFlag or a collection of ObjcLDChangedFlags into feature flag observer blocks. This is the base type for the typed ObjcLDChangedFlags passed into observer blocks. The client app will have to convert the ObjcLDChangedFlag into the expected typed ObjcLDChangedFlag type.
 /// See the typed <code>ObjcLDClient</code> observeWithKey:owner:handler:, observeWithKeys:owner:handler:, and observeAllWithOwner:handler: for more details.
 SWIFT_CLASS_NAMED("ObjcLDChangedFlag")
@@ -320,61 +362,6 @@ SWIFT_CLASS_NAMED("ObjcLDBoolVariationValue")
 @class LDStringChangedFlag;
 @class LDDictionaryChangedFlag;
 
-/// The LDClient is the heart of the SDK, providing client apps running iOS, watchOS, macOS, or tvOS access to LaunchDarkly services. This singleton provides the ability to set a configuration (LDConfig) that controls how the LDClient talks to LaunchDarkly servers, and a user (LDUser) that provides finer control on the feature flag values delivered to LDClient. Once the LDClient has started, it connects to LaunchDarkly’s servers to get the feature flag values you set in the Dashboard.
-/// <h3>Objc Classes</h3>
-/// The SDK creates an Objective-C native style API by wrapping Swift specific classes, properties, and methods into Objective-C wrapper classes prefixed by <code>Objc</code>. By defining Objective-C specific names, client apps written in Objective-C can use a native coding style, including using familiar LaunchDarkly SDK names like <code>LDClient</code>, <code>LDConfig</code>, and <code>LDUser</code>. Objective-C developers should refer to the Objc documentation by following the Objc specific links following type, property, and method names.
-/// <h2>Usage</h2>
-/// <h3>Startup</h3>
-/// <ol>
-///   <li>
-///     To customize, configure a LDConfig (<code>ObjcLDConfig</code>) and LDUser (<code>ObjcLDUser</code>). The <code>config</code> is required, the <code>user</code> is optional. Both give you additional control over the feature flags delivered to the LDClient. See <code>ObjcLDConfig</code> & <code>ObjcLDUser</code> for more details.
-///   </li>
-/// </ol>
-/// <ul>
-///   <li>
-///     The mobileKey set into the <code>LDConfig</code> comes from your LaunchDarkly Account settings (on the left, at the bottom). If you have multiple projects be sure to choose the correct Mobile key.
-///   </li>
-/// </ul>
-/// <ol>
-///   <li>
-///     Call <code>[LDClient.sharedInstance startWithConfig: user: completion:]</code> (<code>ObjcLDClient.startWithConfig(_:config:user:completion:)</code>)
-///   </li>
-/// </ol>
-/// <ul>
-///   <li>
-///     If you do not pass in a LDUser, LDCLient will create a default for you.
-///   </li>
-///   <li>
-///     The optional completion closure allows the LDClient to notify your app when it has gone online.
-///   </li>
-/// </ul>
-/// <ol>
-///   <li>
-///     Because the LDClient is a singleton, you do not have to keep a reference to it in your code.
-///   </li>
-/// </ol>
-/// <h3>Getting Feature Flags</h3>
-/// Once the LDClient has started, it makes your feature flags available using the <code>variation</code> and <code>variationAndSource</code> methods. A <code>variation</code> is a specific flag value. For example, a boolean feature flag has 2 variations, <code>YES</code> and <code>NO</code>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// \code
-/// BOOL boolFlag = [LDClient.sharedInstance boolVariationForKey:@"my-bool-flag" fallback:NO];
-///
-/// \endcodeIf you need to know the source of the variation provided to you for a specific feature flag, the typed <code>variationAndSource</code> methods return a LDVariationValue with the value & source in a single call.
-/// \code
-/// LDBoolVariationValue *boolVariationValue = [LDClient.sharedInstance boolVariationAndSourceForKey:@"my-bool-flag" fallback:NO];
-/// BOOL boolFlag = boolVariationValue.value;
-/// LDFlagValueSource boolFlagSource = boolVariationValue.source;
-///
-/// \endcodeSee the typed <code>-[LDCLient variationForKey: fallback:]</code> or <code>-[LDClient variationAndSourceForKey: fallback:]</code> methods in the section <em>Feature Flag values</em> for details.
-/// <h3>Observing Feature Flags</h3>
-/// If you want to know when a feature flag value changes, you can check the flag’s value. You can also use one of several <code>observe</code> methods to have the LDClient notify you when a change occurs. There are several options– you can setup notifications based on when a specific flag changes, when any flag in a collection changes, or when a flag doesn’t change.
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [LDClient.sharedInstance observeBool:@"my-bool-flag" owner:self handler:^(LDBoolChangedFlag *changedFlag) {
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf updateFlagWithKey:@"my-bool-flag" changedFlag:changedFlag];
-/// }];
-///
-/// \endcodeThe <code>changedFlag</code> passed in to the block contains the old and new value, and the old and new valueSource. See the typed <code>LDChangedFlag</code> classes in the <em>Obj-C Changed Flags</em>.
 SWIFT_CLASS_NAMED("ObjcLDClient")
 @interface LDClient : NSObject
 /// Access to the LDClient singleton. For iOS apps with watchOS companion apps, there will be a singleton on each platform. These singletons do not communicate with each other. If you try to share feature flags between apps, the latest flag values may be overwritten by old feature flags from the other platform. LaunchDarkly recommends not sharing feature flags between apps and allowing each LDClient to manage feature flags on its own platform. If you share feature flag data between apps, provide a way to prevent the LDClients from overwriting new feature flags with old feature flags in the shared data.
@@ -457,6 +444,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested BOOL feature flag value, or the fallback if the flag is missing or cannot be cast to a BOOL, or the client is not started
 - (BOOL)boolVariationForKey:(NSString * _Nonnull)key fallback:(BOOL)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://boolVariation">boolVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist.
+///
+///
+/// returns:
+/// ObjCBoolEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCBoolEvaluationDetail * _Nonnull)boolVariationDetailForKey:(NSString * _Nonnull)key fallback:(BOOL)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDBoolVariationValue</code> (<code>ObjcLDBoolVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a BOOL, or the LDClient is not started, returns the fallback value and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -476,7 +472,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDBoolVariationValue</code> (<code>ObjcLDBoolVariationValue</code>) containing the requested feature flag value and source, or the fallback if the flag is missing or cannot be cast to a BOOL, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDBoolVariationValue * _Nonnull)boolVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(BOOL)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDBoolVariationValue * _Nonnull)boolVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(BOOL)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the boolVariationDetail method for additional insight into flag evaluation.");
 /// Returns the NSInteger variation for the given feature flag. If the flag does not exist, cannot be cast to a NSInteger, or the LDClient is not started, returns the fallback value.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -495,6 +491,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested NSInteger feature flag value, or the fallback if the flag is missing or cannot be cast to a NSInteger, or the client is not started
 - (NSInteger)integerVariationForKey:(NSString * _Nonnull)key fallback:(NSInteger)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://integerVariation">integerVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist.
+///
+///
+/// returns:
+/// ObjCIntegerEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCIntegerEvaluationDetail * _Nonnull)integerVariationDetailForKey:(NSString * _Nonnull)key fallback:(NSInteger)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDIntegerVariationValue</code> (<code>ObjcLDIntegerVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSInteger, or the LDClient is not started, returns the fallback value and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -514,7 +519,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDIntegerVariationValue</code> (<code>ObjcLDIntegerVariationValue</code>) containing the requested feature flag value and source, or the fallback if the flag is missing or cannot be cast to a NSInteger, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDIntegerVariationValue * _Nonnull)integerVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSInteger)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDIntegerVariationValue * _Nonnull)integerVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSInteger)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the integerVariationDetail method for additional insight into flag evaluation.");
 /// Returns the double variation for the given feature flag. If the flag does not exist, cannot be cast to a double, or the LDClient is not started, returns the fallback value.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -533,6 +538,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested double feature flag value, or the fallback if the flag is missing or cannot be cast to a double, or the client is not started
 - (double)doubleVariationForKey:(NSString * _Nonnull)key fallback:(double)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://doubleVariation">doubleVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist.
+///
+///
+/// returns:
+/// ObjCDoubleEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCDoubleEvaluationDetail * _Nonnull)doubleVariationDetailForKey:(NSString * _Nonnull)key fallback:(double)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDDoubleVariationValue</code> (<code>ObjcLDDoubleVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a double, or the LDClient is not started, returns the fallback value and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -552,7 +566,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDDoubleVariationValue</code> (<code>ObjcLDDoubleVariationValue</code>) containing the requested feature flag value and source, or the fallback if the flag is missing or cannot be cast to a double, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDDoubleVariationValue * _Nonnull)doubleVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(double)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDDoubleVariationValue * _Nonnull)doubleVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(double)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the doubleVariationDetail method for additional insight into flag evaluation.");
 /// Returns the NSString variation for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the fallback value, which may be nil.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -571,6 +585,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested NSString feature flag value, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSString, or the client is not started.
 - (NSString * _Nullable)stringVariationForKey:(NSString * _Nonnull)key fallback:(NSString * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://stringVariation">stringVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
+///
+///
+/// returns:
+/// ObjCStringEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCStringEvaluationDetail * _Nonnull)stringVariationDetailForKey:(NSString * _Nonnull)key fallback:(NSString * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDStringVariationValue</code> (<code>ObjcLDStringVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the fallback value (which may be nil) and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -590,7 +613,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDStringVariationValue</code> (<code>ObjcLDStringVariationValue</code>) containing the requested feature flag value and source, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSString, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDStringVariationValue * _Nonnull)stringVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSString * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDStringVariationValue * _Nonnull)stringVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSString * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the stringVariationDetail method for additional insight into flag evaluation.");
 /// Returns the NSArray variation for the given feature flag. If the flag does not exist, cannot be cast to a NSArray, or the LDClient is not started, returns the fallback value, which may be nil..
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -609,6 +632,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested NSArray feature flag value, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSArray, or the client is not started
 - (NSArray * _Nullable)arrayVariationForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://arrayVariation">arrayVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
+///
+///
+/// returns:
+/// ObjCArrayEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCArrayEvaluationDetail * _Nonnull)arrayVariationDetailForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDArrayVariationValue</code> (<code>ObjcLDArrayVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSArray, or the LDClient is not started, returns the fallback value (which may be nil) and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -628,7 +660,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDArrayVariationValue</code> (<code>ObjcLDArrayVariationValue</code>) containing the requested feature flag value and source, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSArray, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDArrayVariationValue * _Nonnull)arrayVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDArrayVariationValue * _Nonnull)arrayVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the arrayVariationDetail method for additional insight into flag evaluation.");
 /// Returns the NSDictionary variation for the given feature flag. If the flag does not exist, cannot be cast to a NSDictionary, or the LDClient is not started, returns the fallback value, which may be nil..
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -647,6 +679,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested NSDictionary feature flag value, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSDictionary, or the client is not started
 - (NSDictionary<NSString *, id> * _Nullable)dictionaryVariationForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://dictionaryVariation">dictionaryVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
+///
+///
+/// returns:
+/// ObjCDictionaryEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCDictionaryEvaluationDetail * _Nonnull)dictionaryVariationDetailForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDDictionaryVariationValue</code> (<code>ObjcLDDictionaryVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSDictionary, or the LDClient is not started, returns the fallback value (which may be nil) and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -666,7 +707,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDDictionaryVariationValue</code> (<code>ObjcLDDictionaryVariationValue</code>) containing the requested feature flag value and source, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSDictionary, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDDictionaryVariationValue * _Nonnull)dictionaryVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDDictionaryVariationValue * _Nonnull)dictionaryVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the dictionaryVariationDetail method for additional insight into flag evaluation.");
 /// Returns a dictionary with the flag keys and their values. If the LDClient is not started, returns nil.
 /// The dictionary will not contain feature flags from the server with null values.
 /// LDClient will not provide any source or change information, only flag keys and flag values. The client app should convert the feature flag value into the desired type.
@@ -878,6 +919,16 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// \param error NSError object to hold the invalidJsonObject error if the data is not a valid JSON item. (Optional)
 ///
 - (BOOL)trackEventWithKey:(NSString * _Nonnull)key data:(id _Nullable)data error:(NSError * _Nullable * _Nullable)error;
+/// See (trackEvent)[x-source-tag://trackEvent] for full documentation.
+/// \param key The key for the event. The SDK does nothing with the key, which can be any string the client app sends
+///
+/// \param data The data for the event. The SDK does nothing with the data, which can be any valid JSON item the client app sends. (Optional)
+///
+/// \param metricValue A numeric value used by the LaunchDarkly experimentation feature in numeric custom metrics. Can be omitted if this event is used by only non-numeric metrics. This field will also be returned as part of the custom event for Data Export.
+///
+/// \param error NSError object to hold the invalidJsonObject error if the data is not a valid JSON item. (Optional)
+///
+- (BOOL)trackEventWithKey:(NSString * _Nonnull)key data:(id _Nullable)data metricValue:(double)metricValue error:(NSError * _Nullable * _Nullable)error;
 /// Report events to LaunchDarkly servers. While online, the LDClient automatically reports events on the <code>LDConfig.eventFlushInterval</code>, and whenever the client app moves to the background. There should normally not be a need to call reportEvents.
 - (void)reportEvents;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1430,6 +1481,48 @@ SWIFT_CLASS("_TtC17LaunchDarkly_tvOS13LDUserWrapper")
 
 
 
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS25ObjCArrayEvaluationDetail")
+@interface ObjCArrayEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS24ObjCBoolEvaluationDetail")
+@interface ObjCBoolEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS30ObjCDictionaryEvaluationDetail")
+@interface ObjCDictionaryEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS26ObjCDoubleEvaluationDetail")
+@interface ObjCDoubleEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS27ObjCIntegerEvaluationDetail")
+@interface ObjCIntegerEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC17LaunchDarkly_tvOS26ObjCStringEvaluationDetail")
+@interface ObjCStringEvaluationDetail : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 /// Collects the elements of a feature flag that changed as a result of a <code>clientstream</code> update or feature flag request. The SDK will pass a typed ObjcLDChangedFlag or a collection of ObjcLDChangedFlags into feature flag observer blocks. This is the base type for the typed ObjcLDChangedFlags passed into observer blocks. The client app will have to convert the ObjcLDChangedFlag into the expected typed ObjcLDChangedFlag type.
 /// See the typed <code>ObjcLDClient</code> observeWithKey:owner:handler:, observeWithKeys:owner:handler:, and observeAllWithOwner:handler: for more details.
 SWIFT_CLASS_NAMED("ObjcLDChangedFlag")
@@ -1517,61 +1610,6 @@ SWIFT_CLASS_NAMED("ObjcLDBoolVariationValue")
 @class LDStringChangedFlag;
 @class LDDictionaryChangedFlag;
 
-/// The LDClient is the heart of the SDK, providing client apps running iOS, watchOS, macOS, or tvOS access to LaunchDarkly services. This singleton provides the ability to set a configuration (LDConfig) that controls how the LDClient talks to LaunchDarkly servers, and a user (LDUser) that provides finer control on the feature flag values delivered to LDClient. Once the LDClient has started, it connects to LaunchDarkly’s servers to get the feature flag values you set in the Dashboard.
-/// <h3>Objc Classes</h3>
-/// The SDK creates an Objective-C native style API by wrapping Swift specific classes, properties, and methods into Objective-C wrapper classes prefixed by <code>Objc</code>. By defining Objective-C specific names, client apps written in Objective-C can use a native coding style, including using familiar LaunchDarkly SDK names like <code>LDClient</code>, <code>LDConfig</code>, and <code>LDUser</code>. Objective-C developers should refer to the Objc documentation by following the Objc specific links following type, property, and method names.
-/// <h2>Usage</h2>
-/// <h3>Startup</h3>
-/// <ol>
-///   <li>
-///     To customize, configure a LDConfig (<code>ObjcLDConfig</code>) and LDUser (<code>ObjcLDUser</code>). The <code>config</code> is required, the <code>user</code> is optional. Both give you additional control over the feature flags delivered to the LDClient. See <code>ObjcLDConfig</code> & <code>ObjcLDUser</code> for more details.
-///   </li>
-/// </ol>
-/// <ul>
-///   <li>
-///     The mobileKey set into the <code>LDConfig</code> comes from your LaunchDarkly Account settings (on the left, at the bottom). If you have multiple projects be sure to choose the correct Mobile key.
-///   </li>
-/// </ul>
-/// <ol>
-///   <li>
-///     Call <code>[LDClient.sharedInstance startWithConfig: user: completion:]</code> (<code>ObjcLDClient.startWithConfig(_:config:user:completion:)</code>)
-///   </li>
-/// </ol>
-/// <ul>
-///   <li>
-///     If you do not pass in a LDUser, LDCLient will create a default for you.
-///   </li>
-///   <li>
-///     The optional completion closure allows the LDClient to notify your app when it has gone online.
-///   </li>
-/// </ul>
-/// <ol>
-///   <li>
-///     Because the LDClient is a singleton, you do not have to keep a reference to it in your code.
-///   </li>
-/// </ol>
-/// <h3>Getting Feature Flags</h3>
-/// Once the LDClient has started, it makes your feature flags available using the <code>variation</code> and <code>variationAndSource</code> methods. A <code>variation</code> is a specific flag value. For example, a boolean feature flag has 2 variations, <code>YES</code> and <code>NO</code>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// \code
-/// BOOL boolFlag = [LDClient.sharedInstance boolVariationForKey:@"my-bool-flag" fallback:NO];
-///
-/// \endcodeIf you need to know the source of the variation provided to you for a specific feature flag, the typed <code>variationAndSource</code> methods return a LDVariationValue with the value & source in a single call.
-/// \code
-/// LDBoolVariationValue *boolVariationValue = [LDClient.sharedInstance boolVariationAndSourceForKey:@"my-bool-flag" fallback:NO];
-/// BOOL boolFlag = boolVariationValue.value;
-/// LDFlagValueSource boolFlagSource = boolVariationValue.source;
-///
-/// \endcodeSee the typed <code>-[LDCLient variationForKey: fallback:]</code> or <code>-[LDClient variationAndSourceForKey: fallback:]</code> methods in the section <em>Feature Flag values</em> for details.
-/// <h3>Observing Feature Flags</h3>
-/// If you want to know when a feature flag value changes, you can check the flag’s value. You can also use one of several <code>observe</code> methods to have the LDClient notify you when a change occurs. There are several options– you can setup notifications based on when a specific flag changes, when any flag in a collection changes, or when a flag doesn’t change.
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [LDClient.sharedInstance observeBool:@"my-bool-flag" owner:self handler:^(LDBoolChangedFlag *changedFlag) {
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf updateFlagWithKey:@"my-bool-flag" changedFlag:changedFlag];
-/// }];
-///
-/// \endcodeThe <code>changedFlag</code> passed in to the block contains the old and new value, and the old and new valueSource. See the typed <code>LDChangedFlag</code> classes in the <em>Obj-C Changed Flags</em>.
 SWIFT_CLASS_NAMED("ObjcLDClient")
 @interface LDClient : NSObject
 /// Access to the LDClient singleton. For iOS apps with watchOS companion apps, there will be a singleton on each platform. These singletons do not communicate with each other. If you try to share feature flags between apps, the latest flag values may be overwritten by old feature flags from the other platform. LaunchDarkly recommends not sharing feature flags between apps and allowing each LDClient to manage feature flags on its own platform. If you share feature flag data between apps, provide a way to prevent the LDClients from overwriting new feature flags with old feature flags in the shared data.
@@ -1654,6 +1692,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested BOOL feature flag value, or the fallback if the flag is missing or cannot be cast to a BOOL, or the client is not started
 - (BOOL)boolVariationForKey:(NSString * _Nonnull)key fallback:(BOOL)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://boolVariation">boolVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist.
+///
+///
+/// returns:
+/// ObjCBoolEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCBoolEvaluationDetail * _Nonnull)boolVariationDetailForKey:(NSString * _Nonnull)key fallback:(BOOL)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDBoolVariationValue</code> (<code>ObjcLDBoolVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a BOOL, or the LDClient is not started, returns the fallback value and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1673,7 +1720,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDBoolVariationValue</code> (<code>ObjcLDBoolVariationValue</code>) containing the requested feature flag value and source, or the fallback if the flag is missing or cannot be cast to a BOOL, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDBoolVariationValue * _Nonnull)boolVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(BOOL)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDBoolVariationValue * _Nonnull)boolVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(BOOL)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the boolVariationDetail method for additional insight into flag evaluation.");
 /// Returns the NSInteger variation for the given feature flag. If the flag does not exist, cannot be cast to a NSInteger, or the LDClient is not started, returns the fallback value.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1692,6 +1739,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested NSInteger feature flag value, or the fallback if the flag is missing or cannot be cast to a NSInteger, or the client is not started
 - (NSInteger)integerVariationForKey:(NSString * _Nonnull)key fallback:(NSInteger)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://integerVariation">integerVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist.
+///
+///
+/// returns:
+/// ObjCIntegerEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCIntegerEvaluationDetail * _Nonnull)integerVariationDetailForKey:(NSString * _Nonnull)key fallback:(NSInteger)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDIntegerVariationValue</code> (<code>ObjcLDIntegerVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSInteger, or the LDClient is not started, returns the fallback value and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1711,7 +1767,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDIntegerVariationValue</code> (<code>ObjcLDIntegerVariationValue</code>) containing the requested feature flag value and source, or the fallback if the flag is missing or cannot be cast to a NSInteger, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDIntegerVariationValue * _Nonnull)integerVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSInteger)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDIntegerVariationValue * _Nonnull)integerVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSInteger)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the integerVariationDetail method for additional insight into flag evaluation.");
 /// Returns the double variation for the given feature flag. If the flag does not exist, cannot be cast to a double, or the LDClient is not started, returns the fallback value.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1730,6 +1786,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested double feature flag value, or the fallback if the flag is missing or cannot be cast to a double, or the client is not started
 - (double)doubleVariationForKey:(NSString * _Nonnull)key fallback:(double)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://doubleVariation">doubleVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist.
+///
+///
+/// returns:
+/// ObjCDoubleEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCDoubleEvaluationDetail * _Nonnull)doubleVariationDetailForKey:(NSString * _Nonnull)key fallback:(double)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDDoubleVariationValue</code> (<code>ObjcLDDoubleVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a double, or the LDClient is not started, returns the fallback value and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1749,7 +1814,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDDoubleVariationValue</code> (<code>ObjcLDDoubleVariationValue</code>) containing the requested feature flag value and source, or the fallback if the flag is missing or cannot be cast to a double, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDDoubleVariationValue * _Nonnull)doubleVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(double)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDDoubleVariationValue * _Nonnull)doubleVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(double)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the doubleVariationDetail method for additional insight into flag evaluation.");
 /// Returns the NSString variation for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the fallback value, which may be nil.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1768,6 +1833,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested NSString feature flag value, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSString, or the client is not started.
 - (NSString * _Nullable)stringVariationForKey:(NSString * _Nonnull)key fallback:(NSString * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://stringVariation">stringVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
+///
+///
+/// returns:
+/// ObjCStringEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCStringEvaluationDetail * _Nonnull)stringVariationDetailForKey:(NSString * _Nonnull)key fallback:(NSString * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDStringVariationValue</code> (<code>ObjcLDStringVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the fallback value (which may be nil) and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1787,7 +1861,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDStringVariationValue</code> (<code>ObjcLDStringVariationValue</code>) containing the requested feature flag value and source, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSString, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDStringVariationValue * _Nonnull)stringVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSString * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDStringVariationValue * _Nonnull)stringVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSString * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the stringVariationDetail method for additional insight into flag evaluation.");
 /// Returns the NSArray variation for the given feature flag. If the flag does not exist, cannot be cast to a NSArray, or the LDClient is not started, returns the fallback value, which may be nil..
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1806,6 +1880,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested NSArray feature flag value, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSArray, or the client is not started
 - (NSArray * _Nullable)arrayVariationForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://arrayVariation">arrayVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
+///
+///
+/// returns:
+/// ObjCArrayEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCArrayEvaluationDetail * _Nonnull)arrayVariationDetailForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDArrayVariationValue</code> (<code>ObjcLDArrayVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSArray, or the LDClient is not started, returns the fallback value (which may be nil) and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1825,7 +1908,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDArrayVariationValue</code> (<code>ObjcLDArrayVariationValue</code>) containing the requested feature flag value and source, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSArray, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDArrayVariationValue * _Nonnull)arrayVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDArrayVariationValue * _Nonnull)arrayVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSArray * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the arrayVariationDetail method for additional insight into flag evaluation.");
 /// Returns the NSDictionary variation for the given feature flag. If the flag does not exist, cannot be cast to a NSDictionary, or the LDClient is not started, returns the fallback value, which may be nil..
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1844,6 +1927,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// returns:
 /// The requested NSDictionary feature flag value, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSDictionary, or the client is not started
 - (NSDictionary<NSString *, id> * _Nullable)dictionaryVariationForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+/// See <a href="x-source-tag://dictionaryVariation">dictionaryVariation</a> for more information on variation methods.
+/// \param key The LDFlagKey for the requested feature flag.
+///
+/// \param fallback The fallback value to return if the feature flag key does not exist. The fallback value may be nil.
+///
+///
+/// returns:
+/// ObjCDictionaryEvaluationDetail: This class contains your value as well as useful information on why that value was returned.
+- (ObjCDictionaryEvaluationDetail * _Nonnull)dictionaryVariationDetailForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
 /// Returns the <code>LDDictionaryVariationValue</code> (<code>ObjcLDDictionaryVariationValue</code>) containing the value and source for the given feature flag. If the flag does not exist, cannot be cast to a NSDictionary, or the LDClient is not started, returns the fallback value (which may be nil) and <code>LDFlagValueSourceFallback</code> for the source.
 /// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>true</em> and <em>false</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
 /// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the fallback value. The LDClient must be online to keep the feature flag values up-to-date.
@@ -1863,7 +1955,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 ///
 /// returns:
 /// A <code>LDDictionaryVariationValue</code> (<code>ObjcLDDictionaryVariationValue</code>) containing the requested feature flag value and source, or the fallback value (which may be nil) if the flag is missing or cannot be cast to a NSDictionary, or the client is not started. If the fallback value is returned, the source is <code>LDFlagValueSourceFallback</code>
-- (LDDictionaryVariationValue * _Nonnull)dictionaryVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT;
+- (LDDictionaryVariationValue * _Nonnull)dictionaryVariationAndSourceForKey:(NSString * _Nonnull)key fallback:(NSDictionary<NSString *, id> * _Nullable)fallback SWIFT_WARN_UNUSED_RESULT SWIFT_DEPRECATED_MSG("Please use the dictionaryVariationDetail method for additional insight into flag evaluation.");
 /// Returns a dictionary with the flag keys and their values. If the LDClient is not started, returns nil.
 /// The dictionary will not contain feature flags from the server with null values.
 /// LDClient will not provide any source or change information, only flag keys and flag values. The client app should convert the feature flag value into the desired type.
@@ -2075,6 +2167,16 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// \param error NSError object to hold the invalidJsonObject error if the data is not a valid JSON item. (Optional)
 ///
 - (BOOL)trackEventWithKey:(NSString * _Nonnull)key data:(id _Nullable)data error:(NSError * _Nullable * _Nullable)error;
+/// See (trackEvent)[x-source-tag://trackEvent] for full documentation.
+/// \param key The key for the event. The SDK does nothing with the key, which can be any string the client app sends
+///
+/// \param data The data for the event. The SDK does nothing with the data, which can be any valid JSON item the client app sends. (Optional)
+///
+/// \param metricValue A numeric value used by the LaunchDarkly experimentation feature in numeric custom metrics. Can be omitted if this event is used by only non-numeric metrics. This field will also be returned as part of the custom event for Data Export.
+///
+/// \param error NSError object to hold the invalidJsonObject error if the data is not a valid JSON item. (Optional)
+///
+- (BOOL)trackEventWithKey:(NSString * _Nonnull)key data:(id _Nullable)data metricValue:(double)metricValue error:(NSError * _Nullable * _Nullable)error;
 /// Report events to LaunchDarkly servers. While online, the LDClient automatically reports events on the <code>LDConfig.eventFlushInterval</code>, and whenever the client app moves to the background. There should normally not be a need to call reportEvents.
 - (void)reportEvents;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
