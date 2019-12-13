@@ -3,7 +3,7 @@
   "tvOS" : [
     {
       "name" : "LaunchDarkly_tvOS",
-      "hash" : "5e3ff4aec8cf76470ad3c0a27f96f0c56b5cddaf65f2737bdf14e05d7d344da1",
+      "hash" : "9a6f196f98d8fa0a4987baaa41d6207a549e1692cd3614ce5420b12f9e5a58a3",
       "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]

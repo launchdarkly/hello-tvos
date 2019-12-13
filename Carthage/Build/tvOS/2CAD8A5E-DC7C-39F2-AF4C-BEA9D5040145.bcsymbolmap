@@ -152,4 +152,4 @@ _OBJC_IVAR_$_LDEventStringAccumulator._eventString
 /Users/joecieslik/code/hello-tvos/Carthage/Checkouts/ios-eventsource/LDEventSource/NSArray+LDEventSource.m
 NSMakeRange
 /Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.4.sdk/System/Library/Frameworks/Foundation.framework/Headers/NSRange.h
-/Users/joecieslik/Library/Caches/org.carthage.CarthageKit/DerivedData/10.3_10G8/ios-eventsource/4.0.3/Build/Intermediates.noindex/ArchiveIntermediates/DarklyEventSource-tvOS/IntermediateBuildFilesPath/LDEventSource.build/Release-appletvos/DarklyEventSource-tvOS.build/DerivedSources/DarklyEventSource_vers.c
+/Users/joecieslik/Library/Caches/org.carthage.CarthageKit/DerivedData/10.3_10G8/ios-eventsource/4.1.0/Build/Intermediates.noindex/ArchiveIntermediates/DarklyEventSource-tvOS/IntermediateBuildFilesPath/LDEventSource.build/Release-appletvos/DarklyEventSource-tvOS.build/DerivedSources/DarklyEventSource_vers.c
