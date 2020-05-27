@@ -1013,6 +1013,8 @@ SWIFT_CLASS_NAMED("ObjcLDConfig")
 @property (nonatomic) BOOL inlineUserInEvents;
 /// Enables logging for debugging. (Default: NO)
 @property (nonatomic) BOOL debugMode;
+/// An Integer that tells UserEnvironmentFlagCache the maximum number of users to locally cache. Can be set to -1 for unlimited cached users. (Default: 5)
+@property (nonatomic) NSInteger maxCachedUsers;
 /// LDConfig constructor. Configurable values are all set to their default values. The client app can modify these values as desired. Note that client app developers may prefer to get the LDConfig from <code>LDClient.config</code> (<code>ObjcLDClient.config</code>) in order to retain previously set values.
 - (nonnull instancetype)initWithMobileKey:(NSString * _Nonnull)mobileKey OBJC_DESIGNATED_INITIALIZER;
 /// Compares the settable properties in 2 LDConfig structs
@@ -2290,6 +2292,8 @@ SWIFT_CLASS_NAMED("ObjcLDConfig")
 @property (nonatomic) BOOL inlineUserInEvents;
 /// Enables logging for debugging. (Default: NO)
 @property (nonatomic) BOOL debugMode;
+/// An Integer that tells UserEnvironmentFlagCache the maximum number of users to locally cache. Can be set to -1 for unlimited cached users. (Default: 5)
+@property (nonatomic) NSInteger maxCachedUsers;
 /// LDConfig constructor. Configurable values are all set to their default values. The client app can modify these values as desired. Note that client app developers may prefer to get the LDConfig from <code>LDClient.config</code> (<code>ObjcLDClient.config</code>) in order to retain previously set values.
 - (nonnull instancetype)initWithMobileKey:(NSString * _Nonnull)mobileKey OBJC_DESIGNATED_INITIALIZER;
 /// Compares the settable properties in 2 LDConfig structs

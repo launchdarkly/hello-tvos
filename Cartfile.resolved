@@ -1,2 +1,2 @@
-github "launchdarkly/ios-client-sdk" "4.5.0"
+github "launchdarkly/ios-client-sdk" "4.6.0"
 github "launchdarkly/ios-eventsource" "4.1.0"
