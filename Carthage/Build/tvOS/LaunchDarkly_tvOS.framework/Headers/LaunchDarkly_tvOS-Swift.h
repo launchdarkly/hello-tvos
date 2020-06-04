@@ -452,6 +452,17 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// \param completion Closure called when the embedded <code>setOnlineIdentify</code> call completes, subject to throttling delays. (Optional)
 ///
 - (void)startCompleteWhenFlagsReceivedWithConfig:(LDConfig * _Nonnull)configWrapper user:(LDUser * _Nullable)userWrapper completion:(void (^ _Nullable)(void))completion;
+/// See <a href="x-source-tag://start">start</a> for more information on starting the SDK.
+/// This method listens for flag updates so the completion will only return once an update has occurred. If the SDK is configured to start offline the method will ignore the timeout and call the completion with True without awaiting a flag update.
+/// \param configWrapper The LDConfig that contains the desired configuration. (Required)
+///
+/// \param userWrapper The LDUser set with the desired user. If omitted, LDClient retains the previously set user, or default if one was never set. (Optional)
+///
+/// \param startWaitSeconds A TimeInterval representing how long to wait for flags before returning true in the completion to indicate that it timed out.
+///
+/// \param completion Closure called when the embedded <code>setOnlineIdentify</code> call completes, subject to throttling delays. Takes a Bool as a parameter that indicates whether the SDK did not come online within startWaitSeconds. (Optional)
+///
+- (void)startCompleteWhenFlagsReceivedWithConfig:(LDConfig * _Nonnull)configWrapper user:(LDUser * _Nullable)userWrapper startWaitSeconds:(NSTimeInterval)startWaitSeconds completion:(void (^ _Nullable)(BOOL))completion;
 /// Stops the LDClient. Stopping the client means the LDClient goes offline and stops recording events. LDClient will no longer provide feature flag values, only returning fallback values.
 /// There is almost no reason to stop the LDClient. Normally, set the LDClient offline to stop communication with the LaunchDarkly servers. Stop the LDClient to stop recording events. There is no need to stop the LDClient prior to suspending, moving to the background, or terminating the app. The SDK will respond to these events as the system requires and as configured in LDConfig.
 - (void)stop;
@@ -1731,6 +1742,17 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) LDClient * _
 /// \param completion Closure called when the embedded <code>setOnlineIdentify</code> call completes, subject to throttling delays. (Optional)
 ///
 - (void)startCompleteWhenFlagsReceivedWithConfig:(LDConfig * _Nonnull)configWrapper user:(LDUser * _Nullable)userWrapper completion:(void (^ _Nullable)(void))completion;
+/// See <a href="x-source-tag://start">start</a> for more information on starting the SDK.
+/// This method listens for flag updates so the completion will only return once an update has occurred. If the SDK is configured to start offline the method will ignore the timeout and call the completion with True without awaiting a flag update.
+/// \param configWrapper The LDConfig that contains the desired configuration. (Required)
+///
+/// \param userWrapper The LDUser set with the desired user. If omitted, LDClient retains the previously set user, or default if one was never set. (Optional)
+///
+/// \param startWaitSeconds A TimeInterval representing how long to wait for flags before returning true in the completion to indicate that it timed out.
+///
+/// \param completion Closure called when the embedded <code>setOnlineIdentify</code> call completes, subject to throttling delays. Takes a Bool as a parameter that indicates whether the SDK did not come online within startWaitSeconds. (Optional)
+///
+- (void)startCompleteWhenFlagsReceivedWithConfig:(LDConfig * _Nonnull)configWrapper user:(LDUser * _Nullable)userWrapper startWaitSeconds:(NSTimeInterval)startWaitSeconds completion:(void (^ _Nullable)(BOOL))completion;
 /// Stops the LDClient. Stopping the client means the LDClient goes offline and stops recording events. LDClient will no longer provide feature flag values, only returning fallback values.
 /// There is almost no reason to stop the LDClient. Normally, set the LDClient offline to stop communication with the LaunchDarkly servers. Stop the LDClient to stop recording events. There is no need to stop the LDClient prior to suspending, moving to the background, or terminating the app. The SDK will respond to these events as the system requires and as configured in LDConfig.
 - (void)stop;
