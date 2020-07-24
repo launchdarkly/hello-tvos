@@ -1,0 +1,2 @@
+$(SRCROOT)/Carthage/Build/tvOS/LaunchDarkly_tvOS.framework
+$(SRCROOT)/Carthage/Build/tvOS/LDSwiftEventSource.framework

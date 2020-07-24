@@ -2,7 +2,6 @@
 //  AppDelegate.swift
 //  hello-tvos
 //
-//  Created by Danial Zahid on 4/9/17.
 //  Copyright © 2017 LaunchDarkly. All rights reserved.
 //
 
@@ -32,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var config = LDConfig(mobileKey: launchDarklyMobileKey)
         config.eventFlushInterval = 30.0
 
-        LDClient.shared.start(config: config, user: user)
+        LDClient.start(config: config, user: user)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

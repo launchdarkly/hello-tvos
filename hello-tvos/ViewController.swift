@@ -2,7 +2,6 @@
 //  ViewController.swift
 //  hello-tvos
 //
-//  Created by Danial Zahid on 4/9/17.
 //  Copyright © 2017 LaunchDarkly. All rights reserved.
 //
 
@@ -27,13 +26,13 @@ class ViewController: UIViewController {
     }
     
     func registerLDClientObservers() {
-        LDClient.shared.observe(key: flagKey, owner: self) { [weak self] (changedFlag) in
+        LDClient.get()?.observe(key: flagKey, owner: self) { [weak self] changedFlag in
             self?.featureFlagDidUpdate(changedFlag.key)
         }
     }
     
     func checkFeatureValue() {
-        let showFeature = LDClient.shared.variation(forKey: flagKey, fallback: false)
+        let showFeature = LDClient.get()!.variation(forKey: flagKey, defaultValue: false)
         updateLabel(value: "\(showFeature)")
     }
     
