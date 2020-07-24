@@ -14,12 +14,6 @@ jobs:
         command: mkdir -p 'artifacts'
 
     - run:
-        name: Install Carthage
-        command: |
-          brew update
-          brew install carthage
-
-    - run:
         name: Build hello-tvos
         command: xcodebuild build -scheme 'hello-tvos' CODE_SIGNING_ALLOWED=NO | tee 'artifacts/xcode_build_raw.log' | xcpretty
 
