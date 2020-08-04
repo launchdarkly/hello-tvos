@@ -2,7 +2,7 @@
   "commitish" : "1.1.0",
   "tvOS" : [
     {
-      "hash" : "80970ba86d8575c92771d9dc3a4bd5dd79cbac6f9437a880409e375700999e25",
+      "hash" : "2db13eef0190c944f53b28e51c6d9ca883ad642370046a3e8c1ba15287df1464",
       "name" : "LDSwiftEventSource",
       "linking" : "dynamic",
       "swiftToolchainVersion" : "5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)"
