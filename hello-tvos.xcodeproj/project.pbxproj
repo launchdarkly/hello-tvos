@@ -12,6 +12,7 @@
 		69ACB99F1E9A87FE00A2F8CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB99D1E9A87FE00A2F8CF /* Main.storyboard */; };
 		69ACB9A11E9A87FF00A2F8CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */; };
 		A3A49BB1282C33700072AFF8 /* LaunchDarkly_tvOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A49BB0282C33700072AFF8 /* LaunchDarkly_tvOS.xcframework */; };
+		A3D818B1282C3A0A0073C003 /* LDSwiftEventSource.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D818B0282C3A0A0073C003 /* LDSwiftEventSource.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69ACB9A21E9A87FF00A2F8CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3A49BB0282C33700072AFF8 /* LaunchDarkly_tvOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LaunchDarkly_tvOS.xcframework; path = Carthage/Build/LaunchDarkly_tvOS.xcframework; sourceTree = "<group>"; };
+		A3D818B0282C3A0A0073C003 /* LDSwiftEventSource.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LDSwiftEventSource.xcframework; path = Carthage/Build/LDSwiftEventSource.xcframework; sourceTree = "<group>"; };
 		B46C1C6924CB561200283630 /* carthage-input.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "carthage-input.xcfilelist"; sourceTree = "<group>"; };
 		B46C1C6A24CB561F00283630 /* carthage-output.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "carthage-output.xcfilelist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -32,6 +34,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3A49BB1282C33700072AFF8 /* LaunchDarkly_tvOS.xcframework in Frameworks */,
+				A3D818B1282C3A0A0073C003 /* LDSwiftEventSource.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				A3A49BB0282C33700072AFF8 /* LaunchDarkly_tvOS.xcframework */,
+				A3D818B0282C3A0A0073C003 /* LDSwiftEventSource.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
