@@ -92,7 +92,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 69ACB9B01E9A87FF00A2F8CF /* Build configuration list for PBXNativeTarget "hello-tvos" */;
 			buildPhases = (
-				B46C1C6724CB55C800283630 /* Carthage copy-frameworks */,
 				69ACB9921E9A87FE00A2F8CF /* Sources */,
 				69ACB9931E9A87FE00A2F8CF /* Frameworks */,
 				69ACB9941E9A87FE00A2F8CF /* Resources */,
@@ -153,30 +152,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B46C1C6724CB55C800283630 /* Carthage copy-frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"$(SRCROOT)/Support/carthage-input.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "Carthage copy-frameworks";
-			outputFileListPaths = (
-				"$(SRCROOT)/Support/carthage-output.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		69ACB9921E9A87FE00A2F8CF /* Sources */ = {
