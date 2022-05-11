@@ -11,8 +11,6 @@
 		69ACB99C1E9A87FE00A2F8CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ACB99B1E9A87FE00A2F8CF /* ViewController.swift */; };
 		69ACB99F1E9A87FE00A2F8CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB99D1E9A87FE00A2F8CF /* Main.storyboard */; };
 		69ACB9A11E9A87FF00A2F8CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */; };
-		B46C1C6324CB55B400283630 /* LDSwiftEventSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B46C1C6124CB55B400283630 /* LDSwiftEventSource.framework */; };
-		B46C1C6524CB55B400283630 /* LaunchDarkly_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B46C1C6224CB55B400283630 /* LaunchDarkly_tvOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,8 +20,6 @@
 		69ACB99E1E9A87FE00A2F8CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		69ACB9A01E9A87FF00A2F8CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69ACB9A21E9A87FF00A2F8CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B46C1C6124CB55B400283630 /* LDSwiftEventSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LDSwiftEventSource.framework; path = Carthage/Build/tvOS/LDSwiftEventSource.framework; sourceTree = "<group>"; };
-		B46C1C6224CB55B400283630 /* LaunchDarkly_tvOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LaunchDarkly_tvOS.framework; path = Carthage/Build/tvOS/LaunchDarkly_tvOS.framework; sourceTree = "<group>"; };
 		B46C1C6924CB561200283630 /* carthage-input.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "carthage-input.xcfilelist"; sourceTree = "<group>"; };
 		B46C1C6A24CB561F00283630 /* carthage-output.xcfilelist */ = {isa = PBXFileReference; lastKnownFileType = text.xcfilelist; path = "carthage-output.xcfilelist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -33,8 +29,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B46C1C6524CB55B400283630 /* LaunchDarkly_tvOS.framework in Frameworks */,
-				B46C1C6324CB55B400283630 /* LDSwiftEventSource.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,8 +68,6 @@
 		B46C1C6024CB55B400283630 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B46C1C6224CB55B400283630 /* LaunchDarkly_tvOS.framework */,
-				B46C1C6124CB55B400283630 /* LDSwiftEventSource.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
