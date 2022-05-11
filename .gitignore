@@ -20,9 +20,10 @@ DerivedData
 Pods/
 
 # Carthage
-Carthage/Checkouts
-Carthage/Build/iOS
-Carthage/Build/Mac
-Carthage/Build/watchOS
+Carthage/Build/.ios-client-sdk.version
+Carthage/Build/LaunchDarkly.xcframework
+Carthage/Build/LaunchDarkly_macOS.xcframework
+Carthage/Build/LaunchDarkly_watchOS.xcframework
+Carthage/Checkouts/
 
 .DS_Store
