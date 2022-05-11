@@ -6,39 +6,39 @@
 	<dict>
 		<key>Headers/LaunchDarkly.h</key>
 		<data>
-		t5VYz+Uhax4BI228hLhr8sBAMYs=
+		D8UFcsBdEq3MbXRZdynBScAyECk=
 		</data>
 		<key>Headers/LaunchDarkly_tvOS-Swift.h</key>
 		<data>
-		2mR7LKggxGvj3/k32P9NgBQhcOs=
+		xbNT7E1xSfu9reOMC2hJiEZduN4=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		1NipSe+punWM02Qm+svS0YXxvbg=
+		A4SK3SeKoeIFS48b/kP9WQZrNYQ=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/Project/arm64-apple-tvos-simulator.swiftsourceinfo</key>
 		<data>
-		Ewmv2Vs9rvIHY7rf9fM62mQY2Kw=
+		53+odbzNPxaDyEi8sfacUQVvuiY=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/Project/x86_64-apple-tvos-simulator.swiftsourceinfo</key>
 		<data>
-		/gSmDCRuteFMKBvQ3w+xi3ZvmfM=
+		nX8UCI17cXC9le02i5khyCoE+LA=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
 		<data>
-		GmKmSAYClIUC5gKTwNp52Evj2GE=
+		cwrzh2Oe+NjWKbuoG8YtFn1KNNI=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/arm64-apple-tvos-simulator.swiftmodule</key>
 		<data>
-		F/eirVgkxMZK8PuG5TA7IkcbDAw=
+		K/BudpH3TaGg0biinH1VPD9PoA0=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
 		<data>
-		yEMzIpv5HQBQjPNt8KZd0B1xQZ8=
+		TpgFTXIzBuRaJrjNIrRK83rYEFw=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
 		<data>
-		deyTXh9JkI1SZHA3EKJJ1jv6F5o=
+		dpmY2xY7U2Aof1M9DzHgbvBDV6M=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -47,88 +47,88 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			t5VYz+Uhax4BI228hLhr8sBAMYs=
+			D8UFcsBdEq3MbXRZdynBScAyECk=
 			</data>
 			<key>hash2</key>
 			<data>
-			J5WByT3wWWekf+U+MIJlfOX5mdoz67Dh4zlHhZFS2kY=
+			XgZcDmQ1Ck2BynWlXxy4CGZNB6twmDwfcm4Zi9YEUS4=
 			</data>
 		</dict>
 		<key>Headers/LaunchDarkly_tvOS-Swift.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			2mR7LKggxGvj3/k32P9NgBQhcOs=
+			xbNT7E1xSfu9reOMC2hJiEZduN4=
 			</data>
 			<key>hash2</key>
 			<data>
-			kqWYkUT48V+prLsLZSKXsTpZvnmu3Dn+KcilmUTYc30=
+			eIK8wqk0D7uGQ1nkUr6oNNWSvCp9RN1aTrETlNb0xvA=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/Project/arm64-apple-tvos-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Ewmv2Vs9rvIHY7rf9fM62mQY2Kw=
+			53+odbzNPxaDyEi8sfacUQVvuiY=
 			</data>
 			<key>hash2</key>
 			<data>
-			9FYEuXTEjTWUQ0yPJIJM6cxA63yeakyRcS56R+z4nns=
+			JeA3ea/cDxKDQnxczhmL3imWhT1tsWG+Wsua89Q4C0A=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/Project/x86_64-apple-tvos-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/gSmDCRuteFMKBvQ3w+xi3ZvmfM=
+			nX8UCI17cXC9le02i5khyCoE+LA=
 			</data>
 			<key>hash2</key>
 			<data>
-			poq/6F+2xgV7zZPm7EISrGj1/K/0xtm5Gfoxy0/2c8M=
+			IQizk585IbCQ7OAQsxuDXbL1odyKV/0BqvF5ZBnz5H8=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			GmKmSAYClIUC5gKTwNp52Evj2GE=
+			cwrzh2Oe+NjWKbuoG8YtFn1KNNI=
 			</data>
 			<key>hash2</key>
 			<data>
-			LkxhauNCst8ZDbSroUS16qXFdYqjdhtXLVdfEmmmS2I=
+			qGHXeXPt7zIp4xGMwR52uJl/jzXNibqDVyQVvWX8/Nw=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/arm64-apple-tvos-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			F/eirVgkxMZK8PuG5TA7IkcbDAw=
+			K/BudpH3TaGg0biinH1VPD9PoA0=
 			</data>
 			<key>hash2</key>
 			<data>
-			yUkOies3e4YmS1HRRLFX5sfV36f2NJcCD/ae+xY7f/s=
+			P7mtQihjtd26AGORDARG70b11e2FmmhGjBp6HteNvnQ=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			yEMzIpv5HQBQjPNt8KZd0B1xQZ8=
+			TpgFTXIzBuRaJrjNIrRK83rYEFw=
 			</data>
 			<key>hash2</key>
 			<data>
-			s1GigZYtG74wCShkUNfT9IkYYx2H27P4wDl6Tk+faIo=
+			NZf65VQ5/KZ+kCmC4HjqxugssL9JnQuzGT2pfV3Yqjg=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			deyTXh9JkI1SZHA3EKJJ1jv6F5o=
+			dpmY2xY7U2Aof1M9DzHgbvBDV6M=
 			</data>
 			<key>hash2</key>
 			<data>
-			igId0IsDk0WmbZ1ZejL9OQMpbDZy3HmDHTmqOhBeZC0=
+			o1SHbfxzBQY2gUPADOId/xZzq7OgdPRpUzz/9Cqww1w=
 			</data>
 		</dict>
 	</dict>

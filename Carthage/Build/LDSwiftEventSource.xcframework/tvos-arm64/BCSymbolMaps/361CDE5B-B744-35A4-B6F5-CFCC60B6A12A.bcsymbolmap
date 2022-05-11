@@ -3,7 +3,7 @@ Apple clang version 13.1.6 (clang-1316.0.21.2.3)
 /Applications/Xcode.app/Contents/Developer/Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.4.sdk
 AppleTVOS15.4.sdk
 /Users/mkeeler/Library/Caches/org.carthage.CarthageKit/DerivedData/13.3.1_13E500a/swift-eventsource/1.3.1/Build/Intermediates.noindex/ArchiveIntermediates/LDSwiftEventSource/IntermediateBuildFilesPath/LDSwiftEventSource.build/Release-appletvos/LDSwiftEventSource.build/DerivedSources/LDSwiftEventSource_vers.c
-/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-build-process/Carthage/Checkouts/swift-eventsource
+/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-to-v6/Carthage/Checkouts/swift-eventsource
 _$s18LDSwiftEventSource14UTF8LineParserC6appendySaySSG10Foundation4DataVF
 _$s18LDSwiftEventSource14UTF8LineParserCfD
 _$s18LDSwiftEventSource14UTF8LineParserCACycfc
@@ -110,7 +110,7 @@ Apple clang version 13.1.6 (clang-1316.0.20.8)
 -private-discriminator _A400CA7A519698F71163208DBD5CB636
 <swift-imported-modules>
 Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
-/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-build-process/Carthage/Checkouts/swift-eventsource/Source/UTF8LineParser.swift
+/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-to-v6/Carthage/Checkouts/swift-eventsource/Source/UTF8LineParser.swift
 $sSo13os_log_type_taMa
 <compiler-generated>
 $sypWOb
@@ -312,7 +312,7 @@ _$s18LDSwiftEventSource4LogsCACycfCTq
 _$s18LDSwiftEventSource4LogsCN
 _$s18LDSwiftEventSource4LogsC5LevelON
 -private-discriminator _2D820273298F4A3A6D3AA38CF08359AE
-/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-build-process/Carthage/Checkouts/swift-eventsource/Source/Logs.swift
+/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-to-v6/Carthage/Checkouts/swift-eventsource/Source/Logs.swift
 $s18LDSwiftEventSource4LogsC5LevelOAESQAAWl
 $s18LDSwiftEventSource4LogsC5LevelOSHAASQWb
 $s18LDSwiftEventSource4LogsC5LevelOMa
@@ -431,7 +431,7 @@ _symbolic _____ 18LDSwiftEventSource25UnsuccessfulResponseErrorC
 _symbolic Si
 _$s18LDSwiftEventSource25UnsuccessfulResponseErrorCMF
 _objc_classes_$s18LDSwiftEventSource25UnsuccessfulResponseErrorCN
-/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-build-process/Carthage/Checkouts/swift-eventsource/Source/Types.swift
+/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-to-v6/Carthage/Checkouts/swift-eventsource/Source/Types.swift
 $s18LDSwiftEventSource25UnsuccessfulResponseErrorCMa
 $s18LDSwiftEventSource10ReadyStateOMa
 $s18LDSwiftEventSource10ReadyStateOwui
@@ -532,7 +532,7 @@ _$s18LDSwiftEventSource0B6ParserC07getLastB2IdSSSgyFTq
 _$s18LDSwiftEventSource0B6ParserC5resetSdyFTq
 _$s18LDSwiftEventSource0B6ParserCN
 -private-discriminator _199B45921F83D2DCA1CC8166146ABF2D
-/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-build-process/Carthage/Checkouts/swift-eventsource/Source/EventParser.swift
+/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-to-v6/Carthage/Checkouts/swift-eventsource/Source/EventParser.swift
 $ss5SliceV32withContiguousStorageIfAvailableyqd__Sgqd__SRy7ElementQzGKXEKlFqd__AGKXEfU_SS8UTF8ViewV_s5Int64VSgTg5Tf4xnn_n
 $sSR8rebasingSRyxGs5SliceVyABG_tcfCs5UInt8V_Tg5
 $sSS8UTF8ViewVSlsSl8distance4from2toSi5IndexQz_AGtFTW
@@ -884,7 +884,7 @@ _$s18LDSwiftEventSource0bC8DelegateC10urlSession_8dataTask10didReceiveySo12NSURL
 _$s18LDSwiftEventSource0bC8DelegateCN
 _OBJC_CLASS_$__TtC18LDSwiftEventSource19EventSourceDelegate
 -private-discriminator _3E200033DD99C338AA781A297861BB7E
-/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-build-process/Carthage/Checkouts/swift-eventsource/Source/LDSwiftEventSource.swift
+/Users/mkeeler/code/launchdarkly/hello-tvos.git/update-to-v6/Carthage/Checkouts/swift-eventsource/Source/LDSwiftEventSource.swift
 $sSo25NSURLSessionConfigurationCMa
 $s10Foundation4DateVSgMa
 $s18LDSwiftEventSource0bC8DelegateC5startyyFyycfU_TA

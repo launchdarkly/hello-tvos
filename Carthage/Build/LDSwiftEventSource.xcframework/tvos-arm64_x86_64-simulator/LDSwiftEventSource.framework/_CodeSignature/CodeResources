@@ -18,11 +18,11 @@
 		</data>
 		<key>Modules/LDSwiftEventSource.swiftmodule/Project/arm64-apple-tvos-simulator.swiftsourceinfo</key>
 		<data>
-		h19OAcyddf1+5yJt/9yjqhyQPbo=
+		SDp/dce+7RIpI279Iqv/10oJJD0=
 		</data>
 		<key>Modules/LDSwiftEventSource.swiftmodule/Project/x86_64-apple-tvos-simulator.swiftsourceinfo</key>
 		<data>
-		RK1BWbyq5QCcO0RtjhT7YlN/2p8=
+		4gh3sgwcJgaCWEHVMZT/2TP4OUw=
 		</data>
 		<key>Modules/LDSwiftEventSource.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/LDSwiftEventSource.swiftmodule/arm64-apple-tvos-simulator.swiftmodule</key>
 		<data>
-		oMMv1FSIgPGoPjpCg14++lVwGgo=
+		ehvq4d+05xqHkcRBYMZ1AFlctBI=
 		</data>
 		<key>Modules/LDSwiftEventSource.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>Modules/LDSwiftEventSource.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
 		<data>
-		A8pGKzbq2JRQAYqZ28O8qpAPdfU=
+		SmCXjCo42LhDhdu+9Mv8oHxNPVg=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -73,22 +73,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			h19OAcyddf1+5yJt/9yjqhyQPbo=
+			SDp/dce+7RIpI279Iqv/10oJJD0=
 			</data>
 			<key>hash2</key>
 			<data>
-			8UST5iwuabFmO5ODQsG26ETEiYUYQMAA5+xEGTRUh78=
+			euYa91Gy/wRRM//nHimS8mdhmOrKZgu/JqWQevVuXSc=
 			</data>
 		</dict>
 		<key>Modules/LDSwiftEventSource.swiftmodule/Project/x86_64-apple-tvos-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			RK1BWbyq5QCcO0RtjhT7YlN/2p8=
+			4gh3sgwcJgaCWEHVMZT/2TP4OUw=
 			</data>
 			<key>hash2</key>
 			<data>
-			3ao73Dhte6jukG6A8i1+JbNHr1IZTcKLxhBfxHR0GKw=
+			lIK6KkhjURQNeET+sXCd4a1Yx+hYEaXWUwgknLjf+H4=
 			</data>
 		</dict>
 		<key>Modules/LDSwiftEventSource.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
@@ -106,11 +106,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oMMv1FSIgPGoPjpCg14++lVwGgo=
+			ehvq4d+05xqHkcRBYMZ1AFlctBI=
 			</data>
 			<key>hash2</key>
 			<data>
-			XS6xnKV8rPxXhSCS4JaAo9kLIVjVvM7nQHXBGwh5q4w=
+			pOiz/JHnqtczu1gJ4iWSw4Q/9oHqZWBw86b4cFi6jLw=
 			</data>
 		</dict>
 		<key>Modules/LDSwiftEventSource.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
@@ -128,11 +128,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			A8pGKzbq2JRQAYqZ28O8qpAPdfU=
+			SmCXjCo42LhDhdu+9Mv8oHxNPVg=
 			</data>
 			<key>hash2</key>
 			<data>
-			k9GXvmiGElsS1S7vjSyFlNKnK9rziC8s2PmHdax0O/g=
+			eIpQw35oREMuRsLEUJoTitoNPpHDFBUJE30j3rUhYO8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
