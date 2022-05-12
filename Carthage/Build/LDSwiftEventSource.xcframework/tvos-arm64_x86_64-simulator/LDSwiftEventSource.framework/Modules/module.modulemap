@@ -1,0 +1,11 @@
+framework module LDSwiftEventSource {
+  umbrella header "LDSwiftEventSource.h"
+
+  export *
+  module * { export * }
+}
+
+module LDSwiftEventSource.Swift {
+    header "LDSwiftEventSource-Swift.h"
+    requires objc
+}
