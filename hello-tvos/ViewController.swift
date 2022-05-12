@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     }
     
     func checkFeatureValue() {
-        let showFeature = LDClient.get()!.variation(forKey: flagKey, defaultValue: false)
+        let showFeature = LDClient.get()!.boolVariation(forKey: flagKey, defaultValue: false)
         updateLabel(value: "\(showFeature)")
     }
     

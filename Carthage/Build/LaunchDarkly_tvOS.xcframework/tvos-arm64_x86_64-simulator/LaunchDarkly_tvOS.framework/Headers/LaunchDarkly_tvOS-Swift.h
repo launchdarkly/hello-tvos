@@ -220,7 +220,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
-
+/// An error thrown from APIs when an invalid argument is provided.
 SWIFT_CLASS("_TtC17LaunchDarkly_tvOS22LDInvalidArgumentError")
 @interface LDInvalidArgumentError : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -235,15 +235,22 @@ SWIFT_CLASS("_TtC17LaunchDarkly_tvOS13LDUserWrapper")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-@class NSCoder;
+@class NSString;
+@class LDValue;
 
-@interface LDUserWrapper (SWIFT_EXTENSION(LaunchDarkly_tvOS)) <NSCoding>
-- (void)encodeWithCoder:(NSCoder * _Nonnull)encoder;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)decoder;
+/// Structure that contains the evaluation result and additional information when evaluating a flag as a boolean.
+SWIFT_CLASS_NAMED("ObjcLDBoolEvaluationDetail")
+@interface LDBoolEvaluationDetail : NSObject
+/// The value of the flag for the current user.
+@property (nonatomic, readonly) BOOL value;
+/// The index of the returned value within the flag’s list of variations, or <code>-1</code> if the default was returned.
+@property (nonatomic, readonly) NSInteger variationIndex;
+/// A structure representing the main factor that influenced the resultant flag evaluation value.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable reason;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-
-@class NSString;
 
 /// Collects the elements of a feature flag that changed as a result of a <code>clientstream</code> update or feature flag request. The SDK will pass a typed ObjcLDChangedFlag or a collection of ObjcLDChangedFlags into feature flag observer blocks. This is the base type for the typed ObjcLDChangedFlags passed into observer blocks. The client app will have to convert the ObjcLDChangedFlag into the expected typed ObjcLDChangedFlag type.
 /// See the typed <code>ObjcLDClient</code> observeWithKey:owner:handler:, observeWithKeys:owner:handler:, and observeAllWithOwner:handler: for more details.
@@ -251,64 +258,19 @@ SWIFT_CLASS_NAMED("ObjcLDChangedFlag")
 @interface LDChangedFlag : NSObject
 /// The changed feature flag’s key
 @property (nonatomic, readonly, copy) NSString * _Nonnull key;
+/// The value from before the flag change occurred.
+@property (nonatomic, readonly, strong) LDValue * _Nonnull oldValue;
+/// The value after the flag change occurred.
+@property (nonatomic, readonly, strong) LDValue * _Nonnull newValue;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
-
-
-/// Wraps the changed feature flag’s NSArray values.
-/// If the flag is not actually a NSArray the SDK sets the old and new value to nil, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDArrayChangedFlag")
-@interface LDArrayChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly, copy) NSArray * _Nullable oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly, copy) NSArray * _Nullable newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
-@end
-
-
-SWIFT_CLASS_NAMED("ObjcLDArrayEvaluationDetail")
-@interface ArrayEvaluationDetail : NSObject
-@property (nonatomic, readonly, copy) NSArray * _Nullable value;
-@property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-/// Wraps the changed feature flag’s BOOL values.
-/// If the flag is not actually a BOOL the SDK sets the old and new value to false, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDBoolChangedFlag")
-@interface LDBoolChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly) BOOL oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly) BOOL newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
-@end
-
-
-SWIFT_CLASS_NAMED("ObjcLDBoolEvaluationDetail")
-@interface LDBoolEvaluationDetail : NSObject
-@property (nonatomic, readonly) BOOL value;
-@property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
 
 @class LDUser;
 @class LDIntegerEvaluationDetail;
 @class LDDoubleEvaluationDetail;
 @class LDStringEvaluationDetail;
-@class DictionaryEvaluationDetail;
-@class LDIntegerChangedFlag;
-@class LDDoubleChangedFlag;
-@class LDStringChangedFlag;
-@class LDDictionaryChangedFlag;
+@class LDJSONEvaluationDetail;
 @class LDConfig;
 
 /// The LDClient is the heart of the SDK, providing client apps running iOS, watchOS, macOS, or tvOS access to LaunchDarkly services. This singleton provides the ability to set a configuration (LDConfig) that controls how the LDClient talks to LaunchDarkly servers, and a user (LDUser) that provides finer control on the feature flag values delivered to LDClient. Once the LDClient has started, it connects to LaunchDarkly’s servers to get the feature flag values you set in the Dashboard.
@@ -318,7 +280,7 @@ SWIFT_CLASS_NAMED("ObjcLDBoolEvaluationDetail")
 /// <h3>Startup</h3>
 /// <ol>
 ///   <li>
-///     To customize, configure a LDConfig (<code>ObjcLDConfig</code>) and LDUser (<code>ObjcLDUser</code>). The <code>config</code> is required, the <code>user</code> is optional. Both give you additional control over the feature flags delivered to the LDClient. See <code>ObjcLDConfig</code> & <code>ObjcLDUser</code> for more details.
+///     To customize, configure a LDConfig (<code>ObjcLDConfig</code>) and LDUser (<code>ObjcLDUser</code>). Both give you additional control over the feature flags delivered to the LDClient. See <code>ObjcLDConfig</code> & <code>ObjcLDUser</code> for more details.
 ///   </li>
 /// </ol>
 /// <ul>
@@ -345,7 +307,7 @@ SWIFT_CLASS_NAMED("ObjcLDBoolEvaluationDetail")
 ///   </li>
 /// </ol>
 /// <h3>Getting Feature Flags</h3>
-/// Once the LDClient has started, it makes your feature flags available using the <code>variation</code> and <code>variationDetail</code> methods. A <code>variation</code> is a specific flag value. For example, a boolean feature flag has 2 variations, <code>YES</code> and <code>NO</code>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
+/// Once the LDClient has started, it makes your feature flags available using the <code>variation</code> and <code>variationDetail</code> methods. A <code>variation</code> is a specific flag value. For example, a boolean feature flag has 2 variations, <code>YES</code> and <code>NO</code>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDValue</code> for the available types.
 /// \code
 /// BOOL boolFlag = [ldClientInstance boolVariationForKey:@"my-bool-flag" defaultValue:NO];
 ///
@@ -427,10 +389,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 /// The requested LDClient instance.
 + (LDClient * _Nullable)getWithEnvironment:(NSString * _Nonnull)environment SWIFT_WARN_UNUSED_RESULT;
 /// Returns the BOOL variation for the given feature flag. If the flag does not exist, cannot be cast to a BOOL, or the LDClient is not started, returns the default value.
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default  value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
+/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDValue</code> for the available types.
 /// A call to <code>boolVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
 /// <h3>Usage</h3>
 /// \code
@@ -454,10 +413,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 /// ObjcLDBoolEvaluationDetail containing your value as well as useful information on why that value was returned.
 - (LDBoolEvaluationDetail * _Nonnull)boolVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(BOOL)defaultValue SWIFT_WARN_UNUSED_RESULT;
 /// Returns the NSInteger variation for the given feature flag. If the flag does not exist, cannot be cast to a NSInteger, or the LDClient is not started, returns the default value.
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
+/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDValue</code> for the available types.
 /// A call to <code>integerVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
 /// <h3>Usage</h3>
 /// \code
@@ -481,10 +437,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 /// ObjcLDIntegerEvaluationDetail containing your value as well as useful information on why that value was returned.
 - (LDIntegerEvaluationDetail * _Nonnull)integerVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(NSInteger)defaultValue SWIFT_WARN_UNUSED_RESULT;
 /// Returns the double variation for the given feature flag. If the flag does not exist, cannot be cast to a double, or the LDClient is not started, returns the default value.
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
+/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDValue</code> for the available types.
 /// A call to <code>doubleVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
 /// <h3>Usage</h3>
 /// \code
@@ -507,11 +460,8 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 /// returns:
 /// ObjcLDDoubleEvaluationDetail containing your value as well as useful information on why that value was returned.
 - (LDDoubleEvaluationDetail * _Nonnull)doubleVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(double)defaultValue SWIFT_WARN_UNUSED_RESULT;
-/// Returns the NSString variation for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the default value, which may be nil.
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
+/// Returns the NSString variation for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the default value.
+/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDValue</code> for the available types.
 /// A call to <code>stringVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
 /// <h3>Usage</h3>
 /// \code
@@ -519,79 +469,48 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 ///
 /// \endcode\param key The LDFlagKey for the requested feature flag.
 ///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
+/// \param defaultValue The default value to return if the feature flag key does not exist.
 ///
 ///
 /// returns:
-/// The requested NSString feature flag value, or the default value (which may be nil) if the flag is missing or cannot be cast to a NSString, or the client is not started.
-- (NSString * _Nullable)stringVariationForKey:(NSString * _Nonnull)key defaultValue:(NSString * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
+/// The requested NSString feature flag value, or the default value if the flag is missing or cannot be cast to a NSString, or the client is not started.
+- (NSString * _Nonnull)stringVariationForKey:(NSString * _Nonnull)key defaultValue:(NSString * _Nonnull)defaultValue SWIFT_WARN_UNUSED_RESULT;
 /// See <a href="x-source-tag://stringVariation">stringVariation</a> for more information on variation methods.
 /// \param key The LDFlagKey for the requested feature flag.
 ///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
+/// \param defaultValue The default value to return if the feature flag key does not exist.
 ///
 ///
 /// returns:
 /// ObjcLDStringEvaluationDetail containing your value as well as useful information on why that value was returned.
-- (LDStringEvaluationDetail * _Nonnull)stringVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(NSString * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
-/// Returns the NSArray variation for the given feature flag. If the flag does not exist, cannot be cast to a NSArray, or the LDClient is not started, returns the default value, which may be nil..
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
-/// A call to <code>arrayVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
+- (LDStringEvaluationDetail * _Nonnull)stringVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(NSString * _Nonnull)defaultValue SWIFT_WARN_UNUSED_RESULT;
+/// Returns the JSON variation for the given feature flag. If the flag does not exist, or the LDClient is not started, returns the default value.
+/// A call to <code>jsonVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
 /// <h3>Usage</h3>
 /// \code
-/// NSArray *arrayFeatureFlagValue = [ldClientInstance arrayVariationForKey:@"my-array-flag" defaultValue:@[@1,@2,@3]];
+/// ObjcLDValue *featureFlagValue = [ldClientInstance jsonVariationForKey:@"my-flag" defaultValue:[LDValue ofBool:NO]];
 ///
 /// \endcode\param key The LDFlagKey for the requested feature flag.
 ///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
+/// \param defaultValue The default value to return if the feature flag key does not exist.
 ///
 ///
 /// returns:
-/// The requested NSArray feature flag value, or the default value (which may be nil) if the flag is missing or cannot be cast to a NSArray, or the client is not started
-- (NSArray * _Nullable)arrayVariationForKey:(NSString * _Nonnull)key defaultValue:(NSArray * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
+/// The requested feature flag value, or the default value if the flag is missing or the client is not started
+- (LDValue * _Nonnull)jsonVariationForKey:(NSString * _Nonnull)key defaultValue:(LDValue * _Nonnull)defaultValue SWIFT_WARN_UNUSED_RESULT;
 /// See <a href="x-source-tag://arrayVariation">arrayVariation</a> for more information on variation methods.
 /// \param key The LDFlagKey for the requested feature flag.
 ///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
+/// \param defaultValue The default value to return if the feature flag key does not exist.
 ///
 ///
 /// returns:
-/// ObjcLDArrayEvaluationDetail containing your value as well as useful information on why that value was returned.
-- (ArrayEvaluationDetail * _Nonnull)arrayVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(NSArray * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
-/// Returns the NSDictionary variation for the given feature flag. If the flag does not exist, cannot be cast to a NSDictionary, or the LDClient is not started, returns the default value, which may be nil..
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
-/// A call to <code>dictionaryVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
-/// <h3>Usage</h3>
-/// \code
-/// NSDictionary *dictionaryFeatureFlagValue = [ldClientInstance dictionaryVariationForKey:@"my-dictionary-flag" defaultValue:@{@"dictionary":@"defaultValue"}];
-///
-/// \endcode\param key The LDFlagKey for the requested feature flag.
-///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
-///
-///
-/// returns:
-/// The requested NSDictionary feature flag value, or the default value (which may be nil) if the flag is missing or cannot be cast to a NSDictionary, or the client is not started
-- (NSDictionary<NSString *, id> * _Nullable)dictionaryVariationForKey:(NSString * _Nonnull)key defaultValue:(NSDictionary<NSString *, id> * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
-/// See <a href="x-source-tag://dictionaryVariation">dictionaryVariation</a> for more information on variation methods.
-/// \param key The LDFlagKey for the requested feature flag.
-///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
-///
-///
-/// returns:
-/// ObjcLDDictionaryEvaluationDetail containing your value as well as useful information on why that value was returned.
-- (DictionaryEvaluationDetail * _Nonnull)dictionaryVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(NSDictionary<NSString *, id> * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
+/// ObjcLDJSONEvaluationDetail containing your value as well as useful information on why that value was returned.
+- (LDJSONEvaluationDetail * _Nonnull)jsonVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(LDValue * _Nonnull)defaultValue SWIFT_WARN_UNUSED_RESULT;
 /// Returns a dictionary with the flag keys and their values. If the LDClient is not started, returns nil.
 /// The dictionary will not contain feature flags from the server with null values.
 /// LDClient will not provide any source or change information, only flag keys and flag values. The client app should convert the feature flag value into the desired type.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable allFlags;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable allFlags;
 /// Sets a handler for the specified BOOL flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDBoolChangedFlag</code> for details.
 /// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
 /// The SDK executes handlers on the main thread.
@@ -610,102 +529,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 ///
 /// \param handler The block the SDK will execute when the feature flag changes.
 ///
-- (void)observeBool:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDBoolChangedFlag * _Nonnull))handler;
-/// Sets a handler for the specified NSInteger flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDIntegerChangedFlag</code> for details.
-/// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>ObjcLDIntegerChangedFlag</code> and <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [ldClientInstance observeInteger:"my-integer-flag" owner:self handler:^(LDIntegerChangedFlag *changedFlag){
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf showIntegerChangedFlag:changedFlag];
-/// }];
-///
-/// \endcode\param key The LDFlagKey for the flag to observe.
-///
-/// \param owner The LDFlagChangeOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The block the SDK will execute when the feature flag changes.
-///
-- (void)observeInteger:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDIntegerChangedFlag * _Nonnull))handler;
-/// Sets a handler for the specified double flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDDoubleChangedFlag</code> for details.
-/// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>ObjcLDDoubleChangedFlag</code> and <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [ldClientInstance observeDouble:"my-double-flag" owner:self handler:^(LDDoubleChangedFlag *changedFlag){
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf showDoubleChangedFlag:changedFlag];
-/// }];
-///
-/// \endcode\param key The LDFlagKey for the flag to observe.
-///
-/// \param owner The LDFlagChangeOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The block the SDK will execute when the feature flag changes.
-///
-- (void)observeDouble:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDDoubleChangedFlag * _Nonnull))handler;
-/// Sets a handler for the specified NSString flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDStringChangedFlag</code> for details.
-/// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>ObjcLDStringChangedFlag</code> and <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [ldClientInstance observeString:"my-string-flag" owner:self handler:^(LDStringChangedFlag *changedFlag){
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf showStringChangedFlag:changedFlag];
-/// }];
-///
-/// \endcode\param key The LDFlagKey for the flag to observe.
-///
-/// \param owner The LDFlagChangeOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The block the SDK will execute when the feature flag changes.
-///
-- (void)observeString:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDStringChangedFlag * _Nonnull))handler;
-/// Sets a handler for the specified NSArray flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDArrayChangedFlag</code> for details.
-/// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>ObjcLDArrayChangedFlag</code> and <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [ldClientInstance observeArray:"my-array-flag" owner:self handler:^(LDArrayChangedFlag *changedFlag){
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf showArrayChangedFlag:changedFlag];
-/// }];
-///
-/// \endcode\param key The LDFlagKey for the flag to observe.
-///
-/// \param owner The LDFlagChangeOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The block the SDK will execute when the feature flag changes.
-///
-- (void)observeArray:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDArrayChangedFlag * _Nonnull))handler;
-/// Sets a handler for the specified NSDictionary flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDDictionaryChangedFlag</code> for details.
-/// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>ObjcLDDictionaryChangedFlag</code> and <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [ldClientInstance observeDictionary:"my-dictionary-flag" owner:self handler:^(LDDictionaryChangedFlag *changedFlag){
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf showDictionaryChangedFlag:changedFlag];
-/// }];
-///
-/// \endcode\param key The LDFlagKey for the flag to observe.
-///
-/// \param owner The LDFlagChangeOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The block the SDK will execute when the feature flag changes.
-///
-- (void)observeDictionary:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDDictionaryChangedFlag * _Nonnull))handler;
+- (void)observe:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDChangedFlag * _Nonnull))handler;
 /// Sets a handler for the specified flag keys executed on the specified owner. If any observed flag’s value changes, executes the handler 1 time, passing in a dictionary of <NSString*, LDChangedFlag*> containing the old and new flag values. See LDChangedFlag (<code>ObjcLDChangedFlag</code>) for details.
 /// The SDK retains only weak references to owner, which allows the client app to freely destroy change owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
 /// The SDK executes handlers on the main thread.
@@ -768,23 +592,6 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 /// \param owner The LDFlagChangeOwner owning the handlers to remove, whether a flag change handler or flags unchanged handler.
 ///
 - (void)stopObservingForOwner:(id _Nonnull)owner;
-/// Sets a handler executed when an error occurs while processing flag or event responses.
-/// The SDK retains only weak references to owner, which allows the client app to freely destroy change owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [[LDClient sharedInstance] observeErrorWithOwner:self handler:^(NSError * _Nonnull error){
-///     __strong typeof(weakSelf) strongSelf = weakSelf;
-///     [self doSomethingWithError:error];
-/// }];
-///
-/// \endcode\param owner The LDObserverOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The LDErrorHandler the SDK will execute when a network request results in an error.
-///
-- (void)observeErrorWithOwner:(id _Nonnull)owner handler:(void (^ _Nonnull)(NSError * _Nonnull))handler;
 /// Adds a custom event to the LDClient event store. A client app can set a tracking event to allow client customized data analysis. Once an app has called <code>track</code>, the app cannot remove the event from the event store.
 /// LDClient periodically transmits events to LaunchDarkly based on the frequency set in LDConfig.eventFlushInterval. The LDClient must be started and online. Ths SDK stores events tracked while the LDClient is offline, but started.
 /// Once the SDK’s event store is full, the SDK discards events until they can be reported to LaunchDarkly. Configure the size of the event store using <code>eventCapacity</code> on the <code>config</code>. See <code>LDConfig</code> (<code>ObjcLDConfig</code>) for details.
@@ -798,7 +605,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 ///
 /// \param error NSError object to hold the invalidJsonObject error if the data is not a valid JSON item. (Optional)
 ///
-- (BOOL)trackWithKey:(NSString * _Nonnull)key data:(id _Nullable)data error:(NSError * _Nullable * _Nullable)error;
+- (void)trackWithKey:(NSString * _Nonnull)key data:(LDValue * _Nullable)data;
 /// See (track)[x-source-tag://track] for full documentation.
 /// \param key The key for the event. The SDK does nothing with the key, which can be any string the client app sends
 ///
@@ -808,7 +615,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 ///
 /// \param error NSError object to hold the invalidJsonObject error if the data is not a valid JSON item. (Optional)
 ///
-- (BOOL)trackWithKey:(NSString * _Nonnull)key data:(id _Nullable)data metricValue:(double)metricValue error:(NSError * _Nullable * _Nullable)error;
+- (void)trackWithKey:(NSString * _Nonnull)key data:(LDValue * _Nullable)data metricValue:(double)metricValue;
 /// Tells the SDK to immediately send any currently queued events to LaunchDarkly.
 /// There should not normally be a need to call this function. While online, the LDClient automatically reports events
 /// on an interval defined by <code>LDConfig.eventFlushInterval</code>. Note that this function does not block until events are
@@ -892,9 +699,9 @@ SWIFT_CLASS_NAMED("ObjcLDConfig")
 @property (nonatomic) BOOL allUserAttributesPrivate;
 /// User attributes and top level custom dictionary keys to treat as private for event reporting for all users.
 /// The SDK will not include private attribute values in analytics events, but private attribute names will be sent.
-/// See <code>LDUser.privatizableAttributes</code> (<code>ObjcLDUser.privatizableAttributes</code>) for the attribute names that can be declared private. To set private user attributes for a specific user, see <code>LDUser.privateAttributes</code> (<code>ObjcLDUser.privateAttributes</code>). (Default: nil)
-/// See Also: <code>allUserAttributesPrivate</code>, <code>LDUser.privatizableAttributes</code> (<code>ObjcLDUser.privatizableAttributes</code>), and <code>LDUser.privateAttributes</code> (<code>ObjcLDUser.privateAttributes</code>).
-@property (nonatomic, copy) NSArray<NSString *> * _Nullable privateUserAttributes;
+/// To set private user attributes for a specific user, see <code>LDUser.privateAttributes</code> (<code>ObjcLDUser.privateAttributes</code>). (Default: <code>[]</code>)
+/// See Also: <code>allUserAttributesPrivate</code> and <code>LDUser.privateAttributes</code> (<code>ObjcLDUser.privateAttributes</code>).
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull privateUserAttributes;
 /// Directs the SDK to use REPORT for HTTP requests to connect to <code>clientstream</code> and make feature flag requests. When NO the SDK uses GET for these requests. Do not use unless advised by LaunchDarkly. (Default: NO)
 @property (nonatomic) BOOL useReport;
 /// Controls how the SDK reports the user in analytics event reports. When set to YES, event reports will contain the user attributes, except attributes marked as private. When set to NO, event reports will contain the user’s key only, reducing the size of event reports. (Default: NO)
@@ -932,89 +739,57 @@ SWIFT_CLASS_NAMED("ObjcLDConfig")
 @end
 
 
-/// Wraps the changed feature flag’s NSDictionary values.
-/// If the flag is not actually an NSDictionary the SDK sets the old and new value to nil, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDDictionaryChangedFlag")
-@interface LDDictionaryChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
-@end
-
-
-SWIFT_CLASS_NAMED("ObjcLDDictionaryEvaluationDetail")
-@interface DictionaryEvaluationDetail : NSObject
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable value;
-@property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-/// Wraps the changed feature flag’s double values.
-/// If the flag is not actually a double the SDK sets the old and new value to 0.0, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDDoubleChangedFlag")
-@interface LDDoubleChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly) double oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly) double newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
-@end
-
-
+/// Structure that contains the evaluation result and additional information when evaluating a flag as a double.
 SWIFT_CLASS_NAMED("ObjcLDDoubleEvaluationDetail")
 @interface LDDoubleEvaluationDetail : NSObject
+/// The value of the flag for the current user.
 @property (nonatomic, readonly) double value;
+/// The index of the returned value within the flag’s list of variations, or <code>-1</code> if the default was returned.
 @property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
+/// A structure representing the main factor that influenced the resultant flag evaluation value.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable reason;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-/// Wraps the changed feature flag’s NSInteger values.
-/// If the flag is not actually an NSInteger the SDK sets the old and new value to 0, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDIntegerChangedFlag")
-@interface LDIntegerChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly) NSInteger oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly) NSInteger newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
-@end
-
-
+/// Structure that contains the evaluation result and additional information when evaluating a flag as an integer.
 SWIFT_CLASS_NAMED("ObjcLDIntegerEvaluationDetail")
 @interface LDIntegerEvaluationDetail : NSObject
+/// The value of the flag for the current user.
 @property (nonatomic, readonly) NSInteger value;
+/// The index of the returned value within the flag’s list of variations, or <code>-1</code> if the default was returned.
 @property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
+/// A structure representing the main factor that influenced the resultant flag evaluation value.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable reason;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-/// Wraps the changed feature flag’s NSString values.
-/// If the flag is not actually an NSString the SDK sets the old and new value to nil, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDStringChangedFlag")
-@interface LDStringChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly, copy) NSString * _Nullable oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly, copy) NSString * _Nullable newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
+/// Structure that contains the evaluation result and additional information when evaluating a flag as a JSON value.
+SWIFT_CLASS_NAMED("ObjcLDJSONEvaluationDetail")
+@interface LDJSONEvaluationDetail : NSObject
+/// The value of the flag for the current user.
+@property (nonatomic, readonly, strong) LDValue * _Nonnull value;
+/// The index of the returned value within the flag’s list of variations, or <code>-1</code> if the default was returned.
+@property (nonatomic, readonly) NSInteger variationIndex;
+/// A structure representing the main factor that influenced the resultant flag evaluation value.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable reason;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
+/// Structure that contains the evaluation result and additional information when evaluating a flag as a string.
 SWIFT_CLASS_NAMED("ObjcLDStringEvaluationDetail")
 @interface LDStringEvaluationDetail : NSObject
+/// The value of the flag for the current user.
 @property (nonatomic, readonly, copy) NSString * _Nullable value;
+/// The index of the returned value within the flag’s list of variations, or <code>-1</code> if the default was returned.
 @property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
+/// A structure representing the main factor that influenced the resultant flag evaluation value.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable reason;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -1025,11 +800,6 @@ SWIFT_CLASS_NAMED("ObjcLDStringEvaluationDetail")
 /// The SDK does not cache user information collected, except for the user key. The user key is used to identify the cached feature flags for that user. Client app developers should use caution not to use sensitive user information as the user-key.
 SWIFT_CLASS_NAMED("ObjcLDUser")
 @interface LDUser : NSObject
-/// LDUser attributes that can be marked private.
-/// The SDK will not include private attribute values in analytics events, but private attribute names will be sent.
-/// See Also: <code>ObjcLDConfig.allUserAttributesPrivate</code>, <code>ObjcLDConfig.privateUserAttributes</code>, and <code>privateAttributes</code>.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSString *> * _Nonnull privatizableAttributes;)
-+ (NSArray<NSString *> * _Nonnull)privatizableAttributes SWIFT_WARN_UNUSED_RESULT;
 /// LDUser secondary attribute used to make <code>secondary</code> private
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull attributeSecondary;)
 + (NSString * _Nonnull)attributeSecondary SWIFT_WARN_UNUSED_RESULT;
@@ -1054,9 +824,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 /// LDUser avatar attribute used to make <code>avatar</code> private
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull attributeAvatar;)
 + (NSString * _Nonnull)attributeAvatar SWIFT_WARN_UNUSED_RESULT;
-/// LDUser custom attribute used to make <code>custom</code> private
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull attributeCustom;)
-+ (NSString * _Nonnull)attributeCustom SWIFT_WARN_UNUSED_RESULT;
 /// Client app defined string that uniquely identifies the user. If the client app does not define a key, the SDK will assign an identifier associated with the anonymous user. The key cannot be made private.
 @property (nonatomic, readonly, copy) NSString * _Nonnull key;
 /// The secondary key for the user. See the <a href="https://docs.launchdarkly.com/home/flags/targeting-users#percentage-rollouts">documentation</a> for more information on it’s use for percentage rollout bucketing.
@@ -1075,32 +842,90 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 @property (nonatomic, copy) NSString * _Nullable email;
 /// Client app defined avatar for the user. (Default: nil)
 @property (nonatomic, copy) NSString * _Nullable avatar;
-/// Client app defined dictionary for the user. The client app may declare top level dictionary items as private. If the client app defines custom as private, the SDK considers the dictionary private except for device & operatingSystem (which cannot be made private). See <code>privateAttributes</code> for details. (Default: nil)
-@property (nonatomic, copy) NSDictionary<NSString *, id> * _Nullable custom;
+/// Client app defined dictionary for the user. The client app may declare top level dictionary items as private. See <code>privateAttributes</code> for details.
+@property (nonatomic, copy) NSDictionary<NSString *, LDValue *> * _Nonnull custom;
 /// Client app defined isAnonymous for the user. If the client app does not define isAnonymous, the SDK will use the <code>key</code> to set this attribute. isAnonymous cannot be made private. (Default: YES)
 @property (nonatomic) BOOL isAnonymous;
-/// Client app defined device for the user. The SDK will determine the device automatically, however the client app can override the value. The SDK will insert the device into the <code>custom</code> dictionary. The device cannot be made private. (Default: the system identified device)
-@property (nonatomic, copy) NSString * _Nullable device;
-/// Client app defined operatingSystem for the user. The SDK will determine the operatingSystem automatically, however the client app can override the value. The SDK will insert the operatingSystem into the <code>custom</code> dictionary. The operatingSystem cannot be made private. (Default: the system identified operating system)
-@property (nonatomic, copy) NSString * _Nullable operatingSystem;
 /// Client app defined privateAttributes for the user.
 /// The SDK will not include private attribute values in analytics events, but private attribute names will be sent.
-/// This attribute is ignored if <code>ObjcLDConfig.allUserAttributesPrivate</code> is YES. Combined with <code>ObjcLDConfig.privateUserAttributes</code>. The SDK considers attributes appearing in either list as private. Client apps may define attributes found in <code>privatizableAttributes</code> and top level <code>custom</code> dictionary keys here. (Default: nil)
+/// This attribute is ignored if <code>ObjcLDConfig.allUserAttributesPrivate</code> is YES. Combined with <code>ObjcLDConfig.privateUserAttributes</code>. The SDK considers attributes appearing in either list as private. Client apps may define most built-in attributes and all top level <code>custom</code> dictionary keys here. (Default: <code>[]</code>])
 /// See Also: <code>ObjcLDConfig.allUserAttributesPrivate</code> and <code>ObjcLDConfig.privateUserAttributes</code>.
-@property (nonatomic, copy) NSArray<NSString *> * _Nullable privateAttributes;
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull privateAttributes;
 /// Initializer to create a LDUser. Client configurable attributes are set to their default value. The SDK will automatically set <code>key</code>, <code>device</code>, <code>operatingSystem</code>, and <code>isAnonymous</code> attributes. The SDK embeds <code>device</code> and <code>operatingSystem</code> into the <code>custom</code> dictionary for transmission to LaunchDarkly.
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Initializer to create a LDUser with a specific key. Other client configurable attributes are set to their default value. The SDK will automatically set <code>key</code>, <code>device</code>, <code>operatingSystem</code>, and <code>isAnonymous</code> attributes. The SDK embeds <code>device</code> and <code>operatingSystem</code> into the <code>custom</code> dictionary for transmission to LaunchDarkly.
 /// \param key String that uniquely identifies the user. If the client app does not define a key, the SDK will assign an identifier associated with the anonymous user.
 ///
 - (nonnull instancetype)initWithKey:(NSString * _Nonnull)key OBJC_DESIGNATED_INITIALIZER;
-/// Initializer that takes a NSDictionary and creates a LDUser from the contents. Uses any keys present to define corresponding attribute values. Initializes attributes not present in the dictionary to their default value. The initializer attempts to set <code>device</code> and <code>operatingSystem</code> from corresponding values embedded in <code>custom</code>. The initializer attempts to set feature flags from values set in <code>config</code>.
-/// \param userDictionary NSDictionary with LDUser attribute keys and values.
-///
-- (nonnull instancetype)initWithUserDictionary:(NSDictionary<NSString *, id> * _Nonnull)userDictionary OBJC_DESIGNATED_INITIALIZER;
 /// Compares users by comparing their user keys only, to allow the client app to collect user information over time
 - (BOOL)isEqualWithObject:(id _Nonnull)object SWIFT_WARN_UNUSED_RESULT;
 @end
+
+@class NSNumber;
+enum LDValueType : NSInteger;
+
+/// Bridged <code>LDValue</code> type for Objective-C.
+/// Can create instances from Objective-C with the provided <code>of</code> static functions, for example <code>[LDValue ofBool:YES]</code>.
+SWIFT_CLASS_NAMED("ObjcLDValue")
+@interface LDValue : NSObject
+/// Create a new <code>LDValue</code> that represents a JSON null.
++ (LDValue * _Nonnull)ofNull SWIFT_WARN_UNUSED_RESULT;
+/// Create a new <code>LDValue</code> from a boolean value.
++ (LDValue * _Nonnull)ofBool:(BOOL)bool_ SWIFT_WARN_UNUSED_RESULT;
+/// Create a new <code>LDValue</code> from a numeric value.
++ (LDValue * _Nonnull)ofNumber:(NSNumber * _Nonnull)number SWIFT_WARN_UNUSED_RESULT;
+/// Create a new <code>LDValue</code> from a string value.
++ (LDValue * _Nonnull)ofString:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
+/// Create a new <code>LDValue</code> from an array of values.
++ (LDValue * _Nonnull)ofArray:(NSArray<LDValue *> * _Nonnull)array SWIFT_WARN_UNUSED_RESULT;
+/// Create a new <code>LDValue</code> object from dictionary of values.
++ (LDValue * _Nonnull)ofDict:(NSDictionary<NSString *, LDValue *> * _Nonnull)dict SWIFT_WARN_UNUSED_RESULT;
+/// Get the type of the value.
+- (enum LDValueType)getType SWIFT_WARN_UNUSED_RESULT;
+/// Get the value as a <code>Bool</code>.
+///
+/// returns:
+/// The contained boolean value or <code>NO</code> if the value is not a boolean.
+- (BOOL)boolValue SWIFT_WARN_UNUSED_RESULT;
+/// Get the value as a <code>Double</code>.
+///
+/// returns:
+/// The contained double value or <code>0.0</code> if the value is not a number.
+- (double)doubleValue SWIFT_WARN_UNUSED_RESULT;
+/// Get the value as a <code>String</code>.
+///
+/// returns:
+/// The contained string value or the empty string if the value is not a string.
+- (NSString * _Nonnull)stringValue SWIFT_WARN_UNUSED_RESULT;
+/// Get the value as an array.
+///
+/// returns:
+/// An array of the contained values, or the empty array if the value is not an array.
+- (NSArray<LDValue *> * _Nonnull)arrayValue SWIFT_WARN_UNUSED_RESULT;
+/// Get the value as a dictionary representing the JSON object
+///
+/// returns:
+/// A dictionary representing the JSON object, or the empty dictionary if the value is not a dictionary.
+- (NSDictionary<NSString *, LDValue *> * _Nonnull)dictValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+/// Used to represent the type of an <code>LDValue</code>.
+typedef SWIFT_ENUM_NAMED(NSInteger, LDValueType, "ObjcLDValueType", closed) {
+/// The value returned by <code>LDValue.getType()</code> when the represented value is a null.
+  LDValueTypeNull = 0,
+/// The value returned by <code>LDValue.getType()</code> when the represented value is a boolean.
+  LDValueTypeBool = 1,
+/// The value returned by <code>LDValue.getType()</code> when the represented value is a number.
+  LDValueTypeNumber = 2,
+/// The value returned by <code>LDValue.getType()</code> when the represented value is a string.
+  LDValueTypeString = 3,
+/// The value returned by <code>LDValue.getType()</code> when the represented value is an array.
+  LDValueTypeArray = 4,
+/// The value returned by <code>LDValue.getType()</code> when the represented value is an object.
+  LDValueTypeObject = 5,
+};
 
 
 
@@ -1333,7 +1158,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
-
+/// An error thrown from APIs when an invalid argument is provided.
 SWIFT_CLASS("_TtC17LaunchDarkly_tvOS22LDInvalidArgumentError")
 @interface LDInvalidArgumentError : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1348,15 +1173,22 @@ SWIFT_CLASS("_TtC17LaunchDarkly_tvOS13LDUserWrapper")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-@class NSCoder;
+@class NSString;
+@class LDValue;
 
-@interface LDUserWrapper (SWIFT_EXTENSION(LaunchDarkly_tvOS)) <NSCoding>
-- (void)encodeWithCoder:(NSCoder * _Nonnull)encoder;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)decoder;
+/// Structure that contains the evaluation result and additional information when evaluating a flag as a boolean.
+SWIFT_CLASS_NAMED("ObjcLDBoolEvaluationDetail")
+@interface LDBoolEvaluationDetail : NSObject
+/// The value of the flag for the current user.
+@property (nonatomic, readonly) BOOL value;
+/// The index of the returned value within the flag’s list of variations, or <code>-1</code> if the default was returned.
+@property (nonatomic, readonly) NSInteger variationIndex;
+/// A structure representing the main factor that influenced the resultant flag evaluation value.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable reason;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-
-@class NSString;
 
 /// Collects the elements of a feature flag that changed as a result of a <code>clientstream</code> update or feature flag request. The SDK will pass a typed ObjcLDChangedFlag or a collection of ObjcLDChangedFlags into feature flag observer blocks. This is the base type for the typed ObjcLDChangedFlags passed into observer blocks. The client app will have to convert the ObjcLDChangedFlag into the expected typed ObjcLDChangedFlag type.
 /// See the typed <code>ObjcLDClient</code> observeWithKey:owner:handler:, observeWithKeys:owner:handler:, and observeAllWithOwner:handler: for more details.
@@ -1364,64 +1196,19 @@ SWIFT_CLASS_NAMED("ObjcLDChangedFlag")
 @interface LDChangedFlag : NSObject
 /// The changed feature flag’s key
 @property (nonatomic, readonly, copy) NSString * _Nonnull key;
+/// The value from before the flag change occurred.
+@property (nonatomic, readonly, strong) LDValue * _Nonnull oldValue;
+/// The value after the flag change occurred.
+@property (nonatomic, readonly, strong) LDValue * _Nonnull newValue;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
-
-
-/// Wraps the changed feature flag’s NSArray values.
-/// If the flag is not actually a NSArray the SDK sets the old and new value to nil, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDArrayChangedFlag")
-@interface LDArrayChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly, copy) NSArray * _Nullable oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly, copy) NSArray * _Nullable newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
-@end
-
-
-SWIFT_CLASS_NAMED("ObjcLDArrayEvaluationDetail")
-@interface ArrayEvaluationDetail : NSObject
-@property (nonatomic, readonly, copy) NSArray * _Nullable value;
-@property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-/// Wraps the changed feature flag’s BOOL values.
-/// If the flag is not actually a BOOL the SDK sets the old and new value to false, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDBoolChangedFlag")
-@interface LDBoolChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly) BOOL oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly) BOOL newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
-@end
-
-
-SWIFT_CLASS_NAMED("ObjcLDBoolEvaluationDetail")
-@interface LDBoolEvaluationDetail : NSObject
-@property (nonatomic, readonly) BOOL value;
-@property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
 
 @class LDUser;
 @class LDIntegerEvaluationDetail;
 @class LDDoubleEvaluationDetail;
 @class LDStringEvaluationDetail;
-@class DictionaryEvaluationDetail;
-@class LDIntegerChangedFlag;
-@class LDDoubleChangedFlag;
-@class LDStringChangedFlag;
-@class LDDictionaryChangedFlag;
+@class LDJSONEvaluationDetail;
 @class LDConfig;
 
 /// The LDClient is the heart of the SDK, providing client apps running iOS, watchOS, macOS, or tvOS access to LaunchDarkly services. This singleton provides the ability to set a configuration (LDConfig) that controls how the LDClient talks to LaunchDarkly servers, and a user (LDUser) that provides finer control on the feature flag values delivered to LDClient. Once the LDClient has started, it connects to LaunchDarkly’s servers to get the feature flag values you set in the Dashboard.
@@ -1431,7 +1218,7 @@ SWIFT_CLASS_NAMED("ObjcLDBoolEvaluationDetail")
 /// <h3>Startup</h3>
 /// <ol>
 ///   <li>
-///     To customize, configure a LDConfig (<code>ObjcLDConfig</code>) and LDUser (<code>ObjcLDUser</code>). The <code>config</code> is required, the <code>user</code> is optional. Both give you additional control over the feature flags delivered to the LDClient. See <code>ObjcLDConfig</code> & <code>ObjcLDUser</code> for more details.
+///     To customize, configure a LDConfig (<code>ObjcLDConfig</code>) and LDUser (<code>ObjcLDUser</code>). Both give you additional control over the feature flags delivered to the LDClient. See <code>ObjcLDConfig</code> & <code>ObjcLDUser</code> for more details.
 ///   </li>
 /// </ol>
 /// <ul>
@@ -1458,7 +1245,7 @@ SWIFT_CLASS_NAMED("ObjcLDBoolEvaluationDetail")
 ///   </li>
 /// </ol>
 /// <h3>Getting Feature Flags</h3>
-/// Once the LDClient has started, it makes your feature flags available using the <code>variation</code> and <code>variationDetail</code> methods. A <code>variation</code> is a specific flag value. For example, a boolean feature flag has 2 variations, <code>YES</code> and <code>NO</code>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
+/// Once the LDClient has started, it makes your feature flags available using the <code>variation</code> and <code>variationDetail</code> methods. A <code>variation</code> is a specific flag value. For example, a boolean feature flag has 2 variations, <code>YES</code> and <code>NO</code>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDValue</code> for the available types.
 /// \code
 /// BOOL boolFlag = [ldClientInstance boolVariationForKey:@"my-bool-flag" defaultValue:NO];
 ///
@@ -1540,10 +1327,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 /// The requested LDClient instance.
 + (LDClient * _Nullable)getWithEnvironment:(NSString * _Nonnull)environment SWIFT_WARN_UNUSED_RESULT;
 /// Returns the BOOL variation for the given feature flag. If the flag does not exist, cannot be cast to a BOOL, or the LDClient is not started, returns the default value.
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default  value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
+/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDValue</code> for the available types.
 /// A call to <code>boolVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
 /// <h3>Usage</h3>
 /// \code
@@ -1567,10 +1351,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 /// ObjcLDBoolEvaluationDetail containing your value as well as useful information on why that value was returned.
 - (LDBoolEvaluationDetail * _Nonnull)boolVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(BOOL)defaultValue SWIFT_WARN_UNUSED_RESULT;
 /// Returns the NSInteger variation for the given feature flag. If the flag does not exist, cannot be cast to a NSInteger, or the LDClient is not started, returns the default value.
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
+/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDValue</code> for the available types.
 /// A call to <code>integerVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
 /// <h3>Usage</h3>
 /// \code
@@ -1594,10 +1375,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 /// ObjcLDIntegerEvaluationDetail containing your value as well as useful information on why that value was returned.
 - (LDIntegerEvaluationDetail * _Nonnull)integerVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(NSInteger)defaultValue SWIFT_WARN_UNUSED_RESULT;
 /// Returns the double variation for the given feature flag. If the flag does not exist, cannot be cast to a double, or the LDClient is not started, returns the default value.
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
+/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDValue</code> for the available types.
 /// A call to <code>doubleVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
 /// <h3>Usage</h3>
 /// \code
@@ -1620,11 +1398,8 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 /// returns:
 /// ObjcLDDoubleEvaluationDetail containing your value as well as useful information on why that value was returned.
 - (LDDoubleEvaluationDetail * _Nonnull)doubleVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(double)defaultValue SWIFT_WARN_UNUSED_RESULT;
-/// Returns the NSString variation for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the default value, which may be nil.
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
+/// Returns the NSString variation for the given feature flag. If the flag does not exist, cannot be cast to a NSString, or the LDClient is not started, returns the default value.
+/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDValue</code> for the available types.
 /// A call to <code>stringVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
 /// <h3>Usage</h3>
 /// \code
@@ -1632,79 +1407,48 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 ///
 /// \endcode\param key The LDFlagKey for the requested feature flag.
 ///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
+/// \param defaultValue The default value to return if the feature flag key does not exist.
 ///
 ///
 /// returns:
-/// The requested NSString feature flag value, or the default value (which may be nil) if the flag is missing or cannot be cast to a NSString, or the client is not started.
-- (NSString * _Nullable)stringVariationForKey:(NSString * _Nonnull)key defaultValue:(NSString * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
+/// The requested NSString feature flag value, or the default value if the flag is missing or cannot be cast to a NSString, or the client is not started.
+- (NSString * _Nonnull)stringVariationForKey:(NSString * _Nonnull)key defaultValue:(NSString * _Nonnull)defaultValue SWIFT_WARN_UNUSED_RESULT;
 /// See <a href="x-source-tag://stringVariation">stringVariation</a> for more information on variation methods.
 /// \param key The LDFlagKey for the requested feature flag.
 ///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
+/// \param defaultValue The default value to return if the feature flag key does not exist.
 ///
 ///
 /// returns:
 /// ObjcLDStringEvaluationDetail containing your value as well as useful information on why that value was returned.
-- (LDStringEvaluationDetail * _Nonnull)stringVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(NSString * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
-/// Returns the NSArray variation for the given feature flag. If the flag does not exist, cannot be cast to a NSArray, or the LDClient is not started, returns the default value, which may be nil..
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
-/// A call to <code>arrayVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
+- (LDStringEvaluationDetail * _Nonnull)stringVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(NSString * _Nonnull)defaultValue SWIFT_WARN_UNUSED_RESULT;
+/// Returns the JSON variation for the given feature flag. If the flag does not exist, or the LDClient is not started, returns the default value.
+/// A call to <code>jsonVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
 /// <h3>Usage</h3>
 /// \code
-/// NSArray *arrayFeatureFlagValue = [ldClientInstance arrayVariationForKey:@"my-array-flag" defaultValue:@[@1,@2,@3]];
+/// ObjcLDValue *featureFlagValue = [ldClientInstance jsonVariationForKey:@"my-flag" defaultValue:[LDValue ofBool:NO]];
 ///
 /// \endcode\param key The LDFlagKey for the requested feature flag.
 ///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
+/// \param defaultValue The default value to return if the feature flag key does not exist.
 ///
 ///
 /// returns:
-/// The requested NSArray feature flag value, or the default value (which may be nil) if the flag is missing or cannot be cast to a NSArray, or the client is not started
-- (NSArray * _Nullable)arrayVariationForKey:(NSString * _Nonnull)key defaultValue:(NSArray * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
+/// The requested feature flag value, or the default value if the flag is missing or the client is not started
+- (LDValue * _Nonnull)jsonVariationForKey:(NSString * _Nonnull)key defaultValue:(LDValue * _Nonnull)defaultValue SWIFT_WARN_UNUSED_RESULT;
 /// See <a href="x-source-tag://arrayVariation">arrayVariation</a> for more information on variation methods.
 /// \param key The LDFlagKey for the requested feature flag.
 ///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
+/// \param defaultValue The default value to return if the feature flag key does not exist.
 ///
 ///
 /// returns:
-/// ObjcLDArrayEvaluationDetail containing your value as well as useful information on why that value was returned.
-- (ArrayEvaluationDetail * _Nonnull)arrayVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(NSArray * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
-/// Returns the NSDictionary variation for the given feature flag. If the flag does not exist, cannot be cast to a NSDictionary, or the LDClient is not started, returns the default value, which may be nil..
-/// A <em>variation</em> is a specific flag value. For example a boolean feature flag has 2 variations, <em>YES</em> and <em>NO</em>. You can create feature flags with more than 2 variations using other feature flag types. See <code>LDFlagValue</code> for the available types.
-/// The LDClient must be started in order to return feature flag values. If the LDClient is not started, it will always return the default value. The LDClient must be online to keep the feature flag values up-to-date.
-/// See <code>LDStreamingMode</code> for details about the modes the LDClient uses to update feature flags.
-/// When offline, LDClient closes the clientstream connection and no longer requests feature flags. The LDClient will return feature flag values (assuming the LDClient was started), which may not match the values set on the LaunchDarkly server.
-/// A call to <code>dictionaryVariation</code> records events reported later. Recorded events allow clients to analyze usage and assist in debugging issues.
-/// <h3>Usage</h3>
-/// \code
-/// NSDictionary *dictionaryFeatureFlagValue = [ldClientInstance dictionaryVariationForKey:@"my-dictionary-flag" defaultValue:@{@"dictionary":@"defaultValue"}];
-///
-/// \endcode\param key The LDFlagKey for the requested feature flag.
-///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
-///
-///
-/// returns:
-/// The requested NSDictionary feature flag value, or the default value (which may be nil) if the flag is missing or cannot be cast to a NSDictionary, or the client is not started
-- (NSDictionary<NSString *, id> * _Nullable)dictionaryVariationForKey:(NSString * _Nonnull)key defaultValue:(NSDictionary<NSString *, id> * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
-/// See <a href="x-source-tag://dictionaryVariation">dictionaryVariation</a> for more information on variation methods.
-/// \param key The LDFlagKey for the requested feature flag.
-///
-/// \param defaultValue The default value to return if the feature flag key does not exist. The default value may be nil.
-///
-///
-/// returns:
-/// ObjcLDDictionaryEvaluationDetail containing your value as well as useful information on why that value was returned.
-- (DictionaryEvaluationDetail * _Nonnull)dictionaryVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(NSDictionary<NSString *, id> * _Nullable)defaultValue SWIFT_WARN_UNUSED_RESULT;
+/// ObjcLDJSONEvaluationDetail containing your value as well as useful information on why that value was returned.
+- (LDJSONEvaluationDetail * _Nonnull)jsonVariationDetailForKey:(NSString * _Nonnull)key defaultValue:(LDValue * _Nonnull)defaultValue SWIFT_WARN_UNUSED_RESULT;
 /// Returns a dictionary with the flag keys and their values. If the LDClient is not started, returns nil.
 /// The dictionary will not contain feature flags from the server with null values.
 /// LDClient will not provide any source or change information, only flag keys and flag values. The client app should convert the feature flag value into the desired type.
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable allFlags;
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable allFlags;
 /// Sets a handler for the specified BOOL flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDBoolChangedFlag</code> for details.
 /// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
 /// The SDK executes handlers on the main thread.
@@ -1723,102 +1467,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 ///
 /// \param handler The block the SDK will execute when the feature flag changes.
 ///
-- (void)observeBool:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDBoolChangedFlag * _Nonnull))handler;
-/// Sets a handler for the specified NSInteger flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDIntegerChangedFlag</code> for details.
-/// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>ObjcLDIntegerChangedFlag</code> and <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [ldClientInstance observeInteger:"my-integer-flag" owner:self handler:^(LDIntegerChangedFlag *changedFlag){
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf showIntegerChangedFlag:changedFlag];
-/// }];
-///
-/// \endcode\param key The LDFlagKey for the flag to observe.
-///
-/// \param owner The LDFlagChangeOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The block the SDK will execute when the feature flag changes.
-///
-- (void)observeInteger:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDIntegerChangedFlag * _Nonnull))handler;
-/// Sets a handler for the specified double flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDDoubleChangedFlag</code> for details.
-/// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>ObjcLDDoubleChangedFlag</code> and <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [ldClientInstance observeDouble:"my-double-flag" owner:self handler:^(LDDoubleChangedFlag *changedFlag){
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf showDoubleChangedFlag:changedFlag];
-/// }];
-///
-/// \endcode\param key The LDFlagKey for the flag to observe.
-///
-/// \param owner The LDFlagChangeOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The block the SDK will execute when the feature flag changes.
-///
-- (void)observeDouble:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDDoubleChangedFlag * _Nonnull))handler;
-/// Sets a handler for the specified NSString flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDStringChangedFlag</code> for details.
-/// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>ObjcLDStringChangedFlag</code> and <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [ldClientInstance observeString:"my-string-flag" owner:self handler:^(LDStringChangedFlag *changedFlag){
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf showStringChangedFlag:changedFlag];
-/// }];
-///
-/// \endcode\param key The LDFlagKey for the flag to observe.
-///
-/// \param owner The LDFlagChangeOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The block the SDK will execute when the feature flag changes.
-///
-- (void)observeString:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDStringChangedFlag * _Nonnull))handler;
-/// Sets a handler for the specified NSArray flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDArrayChangedFlag</code> for details.
-/// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>ObjcLDArrayChangedFlag</code> and <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [ldClientInstance observeArray:"my-array-flag" owner:self handler:^(LDArrayChangedFlag *changedFlag){
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf showArrayChangedFlag:changedFlag];
-/// }];
-///
-/// \endcode\param key The LDFlagKey for the flag to observe.
-///
-/// \param owner The LDFlagChangeOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The block the SDK will execute when the feature flag changes.
-///
-- (void)observeArray:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDArrayChangedFlag * _Nonnull))handler;
-/// Sets a handler for the specified NSDictionary flag key executed on the specified owner. If the flag’s value changes, executes the handler, passing in the <code>changedFlag</code> containing the old and new flag values. See <code>ObjcLDDictionaryChangedFlag</code> for details.
-/// The SDK retains only weak references to the owner, which allows the client app to freely destroy owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>ObjcLDDictionaryChangedFlag</code> and <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [ldClientInstance observeDictionary:"my-dictionary-flag" owner:self handler:^(LDDictionaryChangedFlag *changedFlag){
-///    __strong typeof(weakSelf) strongSelf = weakSelf;
-///    [strongSelf showDictionaryChangedFlag:changedFlag];
-/// }];
-///
-/// \endcode\param key The LDFlagKey for the flag to observe.
-///
-/// \param owner The LDFlagChangeOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The block the SDK will execute when the feature flag changes.
-///
-- (void)observeDictionary:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDDictionaryChangedFlag * _Nonnull))handler;
+- (void)observe:(NSString * _Nonnull)key owner:(id _Nonnull)owner handler:(void (^ _Nonnull)(LDChangedFlag * _Nonnull))handler;
 /// Sets a handler for the specified flag keys executed on the specified owner. If any observed flag’s value changes, executes the handler 1 time, passing in a dictionary of <NSString*, LDChangedFlag*> containing the old and new flag values. See LDChangedFlag (<code>ObjcLDChangedFlag</code>) for details.
 /// The SDK retains only weak references to owner, which allows the client app to freely destroy change owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
 /// The SDK executes handlers on the main thread.
@@ -1881,23 +1530,6 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 /// \param owner The LDFlagChangeOwner owning the handlers to remove, whether a flag change handler or flags unchanged handler.
 ///
 - (void)stopObservingForOwner:(id _Nonnull)owner;
-/// Sets a handler executed when an error occurs while processing flag or event responses.
-/// The SDK retains only weak references to owner, which allows the client app to freely destroy change owners without issues. Client apps should capture a strong self reference from a weak reference immediately inside the handler to avoid retain cycles causing a memory leak.
-/// The SDK executes handlers on the main thread.
-/// SeeAlso: <code>stopObserving(owner:)</code>
-/// <h3>Usage</h3>
-/// \code
-/// __weak typeof(self) weakSelf = self;
-/// [[LDClient sharedInstance] observeErrorWithOwner:self handler:^(NSError * _Nonnull error){
-///     __strong typeof(weakSelf) strongSelf = weakSelf;
-///     [self doSomethingWithError:error];
-/// }];
-///
-/// \endcode\param owner The LDObserverOwner which will execute the handler. The SDK retains a weak reference to the owner.
-///
-/// \param handler The LDErrorHandler the SDK will execute when a network request results in an error.
-///
-- (void)observeErrorWithOwner:(id _Nonnull)owner handler:(void (^ _Nonnull)(NSError * _Nonnull))handler;
 /// Adds a custom event to the LDClient event store. A client app can set a tracking event to allow client customized data analysis. Once an app has called <code>track</code>, the app cannot remove the event from the event store.
 /// LDClient periodically transmits events to LaunchDarkly based on the frequency set in LDConfig.eventFlushInterval. The LDClient must be started and online. Ths SDK stores events tracked while the LDClient is offline, but started.
 /// Once the SDK’s event store is full, the SDK discards events until they can be reported to LaunchDarkly. Configure the size of the event store using <code>eventCapacity</code> on the <code>config</code>. See <code>LDConfig</code> (<code>ObjcLDConfig</code>) for details.
@@ -1911,7 +1543,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 ///
 /// \param error NSError object to hold the invalidJsonObject error if the data is not a valid JSON item. (Optional)
 ///
-- (BOOL)trackWithKey:(NSString * _Nonnull)key data:(id _Nullable)data error:(NSError * _Nullable * _Nullable)error;
+- (void)trackWithKey:(NSString * _Nonnull)key data:(LDValue * _Nullable)data;
 /// See (track)[x-source-tag://track] for full documentation.
 /// \param key The key for the event. The SDK does nothing with the key, which can be any string the client app sends
 ///
@@ -1921,7 +1553,7 @@ SWIFT_CLASS_NAMED("ObjcLDClient")
 ///
 /// \param error NSError object to hold the invalidJsonObject error if the data is not a valid JSON item. (Optional)
 ///
-- (BOOL)trackWithKey:(NSString * _Nonnull)key data:(id _Nullable)data metricValue:(double)metricValue error:(NSError * _Nullable * _Nullable)error;
+- (void)trackWithKey:(NSString * _Nonnull)key data:(LDValue * _Nullable)data metricValue:(double)metricValue;
 /// Tells the SDK to immediately send any currently queued events to LaunchDarkly.
 /// There should not normally be a need to call this function. While online, the LDClient automatically reports events
 /// on an interval defined by <code>LDConfig.eventFlushInterval</code>. Note that this function does not block until events are
@@ -2005,9 +1637,9 @@ SWIFT_CLASS_NAMED("ObjcLDConfig")
 @property (nonatomic) BOOL allUserAttributesPrivate;
 /// User attributes and top level custom dictionary keys to treat as private for event reporting for all users.
 /// The SDK will not include private attribute values in analytics events, but private attribute names will be sent.
-/// See <code>LDUser.privatizableAttributes</code> (<code>ObjcLDUser.privatizableAttributes</code>) for the attribute names that can be declared private. To set private user attributes for a specific user, see <code>LDUser.privateAttributes</code> (<code>ObjcLDUser.privateAttributes</code>). (Default: nil)
-/// See Also: <code>allUserAttributesPrivate</code>, <code>LDUser.privatizableAttributes</code> (<code>ObjcLDUser.privatizableAttributes</code>), and <code>LDUser.privateAttributes</code> (<code>ObjcLDUser.privateAttributes</code>).
-@property (nonatomic, copy) NSArray<NSString *> * _Nullable privateUserAttributes;
+/// To set private user attributes for a specific user, see <code>LDUser.privateAttributes</code> (<code>ObjcLDUser.privateAttributes</code>). (Default: <code>[]</code>)
+/// See Also: <code>allUserAttributesPrivate</code> and <code>LDUser.privateAttributes</code> (<code>ObjcLDUser.privateAttributes</code>).
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull privateUserAttributes;
 /// Directs the SDK to use REPORT for HTTP requests to connect to <code>clientstream</code> and make feature flag requests. When NO the SDK uses GET for these requests. Do not use unless advised by LaunchDarkly. (Default: NO)
 @property (nonatomic) BOOL useReport;
 /// Controls how the SDK reports the user in analytics event reports. When set to YES, event reports will contain the user attributes, except attributes marked as private. When set to NO, event reports will contain the user’s key only, reducing the size of event reports. (Default: NO)
@@ -2045,89 +1677,57 @@ SWIFT_CLASS_NAMED("ObjcLDConfig")
 @end
 
 
-/// Wraps the changed feature flag’s NSDictionary values.
-/// If the flag is not actually an NSDictionary the SDK sets the old and new value to nil, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDDictionaryChangedFlag")
-@interface LDDictionaryChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
-@end
-
-
-SWIFT_CLASS_NAMED("ObjcLDDictionaryEvaluationDetail")
-@interface DictionaryEvaluationDetail : NSObject
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable value;
-@property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-/// Wraps the changed feature flag’s double values.
-/// If the flag is not actually a double the SDK sets the old and new value to 0.0, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDDoubleChangedFlag")
-@interface LDDoubleChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly) double oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly) double newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
-@end
-
-
+/// Structure that contains the evaluation result and additional information when evaluating a flag as a double.
 SWIFT_CLASS_NAMED("ObjcLDDoubleEvaluationDetail")
 @interface LDDoubleEvaluationDetail : NSObject
+/// The value of the flag for the current user.
 @property (nonatomic, readonly) double value;
+/// The index of the returned value within the flag’s list of variations, or <code>-1</code> if the default was returned.
 @property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
+/// A structure representing the main factor that influenced the resultant flag evaluation value.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable reason;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-/// Wraps the changed feature flag’s NSInteger values.
-/// If the flag is not actually an NSInteger the SDK sets the old and new value to 0, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDIntegerChangedFlag")
-@interface LDIntegerChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly) NSInteger oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly) NSInteger newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
-@end
-
-
+/// Structure that contains the evaluation result and additional information when evaluating a flag as an integer.
 SWIFT_CLASS_NAMED("ObjcLDIntegerEvaluationDetail")
 @interface LDIntegerEvaluationDetail : NSObject
+/// The value of the flag for the current user.
 @property (nonatomic, readonly) NSInteger value;
+/// The index of the returned value within the flag’s list of variations, or <code>-1</code> if the default was returned.
 @property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
+/// A structure representing the main factor that influenced the resultant flag evaluation value.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable reason;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-/// Wraps the changed feature flag’s NSString values.
-/// If the flag is not actually an NSString the SDK sets the old and new value to nil, and <code>typeMismatch</code> will be <code>YES</code>.
-SWIFT_CLASS_NAMED("ObjcLDStringChangedFlag")
-@interface LDStringChangedFlag : LDChangedFlag
-/// The changed flag’s value before it changed
-@property (nonatomic, readonly, copy) NSString * _Nullable oldValue;
-/// The changed flag’s value after it changed
-@property (nonatomic, readonly, copy) NSString * _Nullable newValue;
-@property (nonatomic, readonly) BOOL typeMismatch;
+/// Structure that contains the evaluation result and additional information when evaluating a flag as a JSON value.
+SWIFT_CLASS_NAMED("ObjcLDJSONEvaluationDetail")
+@interface LDJSONEvaluationDetail : NSObject
+/// The value of the flag for the current user.
+@property (nonatomic, readonly, strong) LDValue * _Nonnull value;
+/// The index of the returned value within the flag’s list of variations, or <code>-1</code> if the default was returned.
+@property (nonatomic, readonly) NSInteger variationIndex;
+/// A structure representing the main factor that influenced the resultant flag evaluation value.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable reason;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
+/// Structure that contains the evaluation result and additional information when evaluating a flag as a string.
 SWIFT_CLASS_NAMED("ObjcLDStringEvaluationDetail")
 @interface LDStringEvaluationDetail : NSObject
+/// The value of the flag for the current user.
 @property (nonatomic, readonly, copy) NSString * _Nullable value;
+/// The index of the returned value within the flag’s list of variations, or <code>-1</code> if the default was returned.
 @property (nonatomic, readonly) NSInteger variationIndex;
-@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nullable reason;
+/// A structure representing the main factor that influenced the resultant flag evaluation value.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, LDValue *> * _Nullable reason;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -2138,11 +1738,6 @@ SWIFT_CLASS_NAMED("ObjcLDStringEvaluationDetail")
 /// The SDK does not cache user information collected, except for the user key. The user key is used to identify the cached feature flags for that user. Client app developers should use caution not to use sensitive user information as the user-key.
 SWIFT_CLASS_NAMED("ObjcLDUser")
 @interface LDUser : NSObject
-/// LDUser attributes that can be marked private.
-/// The SDK will not include private attribute values in analytics events, but private attribute names will be sent.
-/// See Also: <code>ObjcLDConfig.allUserAttributesPrivate</code>, <code>ObjcLDConfig.privateUserAttributes</code>, and <code>privateAttributes</code>.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSArray<NSString *> * _Nonnull privatizableAttributes;)
-+ (NSArray<NSString *> * _Nonnull)privatizableAttributes SWIFT_WARN_UNUSED_RESULT;
 /// LDUser secondary attribute used to make <code>secondary</code> private
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull attributeSecondary;)
 + (NSString * _Nonnull)attributeSecondary SWIFT_WARN_UNUSED_RESULT;
@@ -2167,9 +1762,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 /// LDUser avatar attribute used to make <code>avatar</code> private
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull attributeAvatar;)
 + (NSString * _Nonnull)attributeAvatar SWIFT_WARN_UNUSED_RESULT;
-/// LDUser custom attribute used to make <code>custom</code> private
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull attributeCustom;)
-+ (NSString * _Nonnull)attributeCustom SWIFT_WARN_UNUSED_RESULT;
 /// Client app defined string that uniquely identifies the user. If the client app does not define a key, the SDK will assign an identifier associated with the anonymous user. The key cannot be made private.
 @property (nonatomic, readonly, copy) NSString * _Nonnull key;
 /// The secondary key for the user. See the <a href="https://docs.launchdarkly.com/home/flags/targeting-users#percentage-rollouts">documentation</a> for more information on it’s use for percentage rollout bucketing.
@@ -2188,32 +1780,90 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _No
 @property (nonatomic, copy) NSString * _Nullable email;
 /// Client app defined avatar for the user. (Default: nil)
 @property (nonatomic, copy) NSString * _Nullable avatar;
-/// Client app defined dictionary for the user. The client app may declare top level dictionary items as private. If the client app defines custom as private, the SDK considers the dictionary private except for device & operatingSystem (which cannot be made private). See <code>privateAttributes</code> for details. (Default: nil)
-@property (nonatomic, copy) NSDictionary<NSString *, id> * _Nullable custom;
+/// Client app defined dictionary for the user. The client app may declare top level dictionary items as private. See <code>privateAttributes</code> for details.
+@property (nonatomic, copy) NSDictionary<NSString *, LDValue *> * _Nonnull custom;
 /// Client app defined isAnonymous for the user. If the client app does not define isAnonymous, the SDK will use the <code>key</code> to set this attribute. isAnonymous cannot be made private. (Default: YES)
 @property (nonatomic) BOOL isAnonymous;
-/// Client app defined device for the user. The SDK will determine the device automatically, however the client app can override the value. The SDK will insert the device into the <code>custom</code> dictionary. The device cannot be made private. (Default: the system identified device)
-@property (nonatomic, copy) NSString * _Nullable device;
-/// Client app defined operatingSystem for the user. The SDK will determine the operatingSystem automatically, however the client app can override the value. The SDK will insert the operatingSystem into the <code>custom</code> dictionary. The operatingSystem cannot be made private. (Default: the system identified operating system)
-@property (nonatomic, copy) NSString * _Nullable operatingSystem;
 /// Client app defined privateAttributes for the user.
 /// The SDK will not include private attribute values in analytics events, but private attribute names will be sent.
-/// This attribute is ignored if <code>ObjcLDConfig.allUserAttributesPrivate</code> is YES. Combined with <code>ObjcLDConfig.privateUserAttributes</code>. The SDK considers attributes appearing in either list as private. Client apps may define attributes found in <code>privatizableAttributes</code> and top level <code>custom</code> dictionary keys here. (Default: nil)
+/// This attribute is ignored if <code>ObjcLDConfig.allUserAttributesPrivate</code> is YES. Combined with <code>ObjcLDConfig.privateUserAttributes</code>. The SDK considers attributes appearing in either list as private. Client apps may define most built-in attributes and all top level <code>custom</code> dictionary keys here. (Default: <code>[]</code>])
 /// See Also: <code>ObjcLDConfig.allUserAttributesPrivate</code> and <code>ObjcLDConfig.privateUserAttributes</code>.
-@property (nonatomic, copy) NSArray<NSString *> * _Nullable privateAttributes;
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull privateAttributes;
 /// Initializer to create a LDUser. Client configurable attributes are set to their default value. The SDK will automatically set <code>key</code>, <code>device</code>, <code>operatingSystem</code>, and <code>isAnonymous</code> attributes. The SDK embeds <code>device</code> and <code>operatingSystem</code> into the <code>custom</code> dictionary for transmission to LaunchDarkly.
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Initializer to create a LDUser with a specific key. Other client configurable attributes are set to their default value. The SDK will automatically set <code>key</code>, <code>device</code>, <code>operatingSystem</code>, and <code>isAnonymous</code> attributes. The SDK embeds <code>device</code> and <code>operatingSystem</code> into the <code>custom</code> dictionary for transmission to LaunchDarkly.
 /// \param key String that uniquely identifies the user. If the client app does not define a key, the SDK will assign an identifier associated with the anonymous user.
 ///
 - (nonnull instancetype)initWithKey:(NSString * _Nonnull)key OBJC_DESIGNATED_INITIALIZER;
-/// Initializer that takes a NSDictionary and creates a LDUser from the contents. Uses any keys present to define corresponding attribute values. Initializes attributes not present in the dictionary to their default value. The initializer attempts to set <code>device</code> and <code>operatingSystem</code> from corresponding values embedded in <code>custom</code>. The initializer attempts to set feature flags from values set in <code>config</code>.
-/// \param userDictionary NSDictionary with LDUser attribute keys and values.
-///
-- (nonnull instancetype)initWithUserDictionary:(NSDictionary<NSString *, id> * _Nonnull)userDictionary OBJC_DESIGNATED_INITIALIZER;
 /// Compares users by comparing their user keys only, to allow the client app to collect user information over time
 - (BOOL)isEqualWithObject:(id _Nonnull)object SWIFT_WARN_UNUSED_RESULT;
 @end
+
+@class NSNumber;
+enum LDValueType : NSInteger;
+
+/// Bridged <code>LDValue</code> type for Objective-C.
+/// Can create instances from Objective-C with the provided <code>of</code> static functions, for example <code>[LDValue ofBool:YES]</code>.
+SWIFT_CLASS_NAMED("ObjcLDValue")
+@interface LDValue : NSObject
+/// Create a new <code>LDValue</code> that represents a JSON null.
++ (LDValue * _Nonnull)ofNull SWIFT_WARN_UNUSED_RESULT;
+/// Create a new <code>LDValue</code> from a boolean value.
++ (LDValue * _Nonnull)ofBool:(BOOL)bool_ SWIFT_WARN_UNUSED_RESULT;
+/// Create a new <code>LDValue</code> from a numeric value.
++ (LDValue * _Nonnull)ofNumber:(NSNumber * _Nonnull)number SWIFT_WARN_UNUSED_RESULT;
+/// Create a new <code>LDValue</code> from a string value.
++ (LDValue * _Nonnull)ofString:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
+/// Create a new <code>LDValue</code> from an array of values.
++ (LDValue * _Nonnull)ofArray:(NSArray<LDValue *> * _Nonnull)array SWIFT_WARN_UNUSED_RESULT;
+/// Create a new <code>LDValue</code> object from dictionary of values.
++ (LDValue * _Nonnull)ofDict:(NSDictionary<NSString *, LDValue *> * _Nonnull)dict SWIFT_WARN_UNUSED_RESULT;
+/// Get the type of the value.
+- (enum LDValueType)getType SWIFT_WARN_UNUSED_RESULT;
+/// Get the value as a <code>Bool</code>.
+///
+/// returns:
+/// The contained boolean value or <code>NO</code> if the value is not a boolean.
+- (BOOL)boolValue SWIFT_WARN_UNUSED_RESULT;
+/// Get the value as a <code>Double</code>.
+///
+/// returns:
+/// The contained double value or <code>0.0</code> if the value is not a number.
+- (double)doubleValue SWIFT_WARN_UNUSED_RESULT;
+/// Get the value as a <code>String</code>.
+///
+/// returns:
+/// The contained string value or the empty string if the value is not a string.
+- (NSString * _Nonnull)stringValue SWIFT_WARN_UNUSED_RESULT;
+/// Get the value as an array.
+///
+/// returns:
+/// An array of the contained values, or the empty array if the value is not an array.
+- (NSArray<LDValue *> * _Nonnull)arrayValue SWIFT_WARN_UNUSED_RESULT;
+/// Get the value as a dictionary representing the JSON object
+///
+/// returns:
+/// A dictionary representing the JSON object, or the empty dictionary if the value is not a dictionary.
+- (NSDictionary<NSString *, LDValue *> * _Nonnull)dictValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+/// Used to represent the type of an <code>LDValue</code>.
+typedef SWIFT_ENUM_NAMED(NSInteger, LDValueType, "ObjcLDValueType", closed) {
+/// The value returned by <code>LDValue.getType()</code> when the represented value is a null.
+  LDValueTypeNull = 0,
+/// The value returned by <code>LDValue.getType()</code> when the represented value is a boolean.
+  LDValueTypeBool = 1,
+/// The value returned by <code>LDValue.getType()</code> when the represented value is a number.
+  LDValueTypeNumber = 2,
+/// The value returned by <code>LDValue.getType()</code> when the represented value is a string.
+  LDValueTypeString = 3,
+/// The value returned by <code>LDValue.getType()</code> when the represented value is an array.
+  LDValueTypeArray = 4,
+/// The value returned by <code>LDValue.getType()</code> when the represented value is an object.
+  LDValueTypeObject = 5,
+};
 
 
 
