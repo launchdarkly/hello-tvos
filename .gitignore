@@ -25,7 +25,6 @@ Carthage/Build/.swift-eventsource.version
 Carthage/Build/LaunchDarkly.xcframework
 Carthage/Build/LaunchDarkly_macOS.xcframework
 Carthage/Build/LaunchDarkly_watchOS.xcframework
-Carthage/Build/LDSwiftEventSource.xcframework/
 Carthage/Build/tvOS/
 Carthage/Checkouts/
 

@@ -6,6 +6,6 @@ framework module LDSwiftEventSource {
 }
 
 module LDSwiftEventSource.Swift {
-    header "LDSwiftEventSource-Swift.h"
-    requires objc
+  header "LDSwiftEventSource-Swift.h"
+  requires objc
 }

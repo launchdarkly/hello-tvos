@@ -10,45 +10,49 @@
 		</data>
 		<key>Headers/LaunchDarkly_tvOS-Swift.h</key>
 		<data>
-		xbNT7E1xSfu9reOMC2hJiEZduN4=
+		c8dzNht9lkbTgAJNbdRhtS38AV8=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		A4SK3SeKoeIFS48b/kP9WQZrNYQ=
+		CeOWlb9kiWx5WePDi1Ck7VEIBXc=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/Project/arm64-apple-tvos-simulator.swiftsourceinfo</key>
 		<data>
-		53+odbzNPxaDyEi8sfacUQVvuiY=
+		NoZqKDwP4TBN8PHB2kJu/ZywRBE=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/Project/x86_64-apple-tvos-simulator.swiftsourceinfo</key>
 		<data>
-		nX8UCI17cXC9le02i5khyCoE+LA=
+		byGAhL1+uyvIJtq3mdsRsFvs4Es=
+		</data>
+		<key>Modules/LaunchDarkly_tvOS.swiftmodule/arm64-apple-tvos-simulator.abi.json</key>
+		<data>
+		FSPnLbho3G+LL9smI3XgVOqBIQ4=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
 		<data>
-		cwrzh2Oe+NjWKbuoG8YtFn1KNNI=
+		uf6ffCwdzHOO0UwyGGhvUjDa7d4=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/arm64-apple-tvos-simulator.swiftmodule</key>
 		<data>
-		K/BudpH3TaGg0biinH1VPD9PoA0=
+		w8G7clHSVOu7+sBfVCYT2IjMUVk=
+		</data>
+		<key>Modules/LaunchDarkly_tvOS.swiftmodule/x86_64-apple-tvos-simulator.abi.json</key>
+		<data>
+		FSPnLbho3G+LL9smI3XgVOqBIQ4=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
 		<data>
-		TpgFTXIzBuRaJrjNIrRK83rYEFw=
+		e6y8h5wQUZVyy9CmYSCdp080h/g=
 		</data>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
 		<data>
-		dpmY2xY7U2Aof1M9DzHgbvBDV6M=
+		JQ1toGOWfL/BuZfd7tMSQje/Bn4=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Headers/LaunchDarkly.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			D8UFcsBdEq3MbXRZdynBScAyECk=
-			</data>
 			<key>hash2</key>
 			<data>
 			XgZcDmQ1Ck2BynWlXxy4CGZNB6twmDwfcm4Zi9YEUS4=
@@ -56,79 +60,65 @@
 		</dict>
 		<key>Headers/LaunchDarkly_tvOS-Swift.h</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			xbNT7E1xSfu9reOMC2hJiEZduN4=
-			</data>
 			<key>hash2</key>
 			<data>
-			eIK8wqk0D7uGQ1nkUr6oNNWSvCp9RN1aTrETlNb0xvA=
+			MCCk+UyPqiLUlN5EjMVoQMnmfnYmpNPqdeDBKry1leU=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/Project/arm64-apple-tvos-simulator.swiftsourceinfo</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			53+odbzNPxaDyEi8sfacUQVvuiY=
-			</data>
 			<key>hash2</key>
 			<data>
-			JeA3ea/cDxKDQnxczhmL3imWhT1tsWG+Wsua89Q4C0A=
+			ma/pM5GKaoddyBJzXrRB0hvE+w6RyHSl/wgvxOfS8fY=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/Project/x86_64-apple-tvos-simulator.swiftsourceinfo</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			nX8UCI17cXC9le02i5khyCoE+LA=
-			</data>
 			<key>hash2</key>
 			<data>
-			IQizk585IbCQ7OAQsxuDXbL1odyKV/0BqvF5ZBnz5H8=
+			JL4S3246PqFyPxh4GHoYeB/lnYT6lamT5seR//1GFC8=
+			</data>
+		</dict>
+		<key>Modules/LaunchDarkly_tvOS.swiftmodule/arm64-apple-tvos-simulator.abi.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KnRdWE4y6t4QM5zi5JDptPdHFgJy1Tku+7GLkZS2aNM=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/arm64-apple-tvos-simulator.swiftdoc</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			cwrzh2Oe+NjWKbuoG8YtFn1KNNI=
-			</data>
 			<key>hash2</key>
 			<data>
-			qGHXeXPt7zIp4xGMwR52uJl/jzXNibqDVyQVvWX8/Nw=
+			NwILmSck+ie+I7exERM8iI7OmXcTm10kbbBTPFrYoyU=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/arm64-apple-tvos-simulator.swiftmodule</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			K/BudpH3TaGg0biinH1VPD9PoA0=
-			</data>
 			<key>hash2</key>
 			<data>
-			P7mtQihjtd26AGORDARG70b11e2FmmhGjBp6HteNvnQ=
+			UYaqNuzf4HkCTcKRKvEpdmYZMHdMxV1MILqJe3hhhzQ=
+			</data>
+		</dict>
+		<key>Modules/LaunchDarkly_tvOS.swiftmodule/x86_64-apple-tvos-simulator.abi.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KnRdWE4y6t4QM5zi5JDptPdHFgJy1Tku+7GLkZS2aNM=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/x86_64-apple-tvos-simulator.swiftdoc</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			TpgFTXIzBuRaJrjNIrRK83rYEFw=
-			</data>
 			<key>hash2</key>
 			<data>
-			NZf65VQ5/KZ+kCmC4HjqxugssL9JnQuzGT2pfV3Yqjg=
+			P6Cdl4y+lkm0KMVAIyj0wbl/A2bbWL2rpQyMMvP5VqI=
 			</data>
 		</dict>
 		<key>Modules/LaunchDarkly_tvOS.swiftmodule/x86_64-apple-tvos-simulator.swiftmodule</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			dpmY2xY7U2Aof1M9DzHgbvBDV6M=
-			</data>
 			<key>hash2</key>
 			<data>
-			o1SHbfxzBQY2gUPADOId/xZzq7OgdPRpUzz/9Cqww1w=
+			Xpm1wET26YnAXB+e1geBs4B7yXwGYgZqxILzu8xyVm8=
 			</data>
 		</dict>
 	</dict>

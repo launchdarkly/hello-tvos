@@ -21,7 +21,7 @@ jobs:
     shell: /bin/bash --login -eo pipefail
 
     macos:
-      xcode: '13.3.1'
+      xcode: '14.0.1'
 
     steps:
     - checkout
@@ -32,7 +32,7 @@ jobs:
 
     - run:
         name: Build hello-tvos
-        command: xcodebuild build -scheme 'hello-tvos' CODE_SIGNING_ALLOWED=NO | tee 'artifacts/xcode_build_raw.log' | xcpretty
+        command: xcodebuild build -scheme 'hello-tvos' -sdk 'appletvsimulator' CODE_SIGNING_ALLOWED=NO | tee 'artifacts/xcode_build_raw.log' | xcpretty
 
     - store_artifacts:
         path: artifacts
