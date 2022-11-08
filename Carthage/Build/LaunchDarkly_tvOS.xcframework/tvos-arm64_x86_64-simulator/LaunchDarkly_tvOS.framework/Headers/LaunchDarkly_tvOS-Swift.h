@@ -272,6 +272,26 @@ SWIFT_CLASS("_TtC17LaunchDarkly_tvOS13LDUserWrapper")
 @end
 
 @class NSString;
+
+/// Use LDApplicationInfo to define application metadata.
+/// These properties are optional and informational. They may be used in LaunchDarkly analytics or other product features,
+/// but they do not affect feature flag evaluations.
+SWIFT_CLASS_NAMED("ObjcLDApplicationInfo")
+@interface LDApplicationInfo : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+/// A unique identifier representing the application where the LaunchDarkly SDK is running.
+/// This can be specified as any string value as long as it only uses the following characters:
+/// ASCII letters, ASCII digits, period, hyphen, underscore. A string containing any other
+/// characters will be ignored.
+- (void)applicationIdentifier:(NSString * _Nonnull)applicationId;
+/// A unique identifier representing the version of the application where the LaunchDarkly SDK
+/// is running.
+/// This can be specified as any string value as long as it only uses the following characters:
+/// ASCII letters, ASCII digits, period, hyphen, underscore. A string containing any other
+/// characters will be ignored.
+- (void)applicationVersion:(NSString * _Nonnull)applicationVersion;
+@end
+
 @class LDValue;
 
 /// Structure that contains the evaluation result and additional information when evaluating a flag as a boolean.
@@ -718,6 +738,8 @@ SWIFT_CLASS_NAMED("ObjcLDConfig")
 @property (nonatomic) NSTimeInterval flagPollingInterval;
 /// The interval between feature flag requests while running in the background. Used only for polling mode. (Default: 60 minutes)
 @property (nonatomic) NSTimeInterval backgroundFlagPollingInterval;
+/// The application info meta data.
+@property (nonatomic, strong) LDApplicationInfo * _Nonnull applicationInfo;
 /// The minimum interval between feature flag requests. Used only for polling mode. (5 minutes)
 @property (nonatomic, readonly) NSTimeInterval minFlagPollingInterval;
 /// The minimum interval between feature flag requests while running in the background. Used only for polling mode. (15 minutes)
@@ -1249,6 +1271,26 @@ SWIFT_CLASS("_TtC17LaunchDarkly_tvOS13LDUserWrapper")
 @end
 
 @class NSString;
+
+/// Use LDApplicationInfo to define application metadata.
+/// These properties are optional and informational. They may be used in LaunchDarkly analytics or other product features,
+/// but they do not affect feature flag evaluations.
+SWIFT_CLASS_NAMED("ObjcLDApplicationInfo")
+@interface LDApplicationInfo : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+/// A unique identifier representing the application where the LaunchDarkly SDK is running.
+/// This can be specified as any string value as long as it only uses the following characters:
+/// ASCII letters, ASCII digits, period, hyphen, underscore. A string containing any other
+/// characters will be ignored.
+- (void)applicationIdentifier:(NSString * _Nonnull)applicationId;
+/// A unique identifier representing the version of the application where the LaunchDarkly SDK
+/// is running.
+/// This can be specified as any string value as long as it only uses the following characters:
+/// ASCII letters, ASCII digits, period, hyphen, underscore. A string containing any other
+/// characters will be ignored.
+- (void)applicationVersion:(NSString * _Nonnull)applicationVersion;
+@end
+
 @class LDValue;
 
 /// Structure that contains the evaluation result and additional information when evaluating a flag as a boolean.
@@ -1695,6 +1737,8 @@ SWIFT_CLASS_NAMED("ObjcLDConfig")
 @property (nonatomic) NSTimeInterval flagPollingInterval;
 /// The interval between feature flag requests while running in the background. Used only for polling mode. (Default: 60 minutes)
 @property (nonatomic) NSTimeInterval backgroundFlagPollingInterval;
+/// The application info meta data.
+@property (nonatomic, strong) LDApplicationInfo * _Nonnull applicationInfo;
 /// The minimum interval between feature flag requests. Used only for polling mode. (5 minutes)
 @property (nonatomic, readonly) NSTimeInterval minFlagPollingInterval;
 /// The minimum interval between feature flag requests while running in the background. Used only for polling mode. (15 minutes)
