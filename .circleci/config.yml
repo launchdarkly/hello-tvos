@@ -27,6 +27,14 @@ jobs:
     - checkout
 
     - run:
+        name: Install carthage
+        command: brew install carthage
+
+    - run:
+        name: Build carthage projects
+        command: carthage update --platform tvOS --use-xcframeworks
+
+    - run:
         name: Make Output Directory
         command: mkdir -p 'artifacts'
 

@@ -23,15 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func setupLDClient() {
-        var user = LDUser(key: "bob@example.com")
-        user.firstName = "Bob"
-        user.lastName = "Loblaw"
-        user.custom = ["groups":["beta_testers"]]
+        var contextBuilder = LDContextBuilder(key: "test@email.com")
+        contextBuilder.trySetValue("firstName", .string("Bob"))
+        contextBuilder.trySetValue("lastName", .string("Loblaw"))
+        contextBuilder.trySetValue("groups", .array([.string("beta_testers")]))
+
+        guard case .success(let context) = contextBuilder.build()
+        else { return }
 
         var config = LDConfig(mobileKey: launchDarklyMobileKey)
         config.eventFlushInterval = 30.0
 
-        LDClient.start(config: config, user: user)
+        LDClient.start(config: config, context: context)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
