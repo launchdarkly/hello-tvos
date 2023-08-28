@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard case .success(let context) = contextBuilder.build()
         else { return }
 
-        var config = LDConfig(mobileKey: launchDarklyMobileKey)
+        var config = LDConfig(mobileKey: launchDarklyMobileKey, autoEnvAttributes: .enabled)
         config.eventFlushInterval = 30.0
 
         LDClient.start(config: config, context: context)
