@@ -1,52 +1,32 @@
-//
-//  ViewController.swift
-//  hello-tvos
-//
-//  Copyright © 2017 LaunchDarkly. All rights reserved.
-//
-
 import UIKit
 import LaunchDarkly_tvOS
 
 class ViewController: UIViewController {
 
-    let flagKey = "test-flag"
+    // Set featureFlagKey to the feature flag key you want to evaluate.
+    let featureFlagKey = "sample-feature"
 
     @IBOutlet weak var valueLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        registerLDClientObservers()
-        checkFeatureValue()
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func registerLDClientObservers() {
-        LDClient.get()?.observe(key: flagKey, owner: self) { [weak self] changedFlag in
-            self?.featureFlagDidUpdate(changedFlag.key)
+        if let ld = LDClient.get() {
+            ld.observe(key: featureFlagKey, owner: self) { [weak self] changedFlag in
+                guard let me = self else { return }
+                guard case .bool(let booleanValue) = changedFlag.newValue else { return }
+
+                me.updateUi(flagKey: changedFlag.key, result: booleanValue)
+            }
+            let result = ld.boolVariation(forKey: featureFlagKey, defaultValue: false)
+            updateUi(flagKey: featureFlagKey, result: result)
         }
     }
-    
-    func checkFeatureValue() {
-        let showFeature = LDClient.get()!.boolVariation(forKey: flagKey, defaultValue: false)
-        updateLabel(value: "\(showFeature)")
-    }
-    
-    func updateLabel(value: String){
-        valueLabel.text = "Flag value: \(value)"
-    }
 
-    //MARK: - ClientDelegate Methods
-    
-    func featureFlagDidUpdate(_ key: String!) {
-        if key == flagKey {
-            checkFeatureValue()
-        }
+    func updateUi(flagKey: String, result: Bool) {
+        self.valueLabel.text = "The \(flagKey) feature flag evaluates to \(result)"
+
+        let toggleOn = UIColor(red: 0, green: 0.52, blue: 0.29, alpha: 1)
+        let toggleOff = UIColor(red: 0.22, green: 0.22, blue: 0.25, alpha: 1)
+        self.view.backgroundColor = result ? toggleOn : toggleOff
     }
-    
 }
-

@@ -1,4 +1,7 @@
 # Xcode
+
+Carthage/
+Cartfile.resolved
 #
 *.pbxuser
 !default.pbxuser
