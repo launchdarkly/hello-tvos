@@ -1,2 +1,2 @@
-github "launchdarkly/ios-client-sdk" ~> 9.0
+github "launchdarkly/ios-client-sdk" >= 9.0
 github "LaunchDarkly/swift-eventsource" ~> 3.1
