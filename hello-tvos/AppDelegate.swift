@@ -27,6 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let config = LDConfig(mobileKey: sdkKey, autoEnvAttributes: .enabled)
 
-        LDClient.start(config: config, context: context)
+        LDClient.start(config: config, context: context, startWaitSeconds: 10)
     }
 }
