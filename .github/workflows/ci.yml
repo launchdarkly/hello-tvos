@@ -30,4 +30,4 @@ jobs:
         run: carthage update --platform tvOS --use-xcframeworks
 
       - name: Build hello-tvos
-        run: xcodebuild build -scheme 'hello-tvos' -sdk 'appletvsimulator' CODE_SIGNING_ALLOWED=NO | xcpretty
+        run: set -o pipefail && xcodebuild build -scheme 'hello-tvos' -sdk 'appletvsimulator' CODE_SIGNING_ALLOWED=NO | xcpretty

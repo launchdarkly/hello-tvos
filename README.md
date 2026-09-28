@@ -6,6 +6,8 @@ Below, you'll find the build procedure. For more comprehensive instructions, you
 
 ## Build instructions
 
+This example requires tvOS 15.0 or later, the minimum deployment target of the LaunchDarkly iOS SDK 11.6.2+.
+
 1. Make sure you have [Xcode](https://itunes.apple.com/us/app/xcode/id497799835?ls=1&mt=12) installed
 1. Make sure you have [Carthage](https://github.com/Carthage/Carthage) installed
 1. Run `carthage update --platform tvOS --use-xcframeworks` to build XCFrameworks for the LaunchDarkly SDK
